@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>SoftLineEC - учет форм обучения</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link th:href="@{/css/main.css}" rel="stylesheet" />
+</head>
+<body class="body">
+<form th:action="${'/FormOfEducation'}" class="center">
+  <div class="centerin">
+    <div class="boxes">
+      <div border="0">
+        <h1 class="title">Форма обучения</h1>
+        <a href="/FormOfEducationAdd" class="custom-btn btn-16">Добавить форму</a>
+      </div>
+    </div>
+    <table>
+      <thead>
+      <tr>
+        <th>Форма обучения</th>
+        <th>Редактирвать</th>
+        <th>Удалить</th>
+      </tr>
+      </thead>
+      <tbody>
+      <form th:action="${'/FormOfEducation'}">
+        <tr th:each="el : ${FormOfEducation}">
+          <td><h3 th:text="${el.getTypeOfEducation()}"></h3></td>
+          <td><a th:href="'/CourseType/' + ${el.idFormOfEducation} + '/edit'">Редактировать</a></td>
+          <td><a th:href="'/CourseType/' + ${el.idFormOfEducation} + '/remove'">Удалить</a></td>
+        </tr>
+      </form>
+      </tbody>
+    </table>
+  </div>
+</form>
+</body>
+</html>
