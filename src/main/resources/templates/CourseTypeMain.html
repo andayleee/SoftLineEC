@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>SoftLineEC - учет типа курсов</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link th:href="@{/css/main.css}" rel="stylesheet" />
+</head>
+<body class="body">
+<form th:action="${'/CourseType'}" class="center">
+    <div class="centerin">
+    <div class="boxes">
+        <div border="0">
+            <h1 class="title">Тип курса</h1>
+            <a href="/CourseTypeAdd" class="custom-btn btn-16">Добавить типы курсов</a>
+        </div>
+    </div>
+    <table>
+        <thead>
+        <tr>
+            <th>Тип курса</th>
+            <th>Редактирвать</th>
+            <th>Удалить</th>
+        </tr>
+        </thead>
+        <tbody>
+        <form th:action="${'/CourseType'}">
+            <tr th:each="el : ${CourseType}">
+                <td><h3 th:text="${el.getNameOfCourseType()}"></h3></td>
+                <td><a th:href="'/CourseType/' + ${el.idCourseType} + '/edit'">Редактировать</a></td>
+                <td><a th:href="'/CourseType/' + ${el.idCourseType} + '/remove'">Удалить</a></td>
+            </tr>
+        </form>
+        </tbody>
+    </table>
+    </div>
+</form>
+</body>
+</html>
