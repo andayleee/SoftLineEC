@@ -18,7 +18,7 @@ html, body {
     background-color: #fff;
     min-height: 150%;
     margin: auto;
-    box-shadow: 0 0 10px #1B1B1B;
+    /*box-shadow: 0 10px 10px #1B1B1B;*/
 }
 
 .centerin {
@@ -35,10 +35,10 @@ html, body {
 table {
     border-collapse: collapse;
     width: 100%;
-    font-size: 13px;
+    font-size: 17px;
     left: 5px;
     right: 5px;
-    box-shadow: 0 0 20px #1B1B1B;
+    /*box-shadow: 0 0 20px #1B1B1B;*/
 }
 table td {
     padding: 15px;
@@ -74,10 +74,11 @@ a:hover {
 
 .title {
     text-transform: uppercase;
+    margin-top: 20px;
     font-weight: 900;
     font-size: calc(var(--index) * 2);
     letter-spacing: calc(var(--index) /1.5);
-    text-shadow: 0 0 20px #1B1B1B;
+    /*text-shadow: 0 0 20px #1B1B1B;*/
     text-align: center;
 }
 .title1 {

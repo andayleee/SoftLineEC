@@ -6,6 +6,7 @@
   <title>SoftLineEC - учет типа курсов</title>
 </head>
 <body>
+<div th:insert="blocks/header.html"/>
 <form th:each="el: ${CourseType}" th:object="${CourseType}" method="post" class="center">
     <div class="centerin">
     <h1 class="title">Изменение типа курсов</h1>
