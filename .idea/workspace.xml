@@ -9,10 +9,10 @@
       <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/main.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/CourseTypeAdd.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/CourseTypeAdd.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/CourseTypeEdit.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/CourseTypeEdit.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/CourseTypeMain.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/CourseTypeMain.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/FormOfEducationAdd.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/FormOfEducationAdd.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/FormOfEducationEdit.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/FormOfEducationEdit.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/FormOfEducationMain.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/FormOfEducationMain.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/blocks/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/blocks/header.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,6 +63,7 @@
     "WebServerToolWindowFactoryState": "false",
     "last_opened_file_path": "/Users/andayleee/Desktop/SoftLineEC/SoftLineEC/src/main/resources/templates",
     "list.type.of.created.stylesheet": "CSS",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
     "spring.configuration.checksum": "1c114b1f90ed77b6f4088dce2018b7a5"
   }
 }]]></component>
@@ -98,7 +99,10 @@
       <workItem from="1674243390197" duration="9305000" />
       <workItem from="1674255065218" duration="178000" />
       <workItem from="1674255728455" duration="5619000" />
-      <workItem from="1674288597287" duration="6126000" />
+      <workItem from="1674288597287" duration="6519000" />
+      <workItem from="1674321914915" duration="265000" />
+      <workItem from="1674469923630" duration="545000" />
+      <workItem from="1674544263293" duration="4334000" />
     </task>
     <servers />
   </component>

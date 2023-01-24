@@ -9,7 +9,9 @@
 <div th:insert="blocks/header.html"/>
 <form th:each="el: ${FormOfEducation}" th:object="${FormOfEducation}" method="post" class="center">
   <div class="centerin">
+    <div class="boxes">
     <h1 class="title">Изменение формы обучения</h1>
+      <div/>
     <div class="group">
       <input type="text" th:value="${el.typeOfEducation}" name="typeOfEducation" required>
       <span class="highlight"></span>

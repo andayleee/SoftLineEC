@@ -10,10 +10,8 @@
 <form th:action="${'/FormOfEducation'}" class="center">
   <div class="centerin">
     <div class="boxes">
-      <div border="0">
         <h1 class="title">Форма обучения</h1>
         <a href="/FormOfEducationAdd" class="custom-btn btn-16">Добавить форму</a>
-      </div>
     </div>
     <table>
       <thead>
@@ -27,8 +25,8 @@
       <form th:action="${'/FormOfEducation'}">
         <tr th:each="el : ${FormOfEducation}">
           <td><h3 th:text="${el.getTypeOfEducation()}"></h3></td>
-          <td><a th:href="'/CourseType/' + ${el.idFormOfEducation} + '/edit'">Редактировать</a></td>
-          <td><a th:href="'/CourseType/' + ${el.idFormOfEducation} + '/remove'">Удалить</a></td>
+          <td><a th:href="'/FormOfEducation/' + ${el.idFormOfEducation} + '/edit'">Редактировать</a></td>
+          <td><a th:href="'/FormOfEducation/' + ${el.idFormOfEducation} + '/remove'">Удалить</a></td>
         </tr>
       </form>
       </tbody>
