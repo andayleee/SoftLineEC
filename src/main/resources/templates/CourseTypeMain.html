@@ -15,20 +15,20 @@
             <a href="/CourseTypeAdd" class="custom-btn btn-16">Добавить типы курсов</a>
         </div>
     </div>
-    <table>
+    <table class="boxes">
         <thead>
         <tr>
             <th>Тип курса</th>
-            <th>Редактирвать</th>
-            <th>Удалить</th>
+            <th style="width: 20px">Редактировать</th>
+            <th style="width: 100px">Удалить</th>
         </tr>
         </thead>
         <tbody>
         <form th:action="${'/CourseType'}">
             <tr th:each="el : ${CourseType}">
                 <td><h3 th:text="${el.getNameOfCourseType()}"></h3></td>
-                <td><a th:href="'/CourseType/' + ${el.idCourseType} + '/edit'">Редактировать</a></td>
-                <td><a th:href="'/CourseType/' + ${el.idCourseType} + '/remove'">Удалить</a></td>
+                <td><a th:href="'/CourseType/' + ${el.idCourseType} + '/edit'">↵</a></td>
+                <td><a th:href="'/CourseType/' + ${el.idCourseType} + '/remove'">⌫</a></td>
             </tr>
         </form>
         </tbody>

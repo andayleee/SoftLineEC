@@ -14,10 +14,11 @@ html, body {
     --index1:calc(1vw);
 }
 .center {
-    width: 50%;
+    width: 70%;
     background-color: #fff;
-    min-height: 150%;
+    min-height: 200vh;
     margin: auto;
+    border-radius: 20px;
     /*box-shadow: 0 10px 10px #1B1B1B;*/
 }
 
@@ -30,12 +31,12 @@ html, body {
 .boxes{
     text-align: center;
     margin-bottom: 10px;
-    width: 50vw;
+    width: 70vw;
 }
 
 table {
     border-collapse: collapse;
-    width: 50vw;
+    width: 70vw;
     font-size: calc(var(--index)/1.3);
     left: 5px;
     right: 5px;
@@ -45,14 +46,15 @@ table td {
     padding: 15px;
 }
 table thead tr {
-    background-color: #54585d;
+    background-color: #b4b4b3;
     color: #ffffff;
     font-weight: bold;
     height: 50px;
-    border: 1px solid #54585d;
+    border: 1px solid #b4b4b3;
+
 }
 table tbody td {
-    color: #636363;
+    color: #2c1616;
     border: 1px solid #dddfe1;
 }
 table tbody tr {
@@ -75,10 +77,11 @@ a:hover {
 
 .title {
     text-transform: uppercase;
+    color: #2c1616;
     margin-top: 20px;
     font-weight: 900;
     font-size: calc(var(--index) * 2);
-    letter-spacing: calc(var(--index) /1.5);
+    letter-spacing: calc(var(--index) /2);
     /*text-shadow: 0 0 20px #1B1B1B;*/
     text-align: center;
 }
@@ -111,7 +114,7 @@ a:hover {
 }
 .btn-16 {
     border: none;
-    color: #000;
+    color: #2c1616;
     z-index: 1;
 }
 .btn-16:after {
@@ -171,9 +174,6 @@ input 				{
     border:none;
     border-bottom:1px solid #757575;
 }
-input text {
-    font-size: calc(var(--index)/1.3);
-}
 input:focus 		{ outline:none; }
 
 label 				 {
@@ -195,7 +195,7 @@ input:focus ~ label, input:valid ~ label 		{
     color: #49516b;
 }
 
-.bar 	{ position:relative; display:block; width:300px; }
+.bar 	{ position:relative; display:block; width:50%; }
 .bar:before, .bar:after 	{
     content:'';
     height:2px;
@@ -215,7 +215,7 @@ input:focus ~ label, input:valid ~ label 		{
 }
 
 input:focus ~ .bar:before, input:focus ~ .bar:after {
-    width:50%;
+    width: 50%;
 }
 
 .highlight {

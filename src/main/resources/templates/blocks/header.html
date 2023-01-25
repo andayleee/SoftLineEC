@@ -1,8 +1,10 @@
-<nav class="px-2 bg-white border-gray-200 dark:bg-gray-900 dark:border-gray-700"
+<nav class="px-2 bg-white border-gray-200 dark:bg-gray-900 dark:border-gray-700" style="position: fixed; top: 0; width: 100%; z-index: 499;"
      xmlns:sec="http://www.w3.org/1999/xhtml" >
   <script src="https://unpkg.com/flowbite@1.5.3/dist/flowbite.js"></script>
   <link rel="stylesheet" href="https://unpkg.com/flowbite@1.5.3/dist/flowbite.min.css"/>
+  <link th:href="@{/images/SoftLineLogo.png}" rel="import"/>
   <div class="container flex flex-wrap justify-between items-center mx-auto">
+    <img th:src="@{/images/SoftLineLogo.png}" height="20" width="100" alt="Logo"/>
     <button data-collapse-toggle="mobile-menu" type="button"
             class="inline-flex justify-center items-center ml-3 text-gray-400 rounded-lg md:hidden hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-300 dark:text-gray-400 dark:hover:text-white dark:focus:ring-gray-500"
             aria-controls="mobile-menu-2" aria-expanded="false">
@@ -18,10 +20,11 @@
       <form sec:authorize="!isAuthenticated()" th:action="@{/login}" method="post" >
         <button type="submit" sec:authorize="!isAuthenticated()" href="/login"
                 class="text-gray-800 hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 md:px-5 md:py-2.5 mr-1 md:mr-2 focus:outline-none">
-          Авторизация
+          Войти
         </button>
         <a href="/registration"
-           class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 md:px-5 md:py-2.5 mr-1 md:mr-2  focus:outline-none">Регистрация</a>
+           class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 md:px-5 md:py-2.5 mr-1 md:mr-2  focus:outline-none">
+          Регистрация</a>
       </form>
       <form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
         <button type="submit" href="/login"
@@ -43,7 +46,7 @@
         </li>
         <li class="nav-item">
           <a class="flex justify-between items-center py-2 pr-4 pl-3 w-full font-medium text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-gray-400 dark:hover:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent"
-             href="/FormOfEducation" data-mdb-ripple="true" data-mdb-ripple-color="light">Форма обчения</a>
+             href="/FormOfEducation" data-mdb-ripple="true" data-mdb-ripple-color="light">Форма обучения</a>
         </li>
         <li class="nav-item" sec:authorize="hasAuthority('ADMIN') or hasAuthority('SALES')">
           <a class="flex justify-between items-center py-2 pr-4 pl-3 w-full font-medium text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-gray-400 dark:hover:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent"
@@ -169,4 +172,5 @@
     </div>
   </div>
 </nav>
+
 

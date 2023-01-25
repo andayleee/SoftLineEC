@@ -9,6 +9,7 @@
       <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/main.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/CourseTypeAdd.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/CourseTypeAdd.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/CourseTypeEdit.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/CourseTypeEdit.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/CourseTypeMain.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/CourseTypeMain.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/FormOfEducationAdd.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/FormOfEducationAdd.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/FormOfEducationEdit.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/FormOfEducationEdit.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/FormOfEducationMain.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/FormOfEducationMain.html" afterDir="false" />
@@ -73,8 +74,11 @@
       <recent name="$PROJECT_DIR$/src/main/java/com/example/SoftLineEC" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/main/resources/templates" />
+      <recent name="$PROJECT_DIR$/src/main/resources/static/images" />
       <recent name="$PROJECT_DIR$/src/main/resources/static" />
+      <recent name="$PROJECT_DIR$/src/main/resources/assets" />
+      <recent name="$PROJECT_DIR$/src/main/resources/assets/photos" />
+      <recent name="$PROJECT_DIR$/src/main/resources/templates" />
     </key>
   </component>
   <component name="RunManager">
@@ -102,7 +106,7 @@
       <workItem from="1674288597287" duration="6519000" />
       <workItem from="1674321914915" duration="265000" />
       <workItem from="1674469923630" duration="545000" />
-      <workItem from="1674544263293" duration="4334000" />
+      <workItem from="1674544263293" duration="19692000" />
     </task>
     <servers />
   </component>

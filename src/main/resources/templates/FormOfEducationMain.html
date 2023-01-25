@@ -13,20 +13,20 @@
         <h1 class="title">Форма обучения</h1>
         <a href="/FormOfEducationAdd" class="custom-btn btn-16">Добавить форму</a>
     </div>
-    <table>
+    <table class="boxes">
       <thead>
       <tr>
         <th>Форма обучения</th>
-        <th>Редактирвать</th>
-        <th>Удалить</th>
+        <th style="width: 20px">Редактировать</th>
+        <th style="width: 100px">Удалить</th>
       </tr>
       </thead>
       <tbody>
       <form th:action="${'/FormOfEducation'}">
         <tr th:each="el : ${FormOfEducation}">
           <td><h3 th:text="${el.getTypeOfEducation()}"></h3></td>
-          <td><a th:href="'/FormOfEducation/' + ${el.idFormOfEducation} + '/edit'">Редактировать</a></td>
-          <td><a th:href="'/FormOfEducation/' + ${el.idFormOfEducation} + '/remove'">Удалить</a></td>
+          <td><a th:href="'/FormOfEducation/' + ${el.idFormOfEducation} + '/edit'">↵</a></td>
+          <td><a th:href="'/FormOfEducation/' + ${el.idFormOfEducation} + '/remove'">⌫</a></td>
         </tr>
       </form>
       </tbody>
