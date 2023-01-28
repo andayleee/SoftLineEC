@@ -7,7 +7,7 @@
 </head>
 <div th:insert="blocks/header.html"/>
 <body>
-<form th:action="${'/BlockAdd'}" th:object="${Block}" th:each="el: ${Block}" method="post" class="center">
+<form th:object="${Block}" th:each="el: ${Block}" method="post" class="center">
   <span class="centerin">
     <div class="boxes">
       <h1 class="title">Изменение блока</h1>

@@ -208,7 +208,7 @@ input:focus ~ label, input:valid ~ label 		{
     color: #49516b;
 }
 
-.bar 	{ position:relative; display:block; width:50%; }
+.bar 	{ position:relative; display:block; width:30%; }
 .bar:before, .bar:after 	{
     content:'';
     height:2px;
@@ -248,14 +248,14 @@ input:focus ~ .highlight {
 }
 
 @-webkit-keyframes inputHighlighter {
-    from { background:#5264AE; }
+    from { background: #9ea2a8; }
     to 	{ width:0; background:transparent; }
 }
 @-moz-keyframes inputHighlighter {
-    from { background:#5264AE; }
+    from { background:#9ea2a8; }
     to 	{ width:0; background:transparent; }
 }
 @keyframes inputHighlighter {
-    from { background:#5264AE; }
+    from { background:#9ea2a8; }
     to 	{ width:0; background:transparent; }
 }

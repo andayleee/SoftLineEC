@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>SoftLineEC - учет вариантов ответа</title>
+  <link th:href="@{/css/main.css}" rel="stylesheet" />
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<div th:insert="blocks/header.html"/>
+<body>
+<form th:object="${AnswerOptions}" th:each="el: ${AnswerOptions}" method="post" class="center">
+  <span class="centerin">
+    <div class="boxes">
+      <h1 class="title">Изменение варианта ответа</h1>
+    </div>
+    <div class="group" >
+      <input type="text" th:value="${el.content}" name="content" required>
+      <span class="highlight"></span>
+      <span class="bar"></span>
+      <label>Содержание</label>
+    </div>
+    <div class="group" >
+      <input type="checkbox" th:checked="${el.valid}" name="valid">
+      <span class="highlight"></span>
+      <span class="bar"></span>
+      <label>Валидность</label>
+    </div>
+    <div class="group">
+      <select name="nameOfQuestion" required>
+        <div th:each="addr : ${Question}">
+          <option th:text="${addr.getNameOfQuestion()}"></option>
+        </div>
+      </select>
+    </div>
+    <button type="submit" class="custom-btn btn-16">Изменить вариант ответа</button>
+  </span>
+</form>
+</body>
+</html>

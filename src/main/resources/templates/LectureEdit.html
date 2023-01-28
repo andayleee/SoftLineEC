@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>SoftLineEC - учет лекций</title>
+  <link th:href="@{/css/main.css}" rel="stylesheet" />
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<div th:insert="blocks/header.html"/>
+<body>
+<form th:object="${Lecture}" th:each="el: ${Lecture}" method="post" class="center">
+  <span class="centerin">
+    <div class="boxes">
+      <h1 class="title">Изменение лекции</h1>
+    </div>
+    <div class="group" >
+      <input type="text" th:value="${el.nameOfLecture}" name="nameOfLecture" required>
+      <span class="highlight"></span>
+      <span class="bar"></span>
+      <label>Название лекции</label>
+    </div>
+    <div class="group">
+      <input type="text" th:value="${el.description}" name="description" required>
+      <span class="highlight"></span>
+      <span class="bar"></span>
+      <label>Описание</label>
+    </div>
+    <div class="group">
+      <input type="number" th:value="${el.content}" name="content" required>
+      <span class="highlight"></span>
+      <span class="bar"></span>
+      <label>Содержание</label>
+    </div>
+    <div class="group">
+      <input type="number" th:value="${el.additionalLiterature}" name="additionalLiterature" required>
+      <span class="highlight"></span>
+      <span class="bar"></span>
+      <label>Доп литература</label>
+    </div>
+    <div class="group">
+      <select name="nameOfCourse" required>
+        <div th:each="addr : ${Block}">
+          <option th:text="${addr.getNameOfBlock()}"></option>
+        </div>
+      </select>
+    </div>
+    <button type="submit" class="custom-btn btn-16">Изменить лекцию</button>
+  </span>
+</form>
+</body>
+</html>

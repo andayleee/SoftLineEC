@@ -4,7 +4,9 @@
   <link rel="stylesheet" href="https://unpkg.com/flowbite@1.5.3/dist/flowbite.min.css"/>
   <link th:href="@{/images/SoftLineLogo.png}" rel="import"/>
   <div class="container flex flex-wrap justify-between items-center mx-auto">
-    <img th:src="@{/images/SoftLineLogo.png}" height="20" width="100" alt="Logo"/>
+    <a href="/">
+      <img th:src="@{/images/SoftLineLogo.png}" height="20" width="100" alt="Logo"/>
+    </a>
     <button data-collapse-toggle="mobile-menu" type="button"
             class="inline-flex justify-center items-center ml-3 text-gray-400 rounded-lg md:hidden hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-300 dark:text-gray-400 dark:hover:text-white dark:focus:ring-gray-500"
             aria-controls="mobile-menu-2" aria-expanded="false">
@@ -50,11 +52,27 @@
         </li>
         <li class="nav-item">
           <a class="flex justify-between items-center py-2 pr-4 pl-3 w-full font-medium text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-gray-400 dark:hover:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent"
-             href="/Course" data-mdb-ripple="true" data-mdb-ripple-color="light">Курсы</a>
+             href="/Course" data-mdb-ripple="true" data-mdb-ripple-color="light">Курс</a>
         </li>
         <li class="nav-item">
           <a class="flex justify-between items-center py-2 pr-4 pl-3 w-full font-medium text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-gray-400 dark:hover:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent"
              href="/Block" data-mdb-ripple="true" data-mdb-ripple-color="light">Блок</a>
+        </li>
+        <li class="nav-item">
+          <a class="flex justify-between items-center py-2 pr-4 pl-3 w-full font-medium text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-gray-400 dark:hover:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent"
+             href="/Lecture" data-mdb-ripple="true" data-mdb-ripple-color="light">Лекция</a>
+        </li>
+        <li class="nav-item">
+          <a class="flex justify-between items-center py-2 pr-4 pl-3 w-full font-medium text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-gray-400 dark:hover:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent"
+             href="/Test" data-mdb-ripple="true" data-mdb-ripple-color="light">Тест</a>
+        </li>
+        <li class="nav-item">
+          <a class="flex justify-between items-center py-2 pr-4 pl-3 w-full font-medium text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-gray-400 dark:hover:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent"
+             href="/Question" data-mdb-ripple="true" data-mdb-ripple-color="light">Вопрос</a>
+        </li>
+        <li class="nav-item">
+          <a class="flex justify-between items-center py-2 pr-4 pl-3 w-full font-medium text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-gray-400 dark:hover:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent"
+             href="/AnswerOptions" data-mdb-ripple="true" data-mdb-ripple-color="light">Вариант ответа</a>
         </li>
         <li sec:authorize="hasAuthority('ADMIN') or hasAuthority('BUHGALTER')">
           <button id="dropdownNavbarLink" data-dropdown-toggle="dropdownNavbar"

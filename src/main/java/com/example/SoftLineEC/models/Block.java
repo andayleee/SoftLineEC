@@ -1,5 +1,6 @@
 package com.example.SoftLineEC.models;
 import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
 public class Block {
@@ -11,6 +12,8 @@ public class Block {
     private String duration;
     @ManyToOne(optional = true)
     private Course courseID;
+    @OneToMany(mappedBy = "blockID", fetch = FetchType.EAGER)
+    private Collection<Lecture> tenants;
 
     public Block(String nameOfBlock, String description, String duration, Course courseID) {
         this.nameOfBlock = nameOfBlock;
@@ -59,5 +62,13 @@ public class Block {
 
     public void setCourseID(Course courseID) {
         this.courseID = courseID;
+    }
+
+    public Collection<Lecture> getTenants() {
+        return tenants;
+    }
+
+    public void setTenants(Collection<Lecture> tenants) {
+        this.tenants = tenants;
     }
 }

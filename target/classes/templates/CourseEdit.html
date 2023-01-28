@@ -7,7 +7,7 @@
 </head>
 <div th:insert="blocks/header.html"/>
 <body>
-<form th:action="${'/CourseAdd'}" th:object="${Course}" th:each="el: ${Courses}" method="post" class="center">
+<form th:object="${Course}" th:each="el: ${Courses}" method="post" class="center">
   <span class="centerin">
     <div class="boxes">
       <h1 class="title">Изменение курса</h1>
@@ -25,7 +25,7 @@
       <label>Дата создания</label>
     </div>
     <div class="group">
-      <textarea  th:value="${el.description}" name="description" required></textarea>
+      <textarea placeholder="Описание" th:value="${el.description}" name="description" required></textarea>
     </div>
     <div class="group">
       <textarea placeholder="Ресурсы" th:value="${el.resources}" name="resources" required></textarea>

@@ -15,6 +15,15 @@
         <a href="/CourseAdd" class="custom-btn btn-16">Добавить курс</a>
       </div>
     </div>
+    <div class="group">
+      <input type="text" required>
+      <span class="highlight"></span>
+      <span class="bar"></span>
+      <label>Поиск</label>
+      <form th:action="${'/CourseSearch'}">
+        <button type="submit" class="custom-btn btn-16" >Найти</button>
+      </form>
+    </div>
     <table class="boxes" style="display: inline-block;vertical-align: top;max-width: 70vw;overflow-x: auto;white-space: normal;-webkit-overflow-scrolling: touch">
       <thead>
       <tr>
@@ -23,7 +32,7 @@
         <th>Описание</th>
         <th>Ресурсы</th>
         <th>Цель</th>
-        <th style="min-width: 500px">Задачи</th>
+        <th style="white-space: pre-line;">Задачи</th>
         <th>Категории обучающихся</th>
         <th>Тип курса</th>
         <th>Форма обучения</th>

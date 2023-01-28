@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title >SoftLineEC - учет вопросов</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link th:href="@{/css/main.css}" rel="stylesheet" />
+</head>
+<body class="body">
+<div th:insert="blocks/header.html"/>
+<form th:action="${'/Question'}" class="center">
+  <span class="centerin" id="container">
+    <div class="boxes">
+      <div border="0">
+        <h1 class="title">Вопрос</h1>
+        <a href="/QuestionAdd" class="custom-btn btn-16">Добавить вопрос</a>
+      </div>
+    </div>
+    <table class="boxes" >
+      <thead>
+      <tr>
+        <th>Название вопроса</th>
+        <th>Балл</th>
+        <th>Тест</th>
+        <th style="width: 20px"></th>
+        <th style="width: 20px"></th>
+      </tr>
+      </thead>
+      <tbody>
+      <form th:action="${'/Question'}">
+        <tr th:each="el : ${Question}">
+          <td><h3 th:text="${el.getNameOfQuestion()}"></h3></td>
+          <td><h3 th:text="${el.getScore()}"></h3></td>
+          <td>
+            <from th:each="addr : ${el.getTestID()}">
+              <a th:text="${addr.getNameOfTest()}"></a>
+            </from>
+          </td>
+          <td><a th:href="'/Question/' + ${el.idQuestion} + '/edit'">↵</a></td>
+          <td><a th:href="'/Question/' + ${el.idQuestion} + '/remove'">⌫</a></td>
+        </tr>
+      </form>
+      </tbody>
+    </table>
+  </span>
+</form>
+</body>
+</html>
