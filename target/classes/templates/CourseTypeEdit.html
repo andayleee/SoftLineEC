@@ -8,7 +8,7 @@
 <body>
 <div th:insert="blocks/header.html"/>
 <form th:each="el: ${CourseType}" th:object="${CourseType}" method="post" class="center">
-    <div class="centerin">
+    <span class="centerin">
         <div class="boxes">
     <h1 class="title">Изменение типа курсов</h1>
             </div>
@@ -21,7 +21,7 @@
     <form method="post">
       <button type="submit" class="custom-btn btn-16">Изменить тип курса</button>
     </form>
-    </div>
+    </span>
 </form>
 </body>
 </html>

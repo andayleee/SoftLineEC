@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>SoftLineEC - учет блоков</title>
+  <link th:href="@{/css/main.css}" rel="stylesheet" />
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<div th:insert="blocks/header.html"/>
+<body>
+<form th:action="${'/BlockAdd'}" th:object="${Block}" method="post" class="center">
+  <span class="centerin">
+    <div class="boxes">
+      <h1 class="title">Добавление блока</h1>
+    </div>
+    <div class="group" >
+      <input type="text" name="nameOfBlock" required>
+      <span class="highlight"></span>
+      <span class="bar"></span>
+      <label>Название блока</label>
+    </div>
+    <div class="group">
+      <input type="text" value="" name="description" required>
+      <span class="highlight"></span>
+      <span class="bar"></span>
+      <label>Описание</label>
+    </div>
+    <div class="group">
+      <input type="number" value="" name="duration" required>
+      <span class="highlight"></span>
+      <span class="bar"></span>
+      <label>Продолжительность</label>
+    </div>
+    <div class="group">
+      <select  name="nameOfCourse" required>
+        <div th:each="element : ${nameOfCourse}">
+          <option th:text="${element.getNameOfCourse()}"></option>
+        </div>
+      </select>
+    </div>
+    <form th:action="${'/BlockAdd'}">
+      <button type="submit" class="custom-btn btn-16">Добавить курс</button>
+    </form>
+  </span>
+</form>
+</body>
+</html>

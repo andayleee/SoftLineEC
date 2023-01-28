@@ -1,6 +1,7 @@
 package com.example.SoftLineEC.models;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
 public class FormOfEducation {
@@ -8,6 +9,9 @@ public class FormOfEducation {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long idFormOfEducation;
     private String typeOfEducation;
+
+    @OneToMany(mappedBy = "formOfEducationID", fetch = FetchType.EAGER)
+    private Collection<Course> tenants;
 
     public FormOfEducation(String typeOfEducation) {
         this.typeOfEducation = typeOfEducation;
@@ -29,5 +33,12 @@ public class FormOfEducation {
 
     public void setTypeOfEducation(String typeOfEducation) {
         this.typeOfEducation = typeOfEducation;
+    }
+    public Collection<Course> getTenants() {
+        return tenants;
+    }
+
+    public void setTenants(Collection<Course> tenants) {
+        this.tenants = tenants;
     }
 }

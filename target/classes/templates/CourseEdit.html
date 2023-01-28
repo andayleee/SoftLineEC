@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>SoftLineEC - учет курсов</title>
+  <link th:href="@{/css/main.css}" rel="stylesheet" />
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<div th:insert="blocks/header.html"/>
+<body>
+<form th:action="${'/CourseAdd'}" th:object="${Course}" th:each="el: ${Courses}" method="post" class="center">
+  <span class="centerin">
+    <div class="boxes">
+      <h1 class="title">Изменение курса</h1>
+    </div>
+    <div class="group" >
+      <input type="text" th:value="${el.nameOfCourse}" name="nameOfCourse" required>
+      <span class="highlight"></span>
+      <span class="bar"></span>
+      <label>Название курса</label>
+    </div>
+    <div class="group">
+      <input type="date" th:value="${el.dateOfCreation}" value="" name="dateOfCreation" required>
+      <span class="highlight"></span>
+      <span class="bar"></span>
+      <label>Дата создания</label>
+    </div>
+    <div class="group">
+      <textarea  th:value="${el.description}" name="description" required></textarea>
+    </div>
+    <div class="group">
+      <textarea placeholder="Ресурсы" th:value="${el.resources}" name="resources" required></textarea>
+    </div>
+    <div class="group">
+      <textarea placeholder="Цель" th:value="${el.goal}" name="goal" required></textarea>
+    </div>
+    <div class="group">
+      <textarea placeholder="Задачи" th:value="${el.tasks}" name="tasks" required></textarea>
+    </div>
+    <div class="group">
+      <input type="text" th:value="${el.categoriesOfStudents}" name="categoriesOfStudents" required>
+      <span class="highlight"></span>
+      <span class="bar"></span>
+      <label>Категории обучающихся</label>
+    </div>
+    <div class="group">
+      <select name="nameOfCourseType" required>
+        <div th:each="addr : ${CourseTypes}">
+          <option th:text="${addr.getNameOfCourseType()}"></option>
+        </div>
+      </select>
+    </div>
+    <div class="group">
+      <select  name="typeOfEducation" required>
+        <div th:each="addr : ${FormOfEducations}">
+          <option th:text="${addr.getTypeOfEducation()}"></option>
+        </div>
+      </select>
+    </div>
+    <button type="submit" class="custom-btn btn-16">Изменить курс</button>
+  </span>
+</form>
+</body>
+</html>

@@ -8,7 +8,7 @@
 <body class="body">
 <div th:insert="blocks/header.html"/>
 <form th:action="${'/CourseType'}" class="center">
-    <div class="centerin">
+    <span class="centerin" id="container">
     <div class="boxes">
         <div border="0">
             <h1 class="title">Тип курса</h1>
@@ -33,7 +33,8 @@
         </form>
         </tbody>
     </table>
-    </div>
+    </span>
 </form>
+<script type="text/javascript" th:src="@{js/app.js}" src="js/app.js"></script>
 </body>
 </html>

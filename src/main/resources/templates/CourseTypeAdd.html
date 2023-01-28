@@ -7,8 +7,8 @@
 </head>
 <div th:insert="blocks/header.html"/>
 <body>
-<form th:action="${'/CourseTypeAdd'}" method="post" class="center">
-    <div class="centerin">
+<form class="center" th:action="${'/CourseTypeAdd'}" method="post">
+    <span class="centerin">
         <div class="boxes">
             <h1 class="title">Добавление типа курсов</h1>
         </div>
@@ -18,8 +18,8 @@
             <span class="bar"></span>
             <label>Наименование</label>
         </div>
-        <button type="submit" class="custom-btn btn-16">Добавить тип курса</button>
-    </div>
+            <button type="submit" class="custom-btn btn-16">Добавить тип курса</button>
+    </span>
 </form>
 </body>
 </html>

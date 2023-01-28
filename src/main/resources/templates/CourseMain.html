@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title >SoftLineEC - учет курсов</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link th:href="@{/css/main.css}" rel="stylesheet" />
+</head>
+<body class="body">
+<div th:insert="blocks/header.html"/>
+<form th:action="${'/Course'}" class="center">
+  <span class="centerin" id="container">
+    <div class="boxes">
+      <div border="0">
+        <h1 class="title">Курс</h1>
+        <a href="/CourseAdd" class="custom-btn btn-16">Добавить курс</a>
+      </div>
+    </div>
+    <table class="boxes" style="display: inline-block;vertical-align: top;max-width: 70vw;overflow-x: auto;white-space: normal;-webkit-overflow-scrolling: touch">
+      <thead>
+      <tr>
+        <th>Название курса</th>
+        <th>Дата создания</th>
+        <th>Описание</th>
+        <th>Ресурсы</th>
+        <th>Цель</th>
+        <th style="min-width: 500px">Задачи</th>
+        <th>Категории обучающихся</th>
+        <th>Тип курса</th>
+        <th>Форма обучения</th>
+        <th style="width: 20px"></th>
+        <th style="width: 20px"></th>
+      </tr>
+      </thead>
+      <tbody>
+      <form th:action="${'/Course'}">
+        <tr th:each="el : ${Course}">
+          <td><h3 th:text="${el.getNameOfCourse()}"></h3></td>
+          <td><h3 th:text="${el.getDateOfCreation()}"></h3></td>
+          <td><h3 th:text="${el.getDescription()}"></h3></td>
+          <td><h3 th:text="${el.getResources()}"></h3></td>
+          <td><h3 th:text="${el.getGoal()}"></h3></td>
+          <td><h3 th:text="${el.getTasks()}"></h3></td>
+          <td><h3 th:text="${el.getCategoriesOfStudents()}"></h3></td>
+          <td>
+            <from th:each="addr : ${el.getCourseTypeID()}">
+              <a th:text="${addr.getNameOfCourseType()}"></a>
+            </from>
+          </td>
+          <td>
+            <from th:each="addr : ${el.getFormOfEducationID()}">
+              <a th:text="${addr.getTypeOfEducation()}"></a>
+            </from>
+          </td>
+          <td><a th:href="'/Course/' + ${el.idCourse} + '/edit'">↵</a></td>
+          <td><a th:href="'/Course/' + ${el.idCourse} + '/remove'">⌫</a></td>
+        </tr>
+      </form>
+      </tbody>
+    </table>
+  </span>
+</form>
+</body>
+</html>
