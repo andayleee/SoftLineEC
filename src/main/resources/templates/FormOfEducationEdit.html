@@ -12,8 +12,9 @@
     <div class="boxes">
     <h1 class="title">Изменение формы обучения</h1>
       </div>
+    <div class="form group" style="color: red" th:if="${#fields.hasErrors('typeOfEducation')}" th:errors="*{typeOfEducation}"></div>
     <div class="group">
-      <input type="text" th:value="${el.typeOfEducation}" name="typeOfEducation" required>
+      <input type="text" th:value="${el.typeOfEducation}" th:field="*{typeOfEducation}" name="typeOfEducation" required>
       <span class="highlight"></span>
       <span class="bar"></span>
       <label>Форма обучения</label>

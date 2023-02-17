@@ -7,8 +7,10 @@ import com.example.SoftLineEC.repositories.LectureRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.*;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.Optional;
 @Controller
@@ -34,9 +36,14 @@ public class LectureController {
         return "LectureAdd";
     }
     @PostMapping("/LectureAdd")
-    public String LectureAddAdd(@ModelAttribute("Lecture") Lecture Lecture,
+    public String LectureAddAdd(@ModelAttribute("Lecture") @Valid Lecture Lecture, BindingResult bindingResult,
                               @RequestParam String nameOfBlock, Model addr)
     {
+        if (bindingResult.hasErrors()) {
+            Iterable<Block> nameOfBlockk = blockRepository.findAll();
+            addr.addAttribute("nameOfBlock",nameOfBlockk);
+            return "LectureAdd";
+        }
         Lecture.setBlockID(blockRepository.findByNameOfBlockOrDescriptionOrDuration(nameOfBlock,nameOfBlock,nameOfBlock));
         lectureRepository.save(Lecture);
         return "LectureMain";
@@ -58,8 +65,10 @@ public class LectureController {
 
     @PostMapping("/Lecture/{id}/edit")
     public String LectureUpdate(@PathVariable("id")long id,
-                                Lecture lecture, @RequestParam String nameOfBlock)
+                                @Valid Lecture lecture, BindingResult bindingResult, @RequestParam String nameOfBlock)
     {
+        if (bindingResult.hasErrors())
+            return "LectureEdit";
         lecture.setBlockID(blockRepository.findByNameOfBlockOrDescriptionOrDuration(nameOfBlock,nameOfBlock,nameOfBlock));
         lectureRepository.save(lecture);
         return "redirect:/Lecture";

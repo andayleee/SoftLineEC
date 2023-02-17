@@ -6,10 +6,10 @@ import com.example.SoftLineEC.repositories.FormOfEducationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @Controller
 public class FormOfEducationController {
@@ -25,16 +25,18 @@ public class FormOfEducationController {
     }
 
     @GetMapping("/FormOfEducationAdd")
-    public String FormOfEducationAdd(Model model)
+    public String FormOfEducationAdd(@ModelAttribute("FormOfEducation") FormOfEducation formOfEducation)
     {
         return "FormOfEducationAdd";
     }
 
     @PostMapping("/FormOfEducationAdd")
-    public String FormOfEducationAddAdd(@RequestParam String typeOfEducation,
-                                   Model model)
+    public String FormOfEducationAddAdd(@ModelAttribute("FormOfEducation") @Valid FormOfEducation formOfEducation, BindingResult bindingResult)
     {
-        FormOfEducation formOfEducation = new FormOfEducation(typeOfEducation);
+        if (bindingResult.hasErrors())
+        {
+            return "FormOfEducationAdd";
+        }
         formOfEducationRepository.save(formOfEducation);
         return "redirect:/FormOfEducation";
     }
@@ -50,11 +52,13 @@ public class FormOfEducationController {
         return "FormOfEducationEdit";
     }
     @PostMapping("/FormOfEducation/{id}/edit")
-    public String FormOfEducationUpdate(@PathVariable("id")long id, @RequestParam String typeOfEducation,
-                                   Model model)
+    public String FormOfEducationUpdate(@PathVariable("id")long id, @Valid FormOfEducation formOfEducation, BindingResult bindingResult)
     {
-        FormOfEducation res = formOfEducationRepository.findById(id).orElseThrow();
-        res.setTypeOfEducation(typeOfEducation);
+        if (bindingResult.hasErrors())
+        {
+            return "FormOfEducationEdit";
+        }
+        formOfEducationRepository.save(formOfEducation);
         return "redirect:/FormOfEducation";
     }
     @GetMapping("/FormOfEducation/{id}/remove")

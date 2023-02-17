@@ -7,23 +7,33 @@
 </head>
 <body class="body">
 <div th:insert="blocks/header.html"/>
-<form th:action="${'/Course'}" class="center">
+<div  class="center" >
   <span class="centerin" id="container">
     <div class="boxes">
       <div border="0">
         <h1 class="title">Курс</h1>
-        <a href="/CourseAdd" class="custom-btn btn-16">Добавить курс</a>
       </div>
     </div>
-    <div class="group">
-      <input type="text" required>
-      <span class="highlight"></span>
-      <span class="bar"></span>
-      <label>Поиск</label>
-      <form th:action="${'/CourseSearch'}">
-        <button type="submit" class="custom-btn btn-16" >Найти</button>
-      </form>
-    </div>
+    <form th:action="${'/CourseSearch'}" method="post" >
+    <table>
+      <tr>
+        <td style="padding: 0px; text-align: center; width: 28vw; border: transparent">
+          <div class="group">
+            <input type="text" name="search" required>
+            <span class="highlight"></span>
+            <span class="bar"></span>
+            <label>Поиск</label>
+          </div>
+        </td>
+        <td style="padding: 0px; text-align: left; width: 1vw; border: transparent">
+          <button type="submit" class="custom-btn btn-16">Найти</button>
+        </td>
+        <td style="padding: 0px; text-align: center; border: transparent">
+          <a href="/CourseAdd" class="custom-btn btn-16">Добавить курс</a>
+        </td>
+      </tr>
+    </table>
+    </form>
     <table class="boxes" style="display: inline-block;vertical-align: top;max-width: 70vw;overflow-x: auto;white-space: normal;-webkit-overflow-scrolling: touch">
       <thead>
       <tr>
@@ -41,7 +51,6 @@
       </tr>
       </thead>
       <tbody>
-      <form th:action="${'/Course'}">
         <tr th:each="el : ${Course}">
           <td><h3 th:text="${el.getNameOfCourse()}"></h3></td>
           <td><h3 th:text="${el.getDateOfCreation()}"></h3></td>
@@ -63,10 +72,9 @@
           <td><a th:href="'/Course/' + ${el.idCourse} + '/edit'">↵</a></td>
           <td><a th:href="'/Course/' + ${el.idCourse} + '/remove'">⌫</a></td>
         </tr>
-      </form>
       </tbody>
     </table>
   </span>
-</form>
+</div>
 </body>
 </html>

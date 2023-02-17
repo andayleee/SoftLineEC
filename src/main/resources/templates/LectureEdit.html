@@ -12,6 +12,7 @@
     <div class="boxes">
       <h1 class="title">Изменение лекции</h1>
     </div>
+<!--    <div class="form group" style="color: red" th:if="${#fields.hasErrors('nameOfLecture')}" th:errors="*{nameOfLecture}"></div>-->
     <div class="group" >
       <input type="text" th:value="${el.nameOfLecture}" name="nameOfLecture" required>
       <span class="highlight"></span>
@@ -25,13 +26,13 @@
       <label>Описание</label>
     </div>
     <div class="group">
-      <input type="number" th:value="${el.content}" name="content" required>
+      <input type="text" th:value="${el.content}" name="content" required>
       <span class="highlight"></span>
       <span class="bar"></span>
       <label>Содержание</label>
     </div>
     <div class="group">
-      <input type="number" th:value="${el.additionalLiterature}" name="additionalLiterature" required>
+      <input type="text" th:value="${el.additionalLiterature}" name="additionalLiterature" required>
       <span class="highlight"></span>
       <span class="bar"></span>
       <label>Доп литература</label>

@@ -7,25 +7,28 @@
 </head>
 <div th:insert="blocks/header.html"/>
 <body>
-<form th:object="${Block}" th:each="el: ${Block}" method="post" class="center">
+<form th:each="el: ${Block}" th:object="${Block}" method="post" class="center">
   <span class="centerin">
     <div class="boxes">
       <h1 class="title">Изменение блока</h1>
     </div>
-    <div class="group" >
-      <input type="text" th:value="${el.nameOfBlock}" name="nameOfBlock" required>
+    <div class="form group" style="color: red" th:if="${#fields.hasErrors('nameOfBlock')}" th:errors="*{Block.nameOfBlock}"></div>
+    <div class="group">
+      <input type="text" th:value="${el.nameOfBlock}" th:field="*{Block.nameOfBlock}" name="nameOfBlock" required>
       <span class="highlight"></span>
       <span class="bar"></span>
       <label>Название блока</label>
     </div>
+    <div class="form group" style="color: red" th:if="${#fields.hasErrors('description')}" th:errors="*{Block.description}"></div>
     <div class="group">
-      <input type="text" th:value="${el.description}" value="" name="description" required>
+      <input type="text" th:value="${el.description}" th:field="*{Block.description}" name="description" required>
       <span class="highlight"></span>
       <span class="bar"></span>
       <label>Описание</label>
     </div>
+    <div class="form group" style="color: red" th:if="${#fields.hasErrors('duration')}" th:errors="*{Block.duration}"></div>
     <div class="group">
-      <input type="number" th:value="${el.duration}" value="" name="duration" required>
+      <input type="number" th:value="${el.duration}" th:field="*{Block.duration}" name="duration" required>
       <span class="highlight"></span>
       <span class="bar"></span>
       <label>Продолжительность</label>

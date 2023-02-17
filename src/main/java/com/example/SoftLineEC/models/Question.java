@@ -1,6 +1,10 @@
 package com.example.SoftLineEC.models;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.Collection;
 
 @Entity
@@ -8,7 +12,11 @@ public class Question {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long idQuestion;
+    @NotBlank(message = "Значение не может быть пустым")
+    @Size(min = 1,max = 500,message = "Значение не может быть меньше 1 и больше 500 символов")
     private String nameOfQuestion;
+    @Min(value=0, message="Стоимость не может быть меньше 0")
+    @Max(value=99, message="Стоимость не может быть больше 99")
     private int score;
     @ManyToOne(optional = true)
     private Test testID;

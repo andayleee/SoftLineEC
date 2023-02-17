@@ -1,6 +1,9 @@
 package com.example.SoftLineEC.models;
 
+import org.hibernate.validator.constraints.UniqueElements;
+
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.util.Collection;
 
 @Entity
@@ -8,6 +11,8 @@ public class CourseType {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long idCourseType;
+    @NotBlank(message = "Значение не может быть пустым")
+    @Size(min = 1,max = 255,message = "Значение не может быть меньше 1 и больше 255 символов")
     private String nameOfCourseType;
     @OneToMany(mappedBy = "courseTypeID", fetch = FetchType.EAGER)
     private Collection<Course> tenants;

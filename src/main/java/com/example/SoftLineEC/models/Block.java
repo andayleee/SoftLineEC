@@ -1,5 +1,7 @@
 package com.example.SoftLineEC.models;
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.Collection;
 
 @Entity
@@ -7,8 +9,14 @@ public class Block {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long idBlock;
+    @NotBlank(message = "Значение не может быть пустым")
+    @Size(min = 1,max = 255,message = "Значение не может быть меньше 1 и больше 255 символов")
     private String nameOfBlock;
+    @NotBlank(message = "Значение не может быть пустым")
+    @Size(min = 1,max = 9000,message = "Значение не может быть меньше 1 и больше 9000 символов")
     private String description;
+    @NotBlank(message = "Значение не может быть пустым")
+    @Size(min = 1,max = 255,message = "Значение не может быть меньше 1 и больше 255 символов")
     private String duration;
     @ManyToOne(optional = true)
     private Course courseID;

@@ -12,24 +12,28 @@
     <div class="boxes">
       <h1 class="title">Добавление лекции</h1>
     </div>
+    <div class="form group" style="color: red" th:if="${#fields.hasErrors('nameOfLecture')}" th:errors="*{nameOfLecture}"></div>
     <div class="group" >
       <input type="text" name="nameOfLecture" required>
       <span class="highlight"></span>
       <span class="bar"></span>
       <label>Название лекции</label>
     </div>
+    <div class="form group" style="color: red" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></div>
     <div class="group">
       <input type="text" value="" name="description" required>
       <span class="highlight"></span>
       <span class="bar"></span>
       <label>Описание</label>
     </div>
+    <div class="form group" style="color: red" th:if="${#fields.hasErrors('content')}" th:errors="*{content}"></div>
     <div class="group">
       <input type="text" value="" name="content" required>
       <span class="highlight"></span>
       <span class="bar"></span>
       <label>Содержание</label>
     </div>
+    <div class="form group" style="color: red" th:if="${#fields.hasErrors('additionalLiterature')}" th:errors="*{additionalLiterature}"></div>
     <div class="group">
       <input type="text" value="" name="additionalLiterature" required>
       <span class="highlight"></span>

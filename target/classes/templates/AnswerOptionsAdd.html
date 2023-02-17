@@ -12,6 +12,7 @@
     <div class="boxes">
       <h1 class="title">Добавление вариантов ответа</h1>
     </div>
+    <div class="form group" style="color: red" th:if="${#fields.hasErrors('content')}" th:errors="*{content}"></div>
     <div class="group" >
       <input type="text" name="content" required>
       <span class="highlight"></span>

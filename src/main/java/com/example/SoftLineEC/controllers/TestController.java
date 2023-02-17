@@ -1,5 +1,6 @@
 package com.example.SoftLineEC.controllers;
 
+import com.example.SoftLineEC.models.Block;
 import com.example.SoftLineEC.models.Test;
 import com.example.SoftLineEC.models.Lecture;
 import com.example.SoftLineEC.repositories.LectureRepository;
@@ -7,8 +8,10 @@ import com.example.SoftLineEC.repositories.TestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.*;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.Optional;
 @Controller
@@ -33,9 +36,14 @@ public class TestController {
         return "TestAdd";
     }
     @PostMapping("/TestAdd")
-    public String TestAddAdd(@ModelAttribute("Test") Test Test,
+    public String TestAddAdd(@ModelAttribute("Test") @Valid Test Test, BindingResult bindingResult,
                                 @RequestParam String nameOfLecture, Model addr)
     {
+        if (bindingResult.hasErrors()) {
+            Iterable<Test> test = testRepository.findAll();
+            addr.addAttribute("Test", test);
+            return "TestMain";
+        }
         Test.setLectureID(lectureRepository.findByNameOfLecture(nameOfLecture));
         testRepository.save(Test);
         return "TestMain";
@@ -57,8 +65,10 @@ public class TestController {
 
     @PostMapping("/Test/{id}/edit")
     public String TestUpdate(@PathVariable("id")long id,
-                             Test test, @RequestParam String nameOfLecture)
+                             @Valid Test test, BindingResult bindingResult, @RequestParam String nameOfLecture)
     {
+        if (bindingResult.hasErrors())
+            return "TestEdit";
         test.setLectureID(lectureRepository.findByNameOfLecture(nameOfLecture));
         testRepository.save(test);
         return "redirect:/Test";

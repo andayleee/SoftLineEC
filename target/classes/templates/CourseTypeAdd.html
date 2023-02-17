@@ -7,13 +7,14 @@
 </head>
 <div th:insert="blocks/header.html"/>
 <body>
-<form class="center" th:action="${'/CourseTypeAdd'}" method="post">
+<form class="center" th:action="${'/CourseTypeAdd'}" th:object="${CourseType}" method="post">
     <span class="centerin">
         <div class="boxes">
             <h1 class="title">Добавление типа курсов</h1>
         </div>
+        <div class="form group" style="color: red" th:if="${#fields.hasErrors('nameOfCourseType')}" th:errors="*{nameOfCourseType}"></div>
         <div class="group">
-            <input type="text" name="nameOfCourseType" required>
+            <input type="text" th:field="*{nameOfCourseType}" name="nameOfCourseType" >
             <span class="highlight"></span>
             <span class="bar"></span>
             <label>Наименование</label>

@@ -7,8 +7,10 @@ import com.example.SoftLineEC.repositories.CourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.*;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -36,9 +38,14 @@ public class BlockController {
     }
 
     @PostMapping("/BlockAdd")
-    public String BlockAddAdd(@ModelAttribute("Block") Block Block,
+    public String BlockAddAdd(@ModelAttribute("Block") @Valid Block Block, BindingResult bindingResult,
                                @RequestParam String nameOfCourse, Model addr)
     {
+        if (bindingResult.hasErrors()) {
+            Iterable<Course> Course = courseRepository.findAll();
+            addr.addAttribute("nameOfCourse",Course);
+            return "BlockAdd";
+        }
         Block.setCourseID(courseRepository.findByCategoriesOfStudentsOrNameOfCourse(nameOfCourse,nameOfCourse));
         blockRepository.save(Block);
         return "BlockMain";
@@ -47,22 +54,24 @@ public class BlockController {
     @GetMapping("/Block/{id}/edit")
     public String BlockEdit(@PathVariable(value = "id") long id, Model model)
     {
+        if(!blockRepository.existsById(id)){
+            return "redirect:/Block";
+        }
         Optional<Block> block = blockRepository.findById(id);
         ArrayList<Block> res = new ArrayList<>();
         block.ifPresent(res::add);
         model.addAttribute("Block", res);
         Iterable<Course> course = courseRepository.findAll();
         model.addAttribute("Course",course);
-        if(!blockRepository.existsById(id)){
-            return "redirect:/Block";
-        }
         return "BlockEdit";
     }
 
     @PostMapping("/Block/{id}/edit")
     public String BlockUpdate(@PathVariable("id")long id,
-                              Block block, @RequestParam String nameOfCourse)
+                              @Valid Block block, BindingResult bindingResult, @RequestParam String nameOfCourse)
     {
+        if (bindingResult.hasErrors())
+            return "BlockEdit";
         block.setCourseID(courseRepository.findByCategoriesOfStudentsOrNameOfCourse(nameOfCourse,nameOfCourse));
         blockRepository.save(block);
         return "redirect:/Block";

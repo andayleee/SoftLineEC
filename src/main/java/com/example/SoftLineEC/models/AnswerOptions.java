@@ -1,11 +1,15 @@
 package com.example.SoftLineEC.models;
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Entity
 public class AnswerOptions {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long idAnswerOptions;
+    @NotBlank(message = "Значение не может быть пустым")
+    @Size(min = 1,max = 2000,message = "Значение не может быть меньше 1 и больше 2000 символов")
     private String content;
     private boolean valid;
     @ManyToOne(optional = true)

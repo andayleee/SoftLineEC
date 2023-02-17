@@ -29,6 +29,7 @@ html, body {
     margin: auto;
     width: 100vh;
     top: 50px;
+    padding-bottom: 20px;
 }
 span{
     display: table;

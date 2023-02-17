@@ -1,6 +1,8 @@
 package com.example.SoftLineEC.models;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.Collection;
 
 @Entity
@@ -8,6 +10,8 @@ public class FormOfEducation {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long idFormOfEducation;
+    @NotBlank(message = "Значение не может быть пустым")
+    @Size(min = 1,max = 255,message = "Значение не может быть меньше 1 и больше 255 символов")
     private String typeOfEducation;
 
     @OneToMany(mappedBy = "formOfEducationID", fetch = FetchType.EAGER)

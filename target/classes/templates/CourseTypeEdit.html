@@ -12,8 +12,9 @@
         <div class="boxes">
     <h1 class="title">Изменение типа курсов</h1>
             </div>
+        <div class="form group" style="color: red" th:if="${#fields.hasErrors('nameOfCourseType')}" th:errors="*{nameOfCourseType}"></div>
         <div class="group">
-            <input type="text" th:value="${el.nameOfCourseType}" name="nameOfCourseType" required>
+            <input type="text" th:value="${el.nameOfCourseType}" th:field="*{nameOfCourseType}" name="nameOfCourseType" required>
             <span class="highlight"></span>
             <span class="bar"></span>
             <label>Наименование</label>

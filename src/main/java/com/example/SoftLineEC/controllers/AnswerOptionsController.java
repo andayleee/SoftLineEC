@@ -9,8 +9,10 @@ import com.example.SoftLineEC.repositories.TestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.*;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.Optional;
 @Controller
@@ -35,9 +37,14 @@ public class AnswerOptionsController {
         return "AnswerOptionsAdd";
     }
     @PostMapping("/AnswerOptionsAdd")
-    public String AnswerOptionsAddAdd(@ModelAttribute("AnswerOptions") AnswerOptions AnswerOptions,
+    public String AnswerOptionsAddAdd(@ModelAttribute("AnswerOptions") @Valid AnswerOptions AnswerOptions, BindingResult bindingResult,
                                  @RequestParam String nameOfQuestion, Model addr)
     {
+        if (bindingResult.hasErrors()) {
+            Iterable<Question> nameOfQuestionn= questionRepository.findAll();
+            addr.addAttribute("nameOfQuestion",nameOfQuestionn);
+            return "AnswerOptionsAdd";
+        }
         AnswerOptions.setQuestionID(questionRepository.findByNameOfQuestion(nameOfQuestion));
         answerOptionsRepository.save(AnswerOptions);
         return "AnswerOptionsMain";
@@ -60,8 +67,10 @@ public class AnswerOptionsController {
 
     @PostMapping("/AnswerOptions/{id}/edit")
     public String AnswerOptionsUpdate(@PathVariable("id")long id,
-                                      AnswerOptions answerOptions, @RequestParam String nameOfQuestion)
+                                      @Valid AnswerOptions answerOptions, BindingResult bindingResult, @RequestParam String nameOfQuestion)
     {
+        if (bindingResult.hasErrors())
+            return "AnswerOptionsEdit";
         answerOptions.setQuestionID(questionRepository.findByNameOfQuestion(nameOfQuestion));
         answerOptionsRepository.save(answerOptions);
         return "redirect:/AnswerOptions";

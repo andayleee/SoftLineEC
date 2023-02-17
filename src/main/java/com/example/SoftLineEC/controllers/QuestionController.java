@@ -7,8 +7,10 @@ import com.example.SoftLineEC.repositories.TestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.*;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.Optional;
 @Controller
@@ -33,9 +35,14 @@ public class QuestionController {
         return "QuestionAdd";
     }
     @PostMapping("/QuestionAdd")
-    public String QuestionAddAdd(@ModelAttribute("Question") Question Question,
+    public String QuestionAddAdd(@ModelAttribute("Question") @Valid Question Question, BindingResult bindingResult,
                              @RequestParam String nameOfTest, Model addr)
     {
+        if (bindingResult.hasErrors()) {
+            Iterable<Test> nameOfTestt= testRepository.findAll();
+            addr.addAttribute("nameOfTest",nameOfTestt);
+            return "QuestionAdd";
+        }
         Question.setTestID(testRepository.findByNameOfTest(nameOfTest));
         questionRepository.save(Question);
         return "QuestionMain";
@@ -57,8 +64,10 @@ public class QuestionController {
 
     @PostMapping("/Question/{id}/edit")
     public String QuestionUpdate(@PathVariable("id")long id,
-                                 Question question, @RequestParam String nameOfTest)
+                                 @Valid Question question, BindingResult bindingResult, @RequestParam String nameOfTest)
     {
+        if (bindingResult.hasErrors())
+            return "QuestionEdit";
         question.setTestID(testRepository.findByNameOfTest(nameOfTest));
         questionRepository.save(question);
         return "redirect:/Question";

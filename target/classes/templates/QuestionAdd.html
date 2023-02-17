@@ -3,6 +3,12 @@
 <head>
     <title>SoftLineEC - учет вопросов</title>
     <link th:href="@{/css/main.css}" rel="stylesheet" />
+<!--    &lt;!&ndash; Подключение библиотеки jQuery &ndash;&gt;-->
+<!--    <script src="jquery.js"></script>-->
+<!--    &lt;!&ndash; Подключение jQuery плагина Masked Input &ndash;&gt;-->
+<!--    <script src="jquery.maskedinput.min.js"></script>-->
+<!--    <link th:href="@{/js/jquery.js}" rel="script" />-->
+<!--    <link th:href="@{/js/jquery.maskedinput.min.js}" rel="script" />-->
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <div th:insert="blocks/header.html"/>
@@ -12,14 +18,16 @@
     <div class="boxes">
       <h1 class="title">Добавление вопроса</h1>
     </div>
+    <div class="form group" style="color: red" th:if="${#fields.hasErrors('nameOfQuestion')}" th:errors="*{nameOfQuestion}"></div>
     <div class="group" >
       <input type="text" name="nameOfQuestion" required>
       <span class="highlight"></span>
       <span class="bar"></span>
       <label>Название вопроса</label>
     </div>
+    <div class="form group" style="color: red" th:if="${#fields.hasErrors('score')}" th:errors="*{score}"></div>
       <div class="group" >
-      <input type="number" name="score" required>
+      <input id="num" type="text" name="score" data-mask="phone"  required>
       <span class="highlight"></span>
       <span class="bar"></span>
       <label>Балл</label>
@@ -35,6 +43,19 @@
       <button type="submit" class="custom-btn btn-16">Добавить вопрос</button>
     </form>
   </span>
+  <script src="https://unpkg.com/imask"></script> <!-- Подключаем плагин через CDN -->
+  <script src="js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+      const inputElement = document.querySelector('[data-mask="phone"]') // ищем наш единственный input
+      const maskOptions = { // создаем объект параметров
+        mask: '00' // задаем единственный параметр mask
+      }
+      IMask(inputElement, maskOptions) // запускаем плагин с переданными параметрами
+
+    })
+  </script>
 </form>
 </body>
 </html>

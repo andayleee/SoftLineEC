@@ -12,14 +12,16 @@
     <div class="boxes">
       <h1 class="title">Изменение вопроса</h1>
     </div>
+    <div class="form group" style="color: red" th:if="${#fields.hasErrors('nameOfQuestion')}" th:errors="*{nameOfQuestion}"></div>
     <div class="group" >
-      <input type="text" th:value="${el.nameOfQuestion}" name="nameOfQuestion" required>
+      <input type="text" th:value="${el.nameOfQuestion}" th:field="*{nameOfQuestion}" name="nameOfQuestion" required>
       <span class="highlight"></span>
       <span class="bar"></span>
       <label>Название вопроса</label>
     </div>
+    <div class="form group" style="color: red" th:if="${#fields.hasErrors('score')}" th:errors="*{score}"></div>
     <div class="group" >
-      <input type="number" th:value="${el.score}" name="score" required>
+      <input type="number" th:value="${el.score}" th:field="*{score}" name="score" required>
       <span class="highlight"></span>
       <span class="bar"></span>
       <label>Балл</label>

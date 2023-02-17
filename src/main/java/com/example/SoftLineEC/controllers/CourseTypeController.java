@@ -5,8 +5,11 @@ import com.example.SoftLineEC.repositories.CourseTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @Controller
 public class CourseTypeController {
@@ -21,17 +24,19 @@ public class CourseTypeController {
         return "CourseTypeMain";
     }
     @GetMapping("/CourseTypeAdd")
-    public String CourseTypeAdd(Model model)
+    public String CourseTypeAdd(@ModelAttribute ("CourseType") CourseType courseType)
     {
         return "CourseTypeAdd";
     }
 
     @PostMapping("/CourseTypeAdd")
-    public String CourseTypeAddAdd(@RequestParam String nameOfCourseType,
-                                   Model model)
+    public String CourseTypeAddAdd(@ModelAttribute ("CourseType") @Valid CourseType courseType, BindingResult bindingResult)
     {
-        CourseType сourseType = new CourseType(nameOfCourseType);
-        courseTypeRepository.save(сourseType);
+        if (bindingResult.hasErrors())
+        {
+            return "CourseTypeAdd";
+        }
+        courseTypeRepository.save(courseType);
         return "redirect:/CourseType";
     }
     @GetMapping("/CourseType/{id}/edit")
@@ -45,11 +50,13 @@ public class CourseTypeController {
         return "CourseTypeEdit";
     }
     @PostMapping("/CourseType/{id}/edit")
-    public String CourseTypeUpdate(@PathVariable("id")long id, @RequestParam String nameOfCourseType,
-                                   Model model)
+    public String CourseTypeUpdate(@PathVariable("id")long id, @Valid CourseType courseType, BindingResult bindingResult)
     {
-        CourseType res = courseTypeRepository.findById(id).orElseThrow();
-        res.setNameOfCourseType(nameOfCourseType);
+        if (bindingResult.hasErrors())
+        {
+            return "CourseTypeEdit";
+        }
+        courseTypeRepository.save(courseType);
         return "redirect:/CourseType";
     }
     @GetMapping("/CourseType/{id}/remove")

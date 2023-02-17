@@ -1,5 +1,7 @@
 package com.example.SoftLineEC.models;
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.Collection;
 
 @Entity
@@ -7,9 +9,17 @@ public class Lecture {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long idLecture;
+    @NotBlank(message = "Значение не может быть пустым")
+    @Size(min = 1,max = 255,message = "Значение не может быть меньше 1 и больше 255 символов")
     private String nameOfLecture;
+    @NotBlank(message = "Значение не может быть пустым")
+    @Size(min = 1,max = 5000,message = "Значение не может быть меньше 1 и больше 5000 символов")
     private String description;
+    @NotBlank(message = "Значение не может быть пустым")
+    @Size(min = 1,max = 5000,message = "Значение не может быть меньше 1 и больше 5000 символов")
     private String content;
+    @NotBlank(message = "Значение не может быть пустым")
+    @Size(min = 1,max = 2000,message = "Значение не может быть меньше 1 и больше 2000 символов")
     private String additionalLiterature;
     @ManyToOne(optional = true)
     private Block blockID;

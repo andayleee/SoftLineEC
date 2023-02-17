@@ -12,7 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Date;
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -26,10 +26,12 @@ public class CourseController {
     @Autowired
     private FormOfEducationRepository formOfEducationRepository;
     @GetMapping("/Course")
-    public String Course(Model model)
+    public String Course(@RequestParam(defaultValue = "") String search, Model model)
     {
-        Iterable<Course> course = courseRepository.findAll();
-        model.addAttribute("Course", course);
+        if (search.equals("")) {
+            Iterable<Course> course = courseRepository.findAll();
+            model.addAttribute("Course", course);
+        }
         return "CourseMain";
     }
     @GetMapping("/CourseAdd")
@@ -43,9 +45,17 @@ public class CourseController {
     }
 
     @PostMapping("/CourseAdd")
-    public String CourseAddAdd(@ModelAttribute("Course") Course course,
+    public String CourseAddAdd(@ModelAttribute("Course") @Valid Course course, BindingResult bindingResult,
                                @RequestParam String nameOfCourseType,@RequestParam String typeOfEducation, Model addr)
     {
+        if (bindingResult.hasErrors())
+        {
+            Iterable<CourseType> courseType = courseTypeRepository.findAll();
+            addr.addAttribute("CourseTypes",courseType);
+            Iterable<FormOfEducation> formOfEducations = formOfEducationRepository.findAll();
+            addr.addAttribute("FormOfEducations",formOfEducations);
+            return "CourseAdd";
+        }
         course.setCourseTypeID(courseTypeRepository.findByNameOfCourseType(nameOfCourseType));
         course.setFormOfEducationID(formOfEducationRepository.findByTypeOfEducation(typeOfEducation));
         courseRepository.save(course);
@@ -55,6 +65,9 @@ public class CourseController {
     @GetMapping("/Course/{id}/edit")
     public String CourseEdit(@PathVariable(value = "id") long id, Model model)
     {
+        if(!courseRepository.existsById(id)){
+            return "redirect:/Course";
+        }
         Optional<Course> course = courseRepository.findById(id);
         ArrayList<Course> res = new ArrayList<>();
         course.ifPresent(res::add);
@@ -63,16 +76,15 @@ public class CourseController {
         model.addAttribute("CourseTypes",courseType);
         Iterable<FormOfEducation> formOfEducations = formOfEducationRepository.findAll();
         model.addAttribute("FormOfEducations",formOfEducations);
-        if(!courseRepository.existsById(id)){
-            return "redirect:/Course";
-        }
         return "CourseEdit";
     }
 
     @PostMapping("/Course/{id}/edit")
     public String CourseUpdate(@PathVariable("id")long id,
-                               Course course, @RequestParam String nameOfCourseType,@RequestParam String typeOfEducation)
+                               @Valid Course course, BindingResult bindingResult, @RequestParam String nameOfCourseType,@RequestParam String typeOfEducation)
     {
+        if (bindingResult.hasErrors())
+            return "CourseEdit";
         course.setCourseTypeID(courseTypeRepository.findByNameOfCourseType(nameOfCourseType));
         course.setFormOfEducationID(formOfEducationRepository.findByTypeOfEducation(typeOfEducation));
         courseRepository.save(course);
@@ -85,5 +97,13 @@ public class CourseController {
         Course course = courseRepository.findById(id).orElseThrow();
         courseRepository.delete(course);
         return "redirect:/Course";
+    }
+
+    @PostMapping("/CourseSearch")
+    public String CourseSearch(@RequestParam(defaultValue = "") String search, Model model)
+    {
+        List<Course> result1 = courseRepository.findByCategoriesOfStudentsss(search);
+        model.addAttribute("Course", result1);
+        return Course(search,model);
     }
 }
