@@ -8,14 +8,14 @@
 <body class="body">
 <div th:insert="blocks/header.html"/>
 <form th:action="${'/AnswerOptions'}" class="center">
-  <span class="centerin" id="container">
+
     <div class="boxes">
       <div border="0">
         <h1 class="title">Вариант ответа</h1>
         <a href="/AnswerOptionsAdd" class="custom-btn btn-16">Добавить вариант ответа</a>
       </div>
     </div>
-    <table class="boxes" >
+    <table>
       <thead>
       <tr>
         <th>Содержание</th>
@@ -41,7 +41,7 @@
       </form>
       </tbody>
     </table>
-  </span>
+
 </form>
 </body>
 </html>

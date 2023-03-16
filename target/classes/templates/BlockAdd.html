@@ -3,12 +3,13 @@
 <head>
   <title>SoftLineEC - учет блоков</title>
   <link th:href="@{/css/main.css}" rel="stylesheet" />
+    <link th:href="@{/js/textAreaResize.js}" rel="script" />
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <div th:insert="blocks/header.html"/>
 <body>
 <form th:action="${'/BlockAdd'}" th:object="${Block}" method="post" class="center">
-  <span class="centerin">
+
     <div class="boxes">
       <h1 class="title">Добавление блока</h1>
     </div>
@@ -21,10 +22,7 @@
     </div>
     <div class="form group" style="color: red" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></div>
     <div class="group">
-      <input type="text" value="" name="description" required>
-      <span class="highlight"></span>
-      <span class="bar"></span>
-      <label>Описание</label>
+        <textarea class="textar" placeholder="Описание" th:field="*{description}" name="description" ></textarea>
     </div>
     <div class="form group" style="color: red" th:if="${#fields.hasErrors('duration')}" th:errors="*{duration}"></div>
     <div class="group">
@@ -34,7 +32,7 @@
       <label>Продолжительность</label>
     </div>
     <div class="group">
-      <select  name="nameOfCourse" required>
+      <select class="selec"  name="nameOfCourse" required>
         <div th:each="element : ${nameOfCourse}">
           <option th:text="${element.getNameOfCourse()}"></option>
         </div>
@@ -43,7 +41,7 @@
     <form th:action="${'/BlockAdd'}">
       <button type="submit" class="custom-btn btn-16">Добавить блок</button>
     </form>
-  </span>
 </form>
+<script type="text/javascript" th:src="@{/js/textAreaResize.js}" src="/js/textAreaResize.js"></script>
 </body>
 </html>

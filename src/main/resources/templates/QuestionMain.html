@@ -8,14 +8,14 @@
 <body class="body">
 <div th:insert="blocks/header.html"/>
 <form th:action="${'/Question'}" class="center">
-  <span class="centerin" id="container">
+
     <div class="boxes">
       <div border="0">
         <h1 class="title">Вопрос</h1>
         <a href="/QuestionAdd" class="custom-btn btn-16">Добавить вопрос</a>
       </div>
     </div>
-    <table class="boxes" >
+    <table>
       <thead>
       <tr>
         <th>Название вопроса</th>
@@ -41,7 +41,7 @@
       </form>
       </tbody>
     </table>
-  </span>
+
 </form>
 </body>
 </html>

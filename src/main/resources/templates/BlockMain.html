@@ -8,14 +8,14 @@
 <body class="body">
 <div th:insert="blocks/header.html"/>
 <form th:action="${'/Block'}" class="center">
-  <span class="centerin" id="container">
+
     <div class="boxes">
       <div border="0">
         <h1 class="title">Блок</h1>
         <a href="/BlockAdd" class="custom-btn btn-16">Добавить блок</a>
       </div>
     </div>
-    <table class="boxes" >
+    <table>
       <thead>
       <tr>
         <th>Название блока</th>
@@ -43,7 +43,7 @@
       </form>
       </tbody>
     </table>
-  </span>
+
 </form>
 </body>
 </html>

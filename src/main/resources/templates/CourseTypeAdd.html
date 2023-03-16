@@ -3,12 +3,12 @@
 <head>
     <title>SoftLineEC - учет типа курсов</title>
     <link th:href="@{/css/main.css}" rel="stylesheet" />
+    <link th:href="@{/js/textAreaResize}" rel="script" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <div th:insert="blocks/header.html"/>
 <body>
 <form class="center" th:action="${'/CourseTypeAdd'}" th:object="${CourseType}" method="post">
-    <span class="centerin">
         <div class="boxes">
             <h1 class="title">Добавление типа курсов</h1>
         </div>
@@ -20,7 +20,6 @@
             <label>Наименование</label>
         </div>
             <button type="submit" class="custom-btn btn-16">Добавить тип курса</button>
-    </span>
 </form>
 </body>
 </html>

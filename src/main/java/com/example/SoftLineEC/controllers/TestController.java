@@ -42,7 +42,7 @@ public class TestController {
         if (bindingResult.hasErrors()) {
             Iterable<Test> test = testRepository.findAll();
             addr.addAttribute("Test", test);
-            return "TestMain";
+            return "TestAdd";
         }
         Test.setLectureID(lectureRepository.findByNameOfLecture(nameOfLecture));
         testRepository.save(Test);

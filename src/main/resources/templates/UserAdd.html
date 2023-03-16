@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <link th:href="@{/css/main.css}" rel="stylesheet" />
+  <title>SoftLineEC - добавление пользователя</title>
+</head>
+<style>
+  .txt{
+    font-size: 20px;
+  }
+</style>
+<body>
+<div th:insert="blocks/header.html"/>
+<form method="post">
+  <table class="table">
+    <tr>
+      <td>
+        <input type="text" placeholder="Логин" name="username" class="txt" required>
+        <input type="text" placeholder="Фамилия" name="userSur" class="txt" required>
+        <input type="text" placeholder="Имя" name="userNamee" class="txt" required>
+        <input type="text" placeholder="Отчество" name="userPatr" class="txt" required>
+      </td>
+      <td>
+        <div th:each="role : ${roles}" class="txt">
+          <input type="checkbox" th:id="${role}" class="txt"
+                 th:name="${'roles[]'}">
+
+          <label th:text="${role}"></label>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <button class="btn btn-success" type="submit">Добавить пользователя</button>
+      </td>
+      <td>
+        <a class="btn btn-danger" th:href="'/admin/' + ${user_object.id}">Назад</a>
+      </td>
+    </tr>
+  </table>
+</form>
+</body>
+</html>

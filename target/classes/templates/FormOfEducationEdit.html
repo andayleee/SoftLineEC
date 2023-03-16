@@ -8,7 +8,6 @@
 <body>
 <div th:insert="blocks/header.html"/>
 <form th:each="el: ${FormOfEducation}" th:object="${FormOfEducation}" method="post" class="center">
-  <span class="centerin">
     <div class="boxes">
     <h1 class="title">Изменение формы обучения</h1>
       </div>
@@ -22,7 +21,6 @@
     <form method="post">
       <button type="submit" class="custom-btn btn-16">Изменить форму обучения</button>
     </form>
-  </span>
 </form>
 </body>
 </html>

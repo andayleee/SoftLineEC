@@ -8,7 +8,7 @@
 <div th:insert="blocks/header.html"/>
 <body>
 <form th:object="${Lecture}" th:each="el: ${Lecture}" method="post" class="center">
-  <span class="centerin">
+
     <div class="boxes">
       <h1 class="title">Изменение лекции</h1>
     </div>
@@ -38,14 +38,14 @@
       <label>Доп литература</label>
     </div>
     <div class="group">
-      <select name="nameOfCourse" required>
+      <select class="selec" name="nameOfBlock" required>
         <div th:each="addr : ${Block}">
           <option th:text="${addr.getNameOfBlock()}"></option>
         </div>
       </select>
     </div>
     <button type="submit" class="custom-btn btn-16">Изменить лекцию</button>
-  </span>
+
 </form>
 </body>
 </html>

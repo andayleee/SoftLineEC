@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+  <link th:href="@{/css/main.css}" rel="stylesheet" />
+    <title>SoftLineEC - изменение пользователя</title>
+</head>
+
+<body class="body">
+<div th:insert="blocks/header.html"/>
+  <form method="post" th:object="${user_object}" class="center">
+
+      <div class="boxes">
+      <div border="0">
+        <h1 class="title">Изменение пользователя</h1>
+      </div>
+    </div>
+    <table class="table" style="align-content: center">
+      <tr>
+        <td style="padding: 0px; align-items: end; width: 50%; border: transparent">
+          <div class="group" >
+            <input type="text" th:field="*{username}" th:value="*{username}" name="username" class="txt" required>
+            <span class="highlight"></span>
+            <span class="bar"></span>
+            <label>Логин</label>
+          </div>
+
+          <div class="group" >
+            <input type="text" th:field="*{userSur}" th:value="${user_object.userSur}" name="userSur" class="txt" required>
+            <span class="highlight"></span>
+            <span class="bar"></span>
+            <label>Фамилия</label>
+          </div>
+
+          <div class="group" >
+            <input type="text" th:field="*{userNamee}" th:value="${user_object.userNamee}" name="userNamee" class="txt" required>
+            <span class="highlight"></span>
+            <span class="bar"></span>
+            <label>Имя</label>
+          </div>
+
+          <div class="group" >
+            <input type="text" th:field="*{userPatr}" th:value="${user_object.userPatr}" name="userPatr" class="txt">
+            <span class="highlight"></span>
+            <span class="bar"></span>
+            <label>Отчество</label>
+          </div>
+        </td>
+        <td style="padding: 0px; text-align: center; width: 28vw; border: transparent">
+            <div th:each="role : ${roles}" style="display: flex; flex-direction: row">
+                 <h1 th:text="${role}"></h1>
+                 <input type="checkbox" th:id="${role}"
+                 th:name="${'roles[]'}" th:value="${role}"
+                 th:checked="${#lists.contains(user_object.roles,role)}">
+            </div>
+        </td>
+      </tr>
+      <tr>
+        <td style="padding: 0px; text-align: center; width: 28vw; border: transparent; background-color: white">
+          <button class="custom-btn btn-16" type="submit" >Изменить пользователя</button>
+        </td>
+        <td style="padding: 0px; text-align: center; width: 28vw; border: transparent; background-color: white";>
+          <a class="custom-btn btn-16" th:href="'/admin/' + ${user_object.id}">Назад</a>
+        </td>
+      </tr>
+    </table>
+    <div class="form group" style="color: red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
+    <div class="form group" style="color: red" th:if="${#fields.hasErrors('userSur')}" th:errors="*{userSur}"></div>
+    <div class="form group" style="color: red" th:if="${#fields.hasErrors('userNamee')}" th:errors="*{userNamee}"></div>
+    <div class="form group" style="color: red" th:if="${#fields.hasErrors('userPatr')}" th:errors="*{userPatr}"></div>
+      </span>
+  </form>
+</body>
+</html>

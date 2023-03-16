@@ -8,12 +8,12 @@
 <body class="body">
 <div th:insert="blocks/header.html"/>
 <form th:action="${'/FormOfEducation'}" class="center">
-  <span class="centerin">
+
     <div class="boxes">
         <h1 class="title">Форма обучения</h1>
         <a href="/FormOfEducationAdd" class="custom-btn btn-16">Добавить форму</a>
     </div>
-    <table class="boxes">
+    <table>
       <thead>
       <tr>
         <th>Форма обучения</th>
@@ -32,6 +32,6 @@
       </tbody>
     </table>
   </div>
-</span>
+</form>
 </body>
 </html>

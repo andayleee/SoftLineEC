@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link th:href="@{/css/main.css}" rel="stylesheet" />
+    <title>SoftLineEC - пользователь</title>
+</head>
+<body class="body">
+<div th:insert="blocks/header.html"/>
+<form  class="center">
+
+    <div class="boxes">
+      <div border="0">
+        <h1 class="title">Пользователь</h1>
+      </div>
+    </div>
+      <table style="margin-bottom: 10px">
+      <tr>
+        <td style="padding: 0px; text-align: right; width: 50%;  border: transparent">
+            <a class="custom-btn btn-16" th:href="'/admin/' + ${user_object.id} + '/update'" style="margin-right: 10px">Редактировать</a>
+        </td>
+        <td style="padding: 0px; text-align: left; width: 50%;  border: transparent">
+            <a href="/admin/a" class="custom-btn btn-16" style="margin-left: 10px">Назад</a>
+        </td>
+      </tr>
+    </table>
+    <table border="0">
+        <thead>
+        <tr>
+            <th>
+                <h1>Пользователь</h1>
+            </th>
+            <th>
+                <h1>Фамилия</h1>
+            </th>
+            <th>
+                <h1>Имя</h1>
+            </th>
+            <th>
+                <h1>Отчество</h1>
+            </th>
+            <th>
+                <h1>Роли</h1>
+            </th>
+            <th>
+                <h1>Активность</h1>
+            </th>
+        </tr>
+        <thead>
+        <tbody>
+        <tr>
+            <td>
+                <h1 th:text="${user_object.username}"></h1>
+            </td>
+            <td>
+                <h1 th:text="${user_object.userSur}"></h1>
+            </td>
+            <td>
+                <h1 th:text="${user_object.userNamee}"></h1>
+            </td>
+            <td>
+                <h1 th:text="${user_object.userPatr}"></h1>
+            </td>
+            <td>
+                <h1 th:text="${user_object.roles}"></h1>
+            </td>
+            <td>
+                <h1 th:text="${user_object.active} == True ? 'Активный' : 'Неактивный'"></h1>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</form>
+</body>
+</html>

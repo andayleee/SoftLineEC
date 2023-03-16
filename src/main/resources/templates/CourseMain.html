@@ -8,7 +8,7 @@
 <body class="body">
 <div th:insert="blocks/header.html"/>
 <div  class="center" >
-  <span class="centerin" id="container">
+
     <div class="boxes">
       <div border="0">
         <h1 class="title">Курс</h1>
@@ -18,10 +18,10 @@
     <table>
       <tr>
         <td style="padding: 0px; text-align: center; width: 28vw; border: transparent">
-          <div class="group">
-            <input type="text" name="search" required>
-            <span class="highlight"></span>
-            <span class="bar"></span>
+          <div class="group" style="width: 90%">
+            <input type="text" name="search" style="width: 90%" required>
+            <span class="highlight" style="width: 90%"></span>
+            <span class="bar" style="width: 90%"></span>
             <label>Поиск</label>
           </div>
         </td>
@@ -34,7 +34,7 @@
       </tr>
     </table>
     </form>
-    <table class="boxes" style="display: inline-block;vertical-align: top;max-width: 70vw;overflow-x: auto;white-space: normal;-webkit-overflow-scrolling: touch">
+    <table style="display: inline-block;vertical-align: top;max-width: 100%;overflow-x: auto;white-space: normal;-webkit-overflow-scrolling: touch">
       <thead>
       <tr>
         <th>Название курса</th>
@@ -74,7 +74,7 @@
         </tr>
       </tbody>
     </table>
-  </span>
+
 </div>
 </body>
 </html>

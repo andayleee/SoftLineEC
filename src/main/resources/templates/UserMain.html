@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link th:href="@{/css/main.css}" rel="stylesheet" />
+    <title>SoftLineEC - пользователи</title>
+</head>
+<body class="body">
+<div th:insert="blocks/header.html"/>
+
+<form class="center">
+
+    <div class="boxes">
+      <div border="0">
+        <h1 class="title">Пользователи</h1>
+        <a href="/registration" class="custom-btn btn-16">Добавить пользователя</a>
+      </div>
+    </div>
+    <table class="boxes" >
+      <thead>
+      <tr>
+        <th>Логин</th>
+        <th>Роль</th>
+        <th style="width: 20px"></th>
+      </tr>
+      </thead>
+      <tbody>
+      <form>
+        <tr th:each="el : ${user_list}">
+          <td><h3 th:text="${el.username}"></h3></td>
+          <td>
+           <div th:each="role : ${el.roles}">
+             <p th:text="${role}"></p>
+           </div>
+         </td>
+          <td><a th:href="'/admin/'+${el.id}">Подробнее...</a></td>
+        </tr>
+      </form>
+      </tbody>
+    </table>
+
+</form>
+</body>
+</html>

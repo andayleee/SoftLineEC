@@ -8,7 +8,6 @@
 <div th:insert="blocks/header.html"/>
 <body>
 <form th:action="${'/AnswerOptionsAdd'}" th:object="${AnswerOptions}" method="post" class="center">
-  <span class="centerin">
     <div class="boxes">
       <h1 class="title">Добавление вариантов ответа</h1>
     </div>
@@ -26,7 +25,7 @@
       <label>Валидность</label>
     </div>
     <div class="group">
-      <select  name="nameOfQuestion" required>
+      <select class="selec"  name="nameOfQuestion" required>
         <div th:each="element : ${nameOfQuestion}">
           <option th:text="${element.getNameOfQuestion()}"></option>
         </div>
@@ -35,7 +34,6 @@
     <form th:action="${'/AnswerOptionsAdd'}">
       <button type="submit" class="custom-btn btn-16">Добавить вариант ответа</button>
     </form>
-  </span>
 </form>
 </body>
 </html>
