@@ -12,23 +12,23 @@
     <div class="boxes">
       <h1 class="title">Изменение блока</h1>
     </div>
-    <div class="form group" style="color: red" th:if="${#fields.hasErrors('nameOfBlock')}" th:errors="*{Block.nameOfBlock}"></div>
+<!--    <div class="form group" style="color: red" th:if="${#fields.hasErrors('nameOfBlock')}" th:errors="*{Block.nameOfBlock}"></div>-->
     <div class="group">
-      <input type="text" th:value="${el.nameOfBlock}" th:field="*{Block.nameOfBlock}" name="nameOfBlock" required>
+      <input type="text" th:value="${el.nameOfBlock}" name="nameOfBlock" required>
       <span class="highlight"></span>
       <span class="bar"></span>
       <label>Название блока</label>
     </div>
-    <div class="form group" style="color: red" th:if="${#fields.hasErrors('description')}" th:errors="*{Block.description}"></div>
+<!--    <div class="form group" style="color: red" th:if="${#fields.hasErrors('description')}" th:errors="*{Block.description}"></div>-->
     <div class="group">
-      <input type="text" th:value="${el.description}" th:field="*{Block.description}" name="description" required>
+      <input type="text" th:value="${el.description}" name="description" required>
       <span class="highlight"></span>
       <span class="bar"></span>
       <label>Описание</label>
     </div>
-    <div class="form group" style="color: red" th:if="${#fields.hasErrors('duration')}" th:errors="*{Block.duration}"></div>
+<!--    <div class="form group" style="color: red" th:if="${#fields.hasErrors('duration')}" th:errors="*{Block.duration}"></div>-->
     <div class="group">
-      <input type="number" th:value="${el.duration}" th:field="*{Block.duration}" name="duration" required>
+      <input type="number" th:value="${el.duration}" name="duration" required>
       <span class="highlight"></span>
       <span class="bar"></span>
       <label>Продолжительность</label>

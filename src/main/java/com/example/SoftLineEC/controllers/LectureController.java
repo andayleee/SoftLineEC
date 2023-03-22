@@ -46,25 +46,25 @@ public class LectureController {
         }
         Lecture.setBlockID(blockRepository.findByNameOfBlockOrDescriptionOrDuration(nameOfBlock,nameOfBlock,nameOfBlock));
         lectureRepository.save(Lecture);
-        return "LectureMain";
+        return "redirect:/Lecture";
     }
-    @GetMapping("/Lecture/{id}/edit")
-    public String LectureEdit(@PathVariable(value = "id") long id, Model model)
+    @GetMapping("/Lecture/{idLecture}/edit")
+    public String LectureEdit(@PathVariable(value = "idLecture") long idLecture, Model model)
     {
-        Optional<Lecture> lecture = lectureRepository.findById(id);
+        if(!lectureRepository.existsById(idLecture)){
+            return "redirect:/Lecture";
+        }
+        Optional<Lecture> lecture = lectureRepository.findById(idLecture);
         ArrayList<Lecture> res = new ArrayList<>();
         lecture.ifPresent(res::add);
         model.addAttribute("Lecture", res);
         Iterable<Block> block = blockRepository.findAll();
         model.addAttribute("Block",block);
-        if(!lectureRepository.existsById(id)){
-            return "redirect:/Lecture";
-        }
         return "LectureEdit";
     }
 
-    @PostMapping("/Lecture/{id}/edit")
-    public String LectureUpdate(@PathVariable("id")long id,
+    @PostMapping("/Lecture/{idLecture}/edit")
+    public String LectureUpdate(@PathVariable("idLecture")long idLecture,
                                 @Valid Lecture lecture, BindingResult bindingResult, @RequestParam String nameOfBlock)
     {
         if (bindingResult.hasErrors())
@@ -74,10 +74,10 @@ public class LectureController {
         return "redirect:/Lecture";
     }
 
-    @GetMapping("/Lecture/{id}/remove")
-    public String LectureRemove(@PathVariable("id") long id, Model model)
+    @GetMapping("/Lecture/{idLecture}/remove")
+    public String LectureRemove(@PathVariable("idLecture") long idLecture, Model model)
     {
-        Lecture lecture = lectureRepository.findById(id).orElseThrow();
+        Lecture lecture = lectureRepository.findById(idLecture).orElseThrow();
         lectureRepository.delete(lecture);
         return "redirect:/Lecture";
     }

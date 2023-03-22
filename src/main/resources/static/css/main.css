@@ -9,6 +9,14 @@ html, body {
     background-color: #EBECF0;
     font-family: 'lato', sans-serif;
 }
+.img {
+    margin: auto;
+    height: 50px;
+    width: 50px;
+}
+p{
+    text-align: center;
+}
 :root{
     --index:calc(1vw + 1vh);
     --index1:calc(1vw);
@@ -96,7 +104,7 @@ a:hover {
     font-family: Syn;
     text-transform: uppercase;
     margin-top: 20px;
-    color: #1E5945;
+    color: #3f1f1f;
     font-size: calc(var(--index) * 2);
     letter-spacing: calc(var(--index) /2);
 }
@@ -298,4 +306,31 @@ input:focus ~ .highlight {
 @keyframes inputHighlighter {
     from { background:#9ea2a8; }
     to 	{ width:0; background:transparent; }
+}
+
+
+.card {
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    background-color: rgba(255, 255, 255, 0.75);
+    border-radius: 12px;
+    border: 1px solid rgba(209, 213, 219, 0.3);
+    width: 100px;
+    height: 100px;
+}
+
+.parent {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    background-color: gray;
+}
+
+.child {
+    position: absolute;
+    top: 50px;
+    left: 50px;
+    width: 100px;
+    height: 100px;
+    background-color: red;
 }

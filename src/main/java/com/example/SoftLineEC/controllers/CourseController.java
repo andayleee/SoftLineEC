@@ -1,8 +1,6 @@
 package com.example.SoftLineEC.controllers;
 
-import com.example.SoftLineEC.models.Course;
-import com.example.SoftLineEC.models.CourseType;
-import com.example.SoftLineEC.models.FormOfEducation;
+import com.example.SoftLineEC.models.*;
 import com.example.SoftLineEC.repositories.CourseRepository;
 import com.example.SoftLineEC.repositories.CourseTypeRepository;
 import com.example.SoftLineEC.repositories.FormOfEducationRepository;
@@ -62,16 +60,16 @@ public class CourseController {
         return "CourseMain";
     }
 
-    @GetMapping("/Course/{id}/edit")
-    public String CourseEdit(@PathVariable(value = "id") long id, Model model)
+    @GetMapping("/Course/{idCourse}/edit")
+    public String CourseEdit(@PathVariable(value = "idCourse") long idCourse, Model model)
     {
-        if(!courseRepository.existsById(id)){
+        if(!courseRepository.existsById(idCourse)){
             return "redirect:/Course";
         }
-        Optional<Course> course = courseRepository.findById(id);
+        Optional<Course> course = courseRepository.findById(idCourse);
         ArrayList<Course> res = new ArrayList<>();
         course.ifPresent(res::add);
-        model.addAttribute("Courses", res);
+        model.addAttribute("Course", res);
         Iterable<CourseType> courseType = courseTypeRepository.findAll();
         model.addAttribute("CourseTypes",courseType);
         Iterable<FormOfEducation> formOfEducations = formOfEducationRepository.findAll();
@@ -79,8 +77,8 @@ public class CourseController {
         return "CourseEdit";
     }
 
-    @PostMapping("/Course/{id}/edit")
-    public String CourseUpdate(@PathVariable("id")long id,
+    @PostMapping("/Course/{idCourse}/edit")
+    public String CourseUpdate(@PathVariable("idCourse")long idCourse,
                                @Valid Course course, BindingResult bindingResult, @RequestParam String nameOfCourseType,@RequestParam String typeOfEducation)
     {
         if (bindingResult.hasErrors())
@@ -91,10 +89,10 @@ public class CourseController {
         return "redirect:/Course";
     }
 
-    @GetMapping("/Course/{id}/remove")
-    public String CourseRemove(@PathVariable("id") long id, Model model)
+    @GetMapping("/Course/{idCourse}/remove")
+    public String CourseRemove(@PathVariable("idCourse") long idCourse, Model model)
     {
-        Course course = courseRepository.findById(id).orElseThrow();
+        Course course = courseRepository.findById(idCourse).orElseThrow();
         courseRepository.delete(course);
         return "redirect:/Course";
     }

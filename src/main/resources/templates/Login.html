@@ -1,13 +1,24 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title >SoftLineEC - учет лекций</title>
+  <title >SoftLineEC - Авторизация</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <div th:insert="blocks/header2.html"/>
   <link th:href="@{/css/loginreg.css}" rel="stylesheet" />
 </head>
+<header>
+  <nav class="card" style="position: fixed; top: 0; width: 100%; z-index: 499; height: 50px">
+    <link th:href="@{/images/SoftLineLogo.png}" rel="import"/>
+    <div style="align-items: center">
+      <a href="/main">
+        <img th:src="@{/images/SoftLineLogo.png}" height="25" width="100" alt="Logo" style="margin-top: 12px; margin-left: 95px"/>
+      </a>
+      <div class="flex items-center md:order-2">
+      </div>
+    </div>
+  </nav>
+</header>
 <body>
-<img th:src="@{/images/back.png}" class="img1" alt="Logo"/>
+<img th:src="@{/images/Background.png}" class="img1" alt="Logo"/>
 <div class="login-box">
   <h2>Вход в аккаунт</h2>
   <form method="post" th:action="@{/login}">
@@ -15,7 +26,7 @@
       <p style="color:red">Неправильный логин или пароль</p>
     </div>
     <div class="user-box">
-      <input type="text" id="firstname" name="username" required="">
+      <input style="outline: none" type="text" id="firstname" name="username" required="">
       <label>Email</label>
     </div>
     <div class="user-box">

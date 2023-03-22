@@ -41,18 +41,18 @@ public class FormOfEducationController {
         return "redirect:/FormOfEducation";
     }
 
-    @GetMapping("/FormOfEducation/{id}/edit")
-    public String FormOfEducationEdit(@PathVariable("id") long id, Model model)
+    @GetMapping("/FormOfEducation/{idFormOfEducation}/edit")
+    public String FormOfEducationEdit(@PathVariable("idFormOfEducation") long idFormOfEducation, Model model)
     {
-        if(!formOfEducationRepository.existsById(id)){
+        if(!formOfEducationRepository.existsById(idFormOfEducation)){
             return "redirect:/FormOfEducation";
         }
-        FormOfEducation res = formOfEducationRepository.findById(id).orElseThrow();
+        FormOfEducation res = formOfEducationRepository.findById(idFormOfEducation).orElseThrow();
         model.addAttribute("FormOfEducation", res);
         return "FormOfEducationEdit";
     }
-    @PostMapping("/FormOfEducation/{id}/edit")
-    public String FormOfEducationUpdate(@PathVariable("id")long id, @Valid FormOfEducation formOfEducation, BindingResult bindingResult)
+    @PostMapping("/FormOfEducation/{idFormOfEducation}/edit")
+    public String FormOfEducationUpdate(@PathVariable("idFormOfEducation")long idFormOfEducation, @Valid FormOfEducation formOfEducation, BindingResult bindingResult)
     {
         if (bindingResult.hasErrors())
         {
@@ -61,10 +61,10 @@ public class FormOfEducationController {
         formOfEducationRepository.save(formOfEducation);
         return "redirect:/FormOfEducation";
     }
-    @GetMapping("/FormOfEducation/{id}/remove")
-    public String FormOfEducationRemove(@PathVariable("id") long id, Model model)
+    @GetMapping("/FormOfEducation/{idFormOfEducation}/remove")
+    public String FormOfEducationRemove(@PathVariable("idFormOfEducation") long idFormOfEducation, Model model)
     {
-        FormOfEducation formOfEducation = formOfEducationRepository.findById(id).orElseThrow();
+        FormOfEducation formOfEducation = formOfEducationRepository.findById(idFormOfEducation).orElseThrow();
         formOfEducationRepository.delete(formOfEducation);
         return "redirect:/FormOfEducation";
     }

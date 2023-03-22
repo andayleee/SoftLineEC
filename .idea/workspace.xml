@@ -6,60 +6,42 @@
   <component name="ChangeListManager">
     <list default="true" id="6935da76-6763-4651-9e30-f14025ac4912" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/SoftLineEC/controllers/TestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/SoftLineEC/controllers/TestController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/SoftLineEC/config/WebSecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/SoftLineEC/config/WebSecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/SoftLineEC/controllers/BlockController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/SoftLineEC/controllers/BlockController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/SoftLineEC/controllers/CourseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/SoftLineEC/controllers/CourseController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/SoftLineEC/controllers/CourseTypeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/SoftLineEC/controllers/CourseTypeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/SoftLineEC/controllers/FormOfEducationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/SoftLineEC/controllers/FormOfEducationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/SoftLineEC/controllers/LectureController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/SoftLineEC/controllers/LectureController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/SoftLineEC/models/PasswordValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/SoftLineEC/models/PasswordValidator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/SoftLineEC/models/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/SoftLineEC/models/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/loginreg.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/loginreg.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/AnswerOptionsAdd.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/AnswerOptionsAdd.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/AnswerOptionsEdit.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/AnswerOptionsEdit.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/AnswerOptionsMain.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/AnswerOptionsMain.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/BlockAdd.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/BlockAdd.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/BlockEdit.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/BlockEdit.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/BlockMain.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/BlockMain.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/CourseAdd.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/CourseAdd.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/CourseEdit.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/CourseEdit.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/CourseMain.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/CourseMain.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/CourseTypeAdd.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/CourseTypeAdd.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/CourseTypeEdit.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/CourseTypeEdit.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/CourseTypeMain.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/CourseTypeMain.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/FormOfEducationAdd.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/FormOfEducationAdd.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/FormOfEducationEdit.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/FormOfEducationEdit.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/FormOfEducationMain.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/FormOfEducationMain.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/LectureAdd.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/LectureAdd.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/LectureEdit.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/LectureEdit.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/LectureMain.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/LectureMain.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/QuestionAdd.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/QuestionAdd.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/QuestionEdit.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/QuestionEdit.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/QuestionMain.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/QuestionMain.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/TestAdd.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/TestAdd.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/TestEdit.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/TestEdit.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/TestMain.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/TestMain.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/Login.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/Login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/MainPage.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/MainPage.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/Registration.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/Registration.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/blocks/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/blocks/header.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/SoftLineEC/controllers/TestController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/SoftLineEC/controllers/TestController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/blocks/header2.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/SoftLineEC/config/WebSecurityConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/SoftLineEC/config/WebSecurityConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/SoftLineEC/controllers/BlockController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/SoftLineEC/controllers/BlockController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/SoftLineEC/controllers/CourseController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/SoftLineEC/controllers/CourseController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/SoftLineEC/controllers/CourseTypeController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/SoftLineEC/controllers/CourseTypeController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/SoftLineEC/controllers/FormOfEducationController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/SoftLineEC/controllers/FormOfEducationController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/SoftLineEC/controllers/LectureController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/SoftLineEC/controllers/LectureController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/SoftLineEC/controllers/RegistrationController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/SoftLineEC/controllers/RegistrationController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/SoftLineEC/models/PasswordValidator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/SoftLineEC/models/PasswordValidator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/SoftLineEC/models/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/SoftLineEC/models/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/css/loginreg.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/css/loginreg.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/static/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/css/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/AnswerOptionsAdd.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/AnswerOptionsAdd.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/AnswerOptionsEdit.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/AnswerOptionsEdit.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/AnswerOptionsMain.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/AnswerOptionsMain.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/BlockAdd.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/BlockAdd.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/BlockEdit.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/BlockEdit.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/BlockMain.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/BlockMain.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/CourseAdd.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/CourseAdd.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/CourseEdit.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/CourseEdit.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/CourseMain.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/CourseMain.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/CourseTypeAdd.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/CourseTypeAdd.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/CourseTypeEdit.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/CourseTypeEdit.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/CourseTypeMain.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/CourseTypeMain.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/FormOfEducationAdd.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/FormOfEducationAdd.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/FormOfEducationEdit.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/FormOfEducationEdit.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/FormOfEducationMain.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/FormOfEducationMain.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/LectureAdd.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/LectureAdd.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/LectureEdit.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/LectureEdit.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/LectureMain.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/LectureMain.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/QuestionAdd.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/QuestionAdd.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/QuestionEdit.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/QuestionEdit.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/QuestionMain.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/QuestionMain.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/TestAdd.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/TestAdd.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/TestEdit.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/TestEdit.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/TestMain.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/TestMain.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/Login.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/Login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/MainPage.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/MainPage.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/Registration.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/Registration.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/templates/blocks/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/blocks/header.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/blocks/header2.html" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,23 +82,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultHtmlFileTemplate": "HTML File",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/Users/andayleee/Desktop/SoftLineEC/SoftLineEC/src/main/resources",
-    "list.type.of.created.stylesheet": "CSS",
-    "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "preferences.lookFeel",
-    "spring.configuration.checksum": "1c114b1f90ed77b6f4088dce2018b7a5"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/andayleee/Desktop/SoftLineEC/SoftLineEC/src/main/resources&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;1c114b1f90ed77b6f4088dce2018b7a5&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/resources" />
@@ -182,6 +164,9 @@
       <workItem from="1678550149873" duration="26851000" />
       <workItem from="1678802313370" duration="858000" />
       <workItem from="1678979286874" duration="17194000" />
+      <workItem from="1678999434311" duration="8974000" />
+      <workItem from="1679043540451" duration="9835000" />
+      <workItem from="1679311534036" duration="7098000" />
     </task>
     <servers />
   </component>

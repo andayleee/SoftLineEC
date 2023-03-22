@@ -39,18 +39,18 @@ public class CourseTypeController {
         courseTypeRepository.save(courseType);
         return "redirect:/CourseType";
     }
-    @GetMapping("/CourseType/{id}/edit")
-    public String CourseTypeEdit(@PathVariable("id") long id, Model model)
+    @GetMapping("/CourseType/{idCourseType}/edit")
+    public String CourseTypeEdit(@PathVariable("idCourseType") long idCourseType, Model model)
     {
-        if(!courseTypeRepository.existsById(id)){
+        if(!courseTypeRepository.existsById(idCourseType)){
             return "redirect:/CourseType";
         }
-        CourseType res = courseTypeRepository.findById(id).orElseThrow();
+        CourseType res = courseTypeRepository.findById(idCourseType).orElseThrow();
         model.addAttribute("CourseType", res);
         return "CourseTypeEdit";
     }
-    @PostMapping("/CourseType/{id}/edit")
-    public String CourseTypeUpdate(@PathVariable("id")long id, @Valid CourseType courseType, BindingResult bindingResult)
+    @PostMapping("/CourseType/{idCourseType}/edit")
+    public String CourseTypeUpdate(@ModelAttribute("courseType") @Valid CourseType courseType, BindingResult bindingResult, @PathVariable("idCourseType")long idCourseType)
     {
         if (bindingResult.hasErrors())
         {
@@ -59,10 +59,10 @@ public class CourseTypeController {
         courseTypeRepository.save(courseType);
         return "redirect:/CourseType";
     }
-    @GetMapping("/CourseType/{id}/remove")
-    public String CourseTypeRemove(@PathVariable("id") long id, Model model)
+    @GetMapping("/CourseType/{idCourseType}/remove")
+    public String CourseTypeRemove(@PathVariable("idCourseType") long idCourseType, Model model)
     {
-        CourseType courseType = courseTypeRepository.findById(id).orElseThrow();
+        CourseType courseType = courseTypeRepository.findById(idCourseType).orElseThrow();
         courseTypeRepository.delete(courseType);
         return "redirect:/CourseType";
     }

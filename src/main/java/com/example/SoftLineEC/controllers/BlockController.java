@@ -51,13 +51,13 @@ public class BlockController {
         return "BlockMain";
     }
 
-    @GetMapping("/Block/{id}/edit")
-    public String BlockEdit(@PathVariable(value = "id") long id, Model model)
+    @GetMapping("/Block/{idBlock}/edit")
+    public String BlockEdit(@PathVariable(value = "idBlock") long idBlock, Model model)
     {
-        if(!blockRepository.existsById(id)){
+        if(!blockRepository.existsById(idBlock)){
             return "redirect:/Block";
         }
-        Optional<Block> block = blockRepository.findById(id);
+        Optional<Block> block = blockRepository.findById(idBlock);
         ArrayList<Block> res = new ArrayList<>();
         block.ifPresent(res::add);
         model.addAttribute("Block", res);
@@ -66,8 +66,8 @@ public class BlockController {
         return "BlockEdit";
     }
 
-    @PostMapping("/Block/{id}/edit")
-    public String BlockUpdate(@PathVariable("id")long id,
+    @PostMapping("/Block/{idBlock}/edit")
+    public String BlockUpdate(@PathVariable("idBlock")long idBlock,
                               @Valid Block block, BindingResult bindingResult, @RequestParam String nameOfCourse)
     {
         if (bindingResult.hasErrors())
@@ -77,10 +77,10 @@ public class BlockController {
         return "redirect:/Block";
     }
 
-    @GetMapping("/Block/{id}/remove")
-    public String BlockRemove(@PathVariable("id") long id, Model model)
+    @GetMapping("/Block/{idBlock}/remove")
+    public String BlockRemove(@PathVariable("idBlock") long idBlock, Model model)
     {
-        Block block = blockRepository.findById(id).orElseThrow();
+        Block block = blockRepository.findById(idBlock).orElseThrow();
         blockRepository.delete(block);
         return "redirect:/Block";
     }
