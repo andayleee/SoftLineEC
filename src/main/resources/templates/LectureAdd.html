@@ -8,7 +8,7 @@
 </head>
 <div th:insert="blocks/header.html"/>
 <body>
-<form th:action="${'/LectureAdd'}" th:object="${Lecture}" method="post" class="center">
+<form th:action="${'/LectureAdd'}" th:object="${Lecture}" method="post" enctype="multipart/form-data" class="center">
 
     <div class="boxes">
       <h1 class="title">Добавление лекции</h1>
@@ -41,6 +41,9 @@
           <option th:text="${element.getNameOfBlock()}"></option>
         </div>
       </select>
+    </div>
+    <div class="group">
+        <input type="file" name="file"/>
     </div>
     <form th:action="${'/LectureAdd'}">
       <button type="submit" class="custom-btn btn-16">Добавить лекцию</button>

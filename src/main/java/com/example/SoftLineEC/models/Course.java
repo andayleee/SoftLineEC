@@ -13,26 +13,20 @@ public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long idCourse;
+    @Column(unique = true)
     @NotBlank(message = "Значение не может быть пустым")
     @Size(min = 1,max = 255,message = "Значение не может быть больше 255 символов")
     private String nameOfCourse;
-//    @NotEmpty(message = "Значение не может быть пустым")
-//    @PastOrPresent(message = "Значение должно представлять сегодняшнюю или прошедшую дату")
     private Date dateOfCreation;
-    @NotBlank(message = "Значение не может быть пустым")
-    @Size(min = 1,max = 5000,message = "Значение не может быть меньше 1 и больше 5000 символов")
+    @Size(max = 5000,message = "Значение не может быть меньше 1 и больше 5000 символов")
     private String description;
-    @Size(min = 1,max = 1000,message = "Значение не может быть меньше 1 и больше 1000 символов")
-    @NotBlank(message = "Значение не может быть пустым")
+    @Size(max = 1000,message = "Значение не может быть меньше 1 и больше 1000 символов")
     private String resources;
-    @Size(min = 1,max = 5000,message = "Значение не может быть меньше 1 и больше 5000 символов")
-    @NotBlank(message = "Значение не может быть пустым")
+    @Size(max = 5000,message = "Значение не может быть меньше 1 и больше 5000 символов")
     private String goal;
-    @Size(min = 1,max = 800,message = "Значение не может быть меньше 1 и больше 800 символов")
-    @NotBlank(message = "Значение не может быть пустым")
+    @Size(max = 800,message = "Значение не может быть меньше 1 и больше 800 символов")
     private String tasks;
-    @Size(min = 1,max = 5000,message = "Значение не может быть меньше 1 и больше 5000 символов")
-    @NotBlank(message = "Значение не может быть пустым")
+    @Size(max = 5000,message = "Значение не может быть меньше 1 и больше 5000 символов")
     private String categoriesOfStudents;
     @ManyToOne(optional = true)
     private CourseType courseTypeID;

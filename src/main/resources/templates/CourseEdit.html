@@ -11,9 +11,9 @@
     <div class="boxes">
       <h1 class="title">Изменение курса</h1>
     </div>
-    <div style="color: red" th:if="${#fields.hasErrors('nameOfCourse')}" th:errors="*{nameOfCourse}"></div>
+<!--    <div style="color: red" th:if="${#fields.hasErrors('nameOfCourse')}" th:errors="*{nameOfCourse}"></div>  th:field="*{nameOfCourse}"-->
     <div class="group" >
-      <input type="text" th:value="${el.nameOfCourse}" th:field="*{nameOfCourse}"  name="nameOfCourse" required>
+      <input type="text" th:value="${el.nameOfCourse}"  name="nameOfCourse" required>
       <span class="highlight"></span>
       <span class="bar"></span>
       <label>Название курса</label>

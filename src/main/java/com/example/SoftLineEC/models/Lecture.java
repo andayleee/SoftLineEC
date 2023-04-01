@@ -1,4 +1,7 @@
 package com.example.SoftLineEC.models;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -25,6 +28,9 @@ public class Lecture {
     private Block blockID;
     @OneToMany(mappedBy = "lectureID", fetch = FetchType.EAGER)
     private Collection<Test> tenants;
+    @Fetch(FetchMode.SUBSELECT)
+    @OneToMany(mappedBy = "lectureID", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Collection<Photo> tenants2;
 
     public Lecture(String nameOfLecture, String description, String content, String additionalLiterature, Block blockID) {
         this.nameOfLecture = nameOfLecture;
@@ -89,5 +95,13 @@ public class Lecture {
 
     public void setTenants(Collection<Test> tenants) {
         this.tenants = tenants;
+    }
+
+    public Collection<Photo> getTenants2() {
+        return tenants2;
+    }
+
+    public void setTenants2(Collection<Photo> tenants2) {
+        this.tenants2 = tenants2;
     }
 }

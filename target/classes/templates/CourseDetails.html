@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" style="background-color: #FFFFFF">
+<head>
+    <title>SoftLineEC - учет курсов</title>
+    <link th:href="@{/css/main.css}" rel="stylesheet" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body style="background-color: #FFFFFF">
+<form th:action="${'/CreateNewCourse/details'}" method="post">
+<div th:insert="blocks/header.html"/>
+<div th:insert="blocks/nav.html"/>
+<div style="margin-top: 15vh; margin-left: 20vw">
+    <h3 style="font-size: 30px; margin-bottom: 20px">Программа курса</h3>
+    <p style="text-align: left; margin-bottom: 20px">В курсе пока нет ни одного блока. <br/>
+    Создайте первый блок, чтобы добавить лекции.</p>
+    <a href="/CreateNewCourse/details/edit" type="submit" class="btn">Редактировать</a>
+</div>
+</form>
+</body>
+</html>

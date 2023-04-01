@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" style="background-color: #FFFFFF">
+<head>
+  <title>SoftLineEC - учет курсов</title>
+  <link th:href="@{/css/main.css}" rel="stylesheet" />
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body style="height: 100vh; background-color: #FFFFFF">
+<form th:action="${'/CourseDescription'}" th:each="el: ${Course}" th:object="${Course}" method="post" >
+  <div th:insert="blocks/header.html"/>
+  <div style="z-index: 1000" th:insert="blocks/nav.html"/>
+  <div style="margin-top: 15vh; margin-left: 20vw; z-index: 0">
+    <div class="group" >
+      <input type="text" th:value="${el.nameOfCourse}"  name="nameOfCourse" required>
+      <span class="highlight"></span>
+      <span class="bar"></span>
+      <label>Название курса</label>
+    </div>
+    <!--    <div class="form group" style="color: red" th:if="${#fields.hasErrors('description')}" th:errors="*{el.description}"></div>-->
+    <div class="group">
+      <textarea class="textar" placeholder="Описание" th:value="${el.description}" name="description" required></textarea>
+    </div>
+    <!--    <div class="form group" style="color: red" th:if="${#fields.hasErrors('resources')}" th:errors="*{el.resources}"></div>-->
+    <div class="group">
+      <textarea class="textar" placeholder="Ресурсы" th:value="${el.resources}"  name="resources" required></textarea>
+    </div>
+    <!--    <div class="form group" style="color: red" th:if="${#fields.hasErrors('goal')}" th:errors="*{el.goal}"></div>-->
+    <div class="group">
+      <textarea class="textar" placeholder="Цель" th:value="${el.goal}"  name="goal" required></textarea>
+    </div>
+    <!--    <div class="form group" style="color: red" th:if="${#fields.hasErrors('tasks')}" th:errors="*{el.tasks}"></div>-->
+    <div class="group">
+      <textarea class="textar" placeholder="Задачи" th:value="${el.tasks}"  name="tasks" required></textarea>
+    </div>
+    <!--    <div class="form group" style="color: red" th:if="${#fields.hasErrors('categoriesOfStudents')}" th:errors="*{el.categoriesOfStudents}"></div>-->
+    <div class="group">
+      <input type="text" th:value="${el.categoriesOfStudents}"  name="categoriesOfStudents" required>
+      <span class="highlight"></span>
+      <span class="bar"></span>
+      <label>Категории обучающихся</label>
+    </div>
+    <form th:action="${'/CourseDescription'}" method="post" >
+      <button type="submit" class="custom-btn btn-16">Изменить информацию о курсе</button>
+    </form>
+  </div>
+</form>
+<script type="text/javascript" th:src="@{/js/textAreaResize.js}" src="/js/textAreaResize.js"></script>
+</body>
+</html>

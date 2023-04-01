@@ -78,7 +78,7 @@ public class CourseController {
     }
 
     @PostMapping("/Course/{idCourse}/edit")
-    public String CourseUpdate(@PathVariable("idCourse")long idCourse,
+    public String CourseUpdate(@PathVariable("idCourse")long idCourse, @ModelAttribute("Course")
                                @Valid Course course, BindingResult bindingResult, @RequestParam String nameOfCourseType,@RequestParam String typeOfEducation)
     {
         if (bindingResult.hasErrors())

@@ -1,0 +1,87 @@
+<style>
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 200px;
+    height: 100%;
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    z-index: 1;
+  }
+
+  .sidebar a {
+    display: block;
+    color: #fff;
+    text-decoration: none;
+    margin-bottom: 10px;
+  }
+
+  .dropdown {
+    position: relative;
+  }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 100%;
+    background-color: #444;
+    min-width: 200px;
+    z-index: 1001;
+  }
+
+  .dropdown-content a {
+    color: #fff;
+    padding: 10px;
+    display: block;
+  }
+
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+  .dropbtn {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+  }
+
+  .fa-caret-down {
+    float: right;
+    margin-top: 3px;
+  }
+
+  .dropbtn:hover {
+    background-color: #444;
+  }
+
+</style>
+<div class="sidebar">
+  <div style="margin-top: 70px"/>
+  <a style="font-size: 30px; margin-bottom: 30px">Курс</a>
+  <div class="dropdown">
+    <button class="dropbtn">О курсе
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+      <a href="/CourseDescription">Описание</a>
+      <a href="/CreateNewCourse/details">Содержание</a>
+    </div>
+  </div>
+  <div class="dropdown">
+    <button class="dropbtn">Настройка
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+      <a href="#">Файлы</a>
+      <a href="#">Сертификаты</a>
+      <a href="#">Права доступа</a>
+    </div>
+  </div>
+</div>

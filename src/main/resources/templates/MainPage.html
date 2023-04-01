@@ -3,6 +3,7 @@
 <head>
   <title >SoftLineEC</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link th:href="@{/css/main.css}" rel="stylesheet" />
 </head>
 <body class="body">
@@ -10,12 +11,47 @@
 <form th:action="${'/main'}" class="center">
     <div class="boxes">
         <h2 class="title123">УЧЕБНЫЙ ЦЕНТР SOFTLINE</h2>
+        <div class="divspace"></div>
+        <h2 class="title12">Почему выбирают Учебный центр Softline?</h2>
+        <div class="divspace"></div>
     </div>
-    <img style="position: relative;" th:src="@{/images/Laptop.png}" alt="1">
-        <div style="position: absolute; top: 0" class="card">
-
+    <div class="row">
+        <div class="col-sm">
+                    <div class="row" style="margin-bottom: 50px">
+                        <div class="col-sm">
+                            <img style="margin: auto;" th:src="@{/images/Grid1.png}" alt="1"/>
+                            <h2>Международные<br/>
+                                сертификаты в центрах<br/>
+                                тестирования Softline</h2>
+                        </div>
+                        <div class="col-sm">
+                            <img style="margin: auto;" th:src="@{/images/Grid2.png}" alt="1"/>
+                            <h2>Возможность <br/>
+                                обучения из любой<br/>
+                                точки мира</h2>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-bottom: 50px">
+                        <div class="col-sm">
+                            <img style="margin: auto" th:src="@{/images/Grid3.png}" alt="1"/>
+                            <h2>Авторизации<br/>
+                                ведущих<br/>
+                                производителей ПО</h2>
+                        </div>
+                        <div class="col-sm">
+                            <img style="margin: auto" th:src="@{/images/Grid4.png}" alt="1"/>
+                            <h2>Гибкий индивидуальный<br/>
+                                подход в обучении</h2>
+                        </div>
+                    </div>
         </div>
-    </img>
+            <div class="col-sm">
+                <img style="position: static" th:src="@{/images/Laptop.png}" alt="1"/>
+            </div>
+            <div/>
+        </div>
+
+    </div>
 </form>
 </body>
 </html>
