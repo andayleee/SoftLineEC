@@ -1,4 +1,5 @@
 package com.example.SoftLineEC.models;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
@@ -15,21 +16,21 @@ public class Lecture {
     @NotBlank(message = "Значение не может быть пустым")
     @Size(min = 1,max = 255,message = "Значение не может быть меньше 1 и больше 255 символов")
     private String nameOfLecture;
-    @NotBlank(message = "Значение не может быть пустым")
-    @Size(min = 1,max = 5000,message = "Значение не может быть меньше 1 и больше 5000 символов")
+
+    @Size(max = 5000,message = "Значение не может быть меньше 1 и больше 5000 символов")
     private String description;
-    @NotBlank(message = "Значение не может быть пустым")
-    @Size(min = 1,max = 5000,message = "Значение не может быть меньше 1 и больше 5000 символов")
+    @Size(max = 5000,message = "Значение не может быть меньше 1 и больше 5000 символов")
     private String content;
-    @NotBlank(message = "Значение не может быть пустым")
-    @Size(min = 1,max = 2000,message = "Значение не может быть меньше 1 и больше 2000 символов")
+
+    @Size(max = 2000,message = "Значение не может быть меньше 1 и больше 2000 символов")
     private String additionalLiterature;
+    @JsonBackReference
     @ManyToOne(optional = true)
     private Block blockID;
     @OneToMany(mappedBy = "lectureID", fetch = FetchType.EAGER)
     private Collection<Test> tenants;
     @Fetch(FetchMode.SUBSELECT)
-    @OneToMany(mappedBy = "lectureID", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "lectureID", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     private Collection<Photo> tenants2;
 
     public Lecture(String nameOfLecture, String description, String content, String additionalLiterature, Block blockID) {

@@ -397,3 +397,36 @@ input:focus ~ .highlight {
     background-color: rgb(231, 231, 231);
     color: #2c1616;
 }
+
+.add-lecture{
+    border: none;
+    background-color: #FFFFFF;
+    color: #2c1616;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.add-lecture:hover {
+    background-color: rgb(231, 231, 231);
+    color: #2c1616;
+}
+
+ .delete-lecture{
+     margin: 12px;
+     border: none;
+     background-color: #FFFFFF;
+     color: #2c1616;
+     font-size: 16px;
+     font-weight: bold;
+     padding: 10px 20px;
+     border-radius: 5px;
+     cursor: pointer;
+     transition: background-color 0.3s ease;
+ }
+.delete-lecture:hover {
+    background-color: rgb(231, 231, 231);
+    color: #2c1616;
+}delete-lecture

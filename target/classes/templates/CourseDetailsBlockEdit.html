@@ -1,0 +1,84 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" style="background-color: #FFFFFF">
+<head>
+    <title>SoftLineEC - учет курсов</title><link th:href="@{/css/main.css}" rel="stylesheet" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body style="background-color: #FFFFFF">
+<form th:action="${'/CreateNewCourse/details/Block/Edit'}" method="post" th:each="el: ${Block}" th:object="${Block}">
+    <div th:insert="blocks/header.html"/>
+    <div th:insert="blocks/nav.html"/>
+    <div class="block" style="margin-top: 15vh; margin-left: 20vw; margin-right: 12vw;">
+        <div class="boxes">
+            <h1 class="title">Изменение блока</h1>
+        </div>
+        <!--    <div class="form group" style="color: red" th:if="${#fields.hasErrors('nameOfBlock')}" th:errors="*{Block.nameOfBlock}"></div>-->
+        <div class="group">
+            <input type="text" th:value="${el.nameOfBlock}" name="nameOfBlock" required>
+            <span class="highlight"></span>
+            <span class="bar"></span>
+            <label>Название блока</label>
+        </div>
+        <!--    <div class="form group" style="color: red" th:if="${#fields.hasErrors('description')}" th:errors="*{Block.description}"></div>-->
+        <div class="group">
+            <textarea class="textar" th:value="${el.description}" th:text="${el.description}" placeholder="Описание" name="description" ></textarea>
+        </div>
+        <!--    <div class="form group" style="color: red" th:if="${#fields.hasErrors('duration')}" th:errors="*{Block.duration}"></div>-->
+        <div class="group">
+            <input class="number" type="number" th:value="${el.duration}" name="duration" required>
+            <span class="highlight"></span>
+            <span class="bar"></span>
+            <label>Продолжительность</label>
+        </div>
+        <button type="submit" id="save-block" class="custom-btn btn-16">Изменить блок</button>
+    </div>
+</form>
+<script type="text/javascript" th:src="@{/js/textAreaResize.js}" src="/js/textAreaResize.js"></script>
+<script src="https://unpkg.com/imask" type="text/javascript"></script> <!-- Подключаем плагин через CDN -->
+<script type="text/javascript" th:src="@{/js/jquery.maskedinput.js}" src="/js/jquery.maskedinput.js"></script>
+<script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+<script>
+    document.getElementById("save-block").addEventListener("click", function() {
+        var nameOfBlockValues = [];
+        var descriptionValues = [];
+        var durationValues = [];
+        $('.block').each(function() {
+            var value = $(this).find('input').val();
+            nameOfBlockValues.push(value);
+            var value1 = $(this).find('textarea').val();
+            descriptionValues.push(value1);
+            var value2 = $(this).find('.number').val();
+            durationValues.push(value2);
+        });
+        console.log(nameOfBlockValues);
+        console.log(descriptionValues);
+        console.log(durationValues);
+        var data = {
+            nameOfBlock: nameOfBlockValues,
+            description: descriptionValues,
+            duration: durationValues
+        };
+        console.log(JSON.stringify(data));
+        if (nameOfBlockValues.includes(null) || nameOfBlockValues.includes("") || descriptionValues.includes(null) || descriptionValues.includes("")||durationValues.includes(null) || durationValues.includes("")) {
+            alert("Введите все данные");
+        } else {
+            $.ajax({
+                url: '/handleBlockEdit',
+                type: 'POST',
+                data: JSON.stringify(data),
+                contentType: "application/json;charset=UTF-8",
+                success: function (data) {
+                    console.log("sucsess");
+                    window.location.href = "/CreateNewCourse/details";
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.error(textStatus, errorThrown);
+                    alert("Данные невалидны!");
+                }
+            });
+        }
+    });
+</script>
+</body>
+</html>

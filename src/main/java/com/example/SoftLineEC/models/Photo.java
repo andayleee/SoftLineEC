@@ -8,7 +8,7 @@ public class Photo {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long idPhoto;
     private String photoPath;
-    @ManyToOne(optional = true, cascade = CascadeType.ALL)
+    @ManyToOne(optional = true)
     private Lecture lectureID;
 
     public Photo(String photoPath, Lecture lectureID) {

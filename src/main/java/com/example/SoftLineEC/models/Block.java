@@ -1,4 +1,7 @@
 package com.example.SoftLineEC.models;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -18,9 +21,11 @@ public class Block {
     @NotBlank(message = "Значение не может быть пустым")
     @Size(min = 1,max = 255,message = "Значение не может быть меньше 1 и больше 255 символов")
     private String duration;
+    @JsonBackReference
     @ManyToOne(optional = true)
     private Course courseID;
-    @OneToMany(mappedBy = "blockID", fetch = FetchType.EAGER)
+    @JsonManagedReference
+    @OneToMany(mappedBy = "blockID", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     private Collection<Lecture> tenants;
 
     public Block(String nameOfBlock, String description, String duration, Course courseID) {

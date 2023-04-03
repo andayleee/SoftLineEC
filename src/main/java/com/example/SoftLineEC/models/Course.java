@@ -1,5 +1,8 @@
 package com.example.SoftLineEC.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
@@ -7,6 +10,7 @@ import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Size;
 import java.sql.Date;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 public class Course {
@@ -28,10 +32,13 @@ public class Course {
     private String tasks;
     @Size(max = 5000,message = "Значение не может быть меньше 1 и больше 5000 символов")
     private String categoriesOfStudents;
+    @JsonBackReference
     @ManyToOne(optional = true)
     private CourseType courseTypeID;
+    @JsonBackReference
     @ManyToOne(optional = true)
     private FormOfEducation formOfEducationID;
+    @JsonManagedReference
     @OneToMany(mappedBy = "courseID", fetch = FetchType.EAGER)
     private Collection<Block> tenants;
 

@@ -1,7 +1,14 @@
 package com.example.SoftLineEC.repositories;
+import com.example.SoftLineEC.models.Block;
 import com.example.SoftLineEC.models.Lecture;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.CrudRepository;
 
-public interface LectureRepository extends CrudRepository<Lecture,Long>{
+import java.util.List;
+import java.util.Optional;
+
+public interface LectureRepository extends CrudRepository<Lecture,Long> {
     Lecture findByNameOfLecture(String nameOfLecture);
+//    Optional<Lecture> findLecturesByBlockID(Long BlockID);
+    List<Lecture> findLecturesByBlockID(Block blockID);
 }
