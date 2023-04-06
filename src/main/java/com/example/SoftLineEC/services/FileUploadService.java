@@ -24,7 +24,7 @@ public class FileUploadService {
         try (InputStream inputStream = file.getInputStream()) {
             Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
         }
-        filePath2 = filePath.toString();
+        filePath2 = filePath.toString().substring(25);
     }
     public static String getFilePath2(){
         return filePath2;

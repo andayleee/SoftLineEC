@@ -1,5 +1,7 @@
 package com.example.SoftLineEC.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -13,6 +15,7 @@ public class Test {
     @NotBlank(message = "Значение не может быть пустым")
     @Size(min = 1,max = 255,message = "Значение не может быть меньше 1 и больше 255 символов")
     private String nameOfTest;
+    @JsonBackReference
     @ManyToOne(optional = true)
     private Lecture lectureID;
     @OneToMany(mappedBy = "testID", fetch = FetchType.EAGER)

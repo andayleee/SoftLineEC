@@ -13,4 +13,6 @@ public interface CourseRepository extends CrudRepository<Course,Long> {
     @Query("SELECT m FROM Course m WHERE m.categoriesOfStudents LIKE %?1% or m.nameOfCourse LIKE %?1%")
     List<Course> findByCategoriesOfStudentsss (String categoriesOfStudents);
 
+    Course findCoursesByNameOfCourse(String NameOfCourse);
+
 }

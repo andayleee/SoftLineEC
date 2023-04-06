@@ -32,32 +32,6 @@
   var lectureNum = 0;
   containerLecture = document.getElementById('containerLecture');
 
-  // $.ajax({
-  //   url: "/getCourseData",
-  //   method: "GET",
-  //   data: {  },
-  //   contentType: "application/json;charset=UTF-8",
-  //   dataType: "json",
-  //   success: function(response) {
-  //     if (response.blocksExist && response.lecturesExist) {
-  //       console.log("вывод блоков и лекций");
-  //       // вывод блоков и лекций
-  //     } else if (response.blocksExist && !response.lecturesExist) {
-  //       console.log("вывод блоков без лекций");
-  //       // вывод блоков без лекций
-  //     } else if (!response.blocksExist && response.lecturesExist) {
-  //       console.log("вывод лекций без блоков");
-  //       // вывод лекций без блоков
-  //     } else {
-  //       console.log("вывод сообщения об отсутствии блоков и лекций");
-  //       // вывод сообщения об отсутствии блоков и лекций
-  //     }
-  //   },
-  //   error: function(xhr, status, error) {
-  //     // обработка ошибок
-  //   }
-  // });
-
   document.getElementById("load-block").addEventListener("click", function() {
     $.get("/blockAddSample", {num: blockNum}, function(data) {
       if(blockNum<5) {

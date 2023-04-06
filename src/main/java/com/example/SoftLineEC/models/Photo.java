@@ -1,5 +1,7 @@
 package com.example.SoftLineEC.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 
 @Entity
@@ -8,6 +10,7 @@ public class Photo {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long idPhoto;
     private String photoPath;
+    @JsonBackReference
     @ManyToOne(optional = true)
     private Lecture lectureID;
 

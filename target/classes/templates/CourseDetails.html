@@ -158,6 +158,26 @@
             }
         });
     }
+    function editLecture(id) {
+        $.ajax({
+            url: "/CreateNewCourse/details/Lecture/Edit",
+            type: "POST",
+            data: { id: id },
+            success: function() {
+                window.location.href = "/CreateNewCourse/details/Lecture/Edit";
+            }
+        });
+    }
+    function showDetails(id) {
+        $.ajax({
+            url: "/CreateNewCourse/details/Lecture/Edit/Content",
+            type: "POST",
+            data: { id: id },
+            success: function() {
+                window.location.href = "/CreateNewCourse/details/Lecture/Edit/Content";
+            }
+        });
+    }
 </script>
 </body>
 </html>

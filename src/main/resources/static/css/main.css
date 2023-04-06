@@ -34,12 +34,13 @@ p{
     .sidebar {
         display: none;
     }
-    .divcousre{
-        margin-top: 15vh;
+}
+@media (max-width: 1000px) {
+    .divcousre {
         margin-left: 0vw;
-        background-color: transparent
     }
 }
+
 
 .divcousre{
     margin-top: 15vh;

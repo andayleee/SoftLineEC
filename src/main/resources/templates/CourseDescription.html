@@ -4,46 +4,105 @@
   <title>SoftLineEC - учет курсов</title>
   <link th:href="@{/css/main.css}" rel="stylesheet" />
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body style="height: 100vh; background-color: #FFFFFF">
 <form th:action="${'/CourseDescription'}" th:each="el: ${Course}" th:object="${Course}" method="post" >
   <div th:insert="blocks/header.html"/>
   <div style="z-index: 1000" th:insert="blocks/nav.html"/>
-  <div style="margin-top: 15vh; margin-left: 20vw; z-index: 0">
+  <div class="course divcousre">
     <div class="group" >
-      <input type="text" th:value="${el.nameOfCourse}"  name="nameOfCourse" required>
+      <input type="text" th:value="${el.nameOfCourse}"  class="nameOfCourse" name="nameOfCourse" required>
       <span class="highlight"></span>
       <span class="bar"></span>
       <label>Название курса</label>
     </div>
     <!--    <div class="form group" style="color: red" th:if="${#fields.hasErrors('description')}" th:errors="*{el.description}"></div>-->
     <div class="group">
-      <textarea class="textar" placeholder="Описание" th:value="${el.description}" name="description" required></textarea>
+      <textarea class="textar description" placeholder="Описание" th:value="${el.description}" th:text="${el.description}" name="description" required></textarea>
     </div>
     <!--    <div class="form group" style="color: red" th:if="${#fields.hasErrors('resources')}" th:errors="*{el.resources}"></div>-->
     <div class="group">
-      <textarea class="textar" placeholder="Ресурсы" th:value="${el.resources}"  name="resources" required></textarea>
+      <textarea class="textar resources" placeholder="Ресурсы" th:value="${el.resources}" th:text="${el.resources}"  name="resources" required></textarea>
     </div>
     <!--    <div class="form group" style="color: red" th:if="${#fields.hasErrors('goal')}" th:errors="*{el.goal}"></div>-->
     <div class="group">
-      <textarea class="textar" placeholder="Цель" th:value="${el.goal}"  name="goal" required></textarea>
+      <textarea class="textar goal" placeholder="Цель" th:value="${el.goal}" th:text="${el.goal}"  name="goal" required></textarea>
     </div>
     <!--    <div class="form group" style="color: red" th:if="${#fields.hasErrors('tasks')}" th:errors="*{el.tasks}"></div>-->
     <div class="group">
-      <textarea class="textar" placeholder="Задачи" th:value="${el.tasks}"  name="tasks" required></textarea>
+      <textarea class="textar tasks" placeholder="Задачи" th:value="${el.tasks}" th:text="${el.tasks}"  name="tasks" required></textarea>
     </div>
     <!--    <div class="form group" style="color: red" th:if="${#fields.hasErrors('categoriesOfStudents')}" th:errors="*{el.categoriesOfStudents}"></div>-->
     <div class="group">
-      <input type="text" th:value="${el.categoriesOfStudents}"  name="categoriesOfStudents" required>
+      <input type="text" th:value="${el.categoriesOfStudents}" class="categoriesOfStudents"  name="categoriesOfStudents" required>
       <span class="highlight"></span>
       <span class="bar"></span>
       <label>Категории обучающихся</label>
     </div>
-    <form th:action="${'/CourseDescription'}" method="post" >
-      <button type="submit" class="custom-btn btn-16">Изменить информацию о курсе</button>
-    </form>
+      <button type="submit" id="save-course" class="custom-btn btn-16">Изменить информацию о курсе</button>
   </div>
 </form>
 <script type="text/javascript" th:src="@{/js/textAreaResize.js}" src="/js/textAreaResize.js"></script>
+<script src="https://unpkg.com/imask" type="text/javascript"></script> <!-- Подключаем плагин через CDN -->
+<script type="text/javascript" th:src="@{/js/jquery.maskedinput.js}" src="/js/jquery.maskedinput.js"></script>
+<script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+<script>
+  document.getElementById("save-course").addEventListener("click", function() {
+    var nameOfCourseValues = [];
+    var descriptionValues = [];
+    var resourcesValues = [];
+    var goalValues = [];
+    var tasksValues = [];
+    var categoriesOfStudentsValues = [];
+    $('.course').each(function() {
+      var value = $(this).find('.nameOfCourse').val();
+      nameOfCourseValues.push(value);
+      var value1 = $(this).find('.description').val();
+      descriptionValues.push(value1);
+      var value2 = $(this).find('.resources').val();
+      resourcesValues.push(value2);
+      var value3 = $(this).find('.goal').val();
+      goalValues.push(value3);
+      var value4 = $(this).find('.tasks').val();
+      tasksValues.push(value4);
+      var value5 = $(this).find('.categoriesOfStudents').val();
+      categoriesOfStudentsValues.push(value5);
+    });
+    console.log(nameOfCourseValues);
+    console.log(descriptionValues);
+    console.log(resourcesValues);
+    console.log(goalValues);
+    console.log(tasksValues);
+    console.log(categoriesOfStudentsValues);
+    var data = {
+      nameOfCourse: nameOfCourseValues,
+      description: descriptionValues,
+      resources: resourcesValues,
+      goal: goalValues,
+      tasks: tasksValues,
+      categoriesOfStudents: categoriesOfStudentsValues
+    };
+    console.log(JSON.stringify(data));
+    if (nameOfCourseValues.includes(null) || nameOfCourseValues.includes("") || descriptionValues.includes(null) || descriptionValues.includes("")||resourcesValues.includes(null) || resourcesValues.includes("")  || goalValues.includes(null) || goalValues.includes("") || tasksValues.includes(null) || tasksValues.includes("") || categoriesOfStudentsValues.includes(null) || categoriesOfStudentsValues.includes("")) {
+      alert("Введите все данные");
+    } else {
+      $.ajax({
+        url: '/handleCourseEdit',
+        type: 'POST',
+        data: JSON.stringify(data),
+        contentType: "application/json;charset=UTF-8",
+        success: function (data) {
+          console.log("sucsess");
+          window.location.href = "/CreateNewCourse/details";
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+          console.error(textStatus, errorThrown);
+          alert("Данные невалидны!");
+        }
+      });
+    }
+  });
+</script>
 </body>
 </html>

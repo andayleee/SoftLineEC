@@ -9,6 +9,6 @@ import java.util.Optional;
 
 public interface LectureRepository extends CrudRepository<Lecture,Long> {
     Lecture findByNameOfLecture(String nameOfLecture);
-//    Optional<Lecture> findLecturesByBlockID(Long BlockID);
     List<Lecture> findLecturesByBlockID(Block blockID);
+    Lecture findLectureByIdLecture(long IdLecture);
 }

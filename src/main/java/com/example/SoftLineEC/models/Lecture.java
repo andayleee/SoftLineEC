@@ -1,5 +1,6 @@
 package com.example.SoftLineEC.models;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
@@ -27,8 +28,10 @@ public class Lecture {
     @JsonBackReference
     @ManyToOne(optional = true)
     private Block blockID;
+    @JsonManagedReference
     @OneToMany(mappedBy = "lectureID", fetch = FetchType.EAGER)
     private Collection<Test> tenants;
+    @JsonManagedReference
     @Fetch(FetchMode.SUBSELECT)
     @OneToMany(mappedBy = "lectureID", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     private Collection<Photo> tenants2;
