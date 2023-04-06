@@ -79,18 +79,16 @@
               type: "DELETE",
               url: "/photo/" + photos[i].idPhoto,
               success: function() {
-
+                imageContainer.remove();
               },
               error: function() {
                 console.error("Ошибка при удалении блока");
               }
             });
-            imageContainer.remove();
           });
             imageContainer.appendChild(imageElement);
             imageContainer.appendChild(deleteButton);
           imagesContainer.appendChild(imageContainer);
-          countOfButton++;
         }
       },
       error: function() {
@@ -120,7 +118,7 @@
       deleteBtn.id = countOfButton.toString();
       deleteBtn.className = countOfButton.toString();
       deleteBtn.addEventListener('click', function() {
-        deleteLecture(deleteBtn.id);
+        deletePhoto(deleteBtn.id);
       });
       var newInput = document.createElement('input');
       newInput.type = 'file';
@@ -138,6 +136,16 @@
       alert("Достигнуто максимальное кол-во фото");
     }
   });
+  function deletePhoto(id) {
+    if(countOfButton>1) {
+      var element = document.getElementsByClassName(id)[0];
+      var imgButton = document.getElementById(id);
+      imgButton.remove();
+      element.remove();
+      countOfButton--;
+    }else {
+    }
+  }
 
   document.getElementById("save-lecture").addEventListener("click", function() {
     var content = quill.getContents();
