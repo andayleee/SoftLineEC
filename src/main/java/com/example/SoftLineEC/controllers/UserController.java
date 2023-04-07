@@ -11,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/admin")
@@ -84,7 +85,7 @@ public class UserController {
             modelRoles.addAttribute("roles", Role.values());
             return "UserEdit";
         }
-        String password = user.getPassword();
+        Optional<User> userData = userRepository.findById(id);
         user.getRoles().clear();
         if(roles == null)
             return "UserEdit";
@@ -96,7 +97,8 @@ public class UserController {
             }
         }
         user.setActive(true);
-        user.setPassword(password);
+        user.setPassword(userData.get().getPassword());
+        user.setRepeatPassword(userData.get().getRepeatPassword());
         userRepository.save(user);
         return "redirect:/admin/{id}";
     }

@@ -34,13 +34,14 @@
 
   document.getElementById("load-block").addEventListener("click", function() {
     $.get("/blockAddSample", {num: blockNum}, function(data) {
-      if(blockNum<5) {
+      if(blockNum<15) {
         const newBlock = $("#container").append(data);
         $(".block").each(function (index) {
-            const inputElement = document.querySelector('.number')
+          const inputElement = document.querySelectorAll('.number')[index];
             const maskOptions = {
-              mask: '00'
+              mask: '000'
               }
+              console.log(inputElement);
           IMask(inputElement, maskOptions);
           $(this).find(".block-num").text(index + 1);
           $(this).attr("data-block-num", index + 1);
