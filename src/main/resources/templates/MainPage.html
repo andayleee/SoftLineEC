@@ -4,7 +4,7 @@
   <title >SoftLineEC</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-
+    <link rel="shortcut icon" href="/images/slLogo.svg">
     <!-- Latest compiled JavaScript -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
@@ -69,19 +69,19 @@
         <h1 class="title12" style="margin-top: 5vh">Все курсы</h1>
         <div style="height: 5vh"></div>
         <div class="search-container">
-            <input id="search-input" type="text" placeholder="Search courses...">
-            <button id="search-button" type="button" class="btn btn-course" style="margin: 0px">Search</button>
+            <input id="search-input" type="text" placeholder="Поиск курсов...">
+            <button id="search-button" type="button" class="btn btn-course" style="margin: 0px">Найти</button>
         </div>
         <div style="height: 5vh"></div>
         <div id="pagination-container" style="width: 100%;margin-bottom: 50px"></div>
         <div id="courses-list" style="width: 100%; display: flex; justify-content: center; flex-direction: column"></div>
         <button type="submit" id="go-to" class="custom-btn btn-16">Вернуться</button>
-        <div class="divspace"></div>
+        <div style="height: 10vh"></div>
     </div>
 </form>
 <script>
     var currentPage = 1;
-    var itemsPerPage = 5;
+    var itemsPerPage = 4;
     var coursesData;
 
     $.ajax({
@@ -110,57 +110,89 @@
     });
 
     function displayItems(courses) {
+        var i = 0;
         var startIndex = (currentPage - 1) * itemsPerPage;
         var endIndex = startIndex + itemsPerPage;
         var coursesToDisplay = courses.slice(startIndex, endIndex);
         var coursesList = $('#courses-list');
         coursesList.empty();
         coursesToDisplay.forEach(function(course) {
-            var card = $('<div>').addClass('card').css({
-                'box-shadow': '0 4px 8px 0 rgba(0,0,0,0.2)',
-                'max-width': '100%',
-                'margin-bottom': '50px',
-                'display': 'flex',
-                'flex-direction': 'column',
-                'height': '100%'
+            $.ajax({
+                url: '/check-coursesType-' + course.idCourse,
+                type: 'POST',
+                success: function(courseType) {
+                    $.ajax({
+                        url: '/check-formOf-' + course.idCourse,
+                        type: 'POST',
+                        success: function(formOfEducation) {
+                            var card = $('<div>').addClass('card').css({
+                                'box-shadow': '0 4px 8px 0 rgba(0,0,0,0.2)',
+                                'max-width': '100%',
+                                'margin-bottom': '50px',
+                                'display': 'flex',
+                                'flex-direction': 'column',
+                                'height': '100%'
+                            }).attr('id', coursesToDisplay[i].idCourse);
+                            var cardTitle = $('<h5>').addClass('card-title course-card').text(course.nameOfCourse).css({
+                                'bottom': '0',
+                                'left': '0',
+                                'right': '0',
+                                'color': '#fff',
+                                'padding': '10px',
+                                'background-color': 'rgb(199,199,199)',
+                                'margin-bottom': '0',
+                                'text-align':'start'
+                            });
+                            var cardBody = $('<div>').addClass('card-body').css({
+                                'display': 'flex',
+                                'flex-direction': 'column',
+                                'justify-content': 'space-between',
+                                'height': '100%'
+                            });
+                            var cardText = $('<p>').addClass('card-text').text(course.description).css({
+                                'text-align':'start',
+                                'margin': '0 20px 0 20px'
+                            });
+                            var cardButtonContainer = $('<div>').css({
+                                'display':'flex',
+                                'align-items':'center',
+                                'justify-content':'end',
+                                'margin-top':'-15px'
+                            });
+                            var cardButton = $('<a>').addClass('btn btn-course').attr('href', '/main/Courses-' + coursesToDisplay[i].idCourse).text('Подробнее').css('width','150px');
+                            var cardLine = $('<hr>').css({
+                                'border': 'none',
+                                'height': '1px',
+                                'background-color': 'rgb(189,189,189)',
+                                'margin': '20px 0 0 0'
+                            });
+                            var typeOfCourse = $('<p>').addClass('card-text').text(courseType).css({
+                                'color':'#d02d49'
+                            });
+                            var FormOfEducation = $('<p>').addClass('card-text').text("Форма обучения: " + formOfEducation).css({
+                                'color':'#d02d49'
+                            });
+                            var typeOfCourseAndFormOfEducation = $('<div>').addClass('card-body').css({
+                                'display': 'flex',
+                                'align-items':'end',
+                                'justify-content': 'space-between',
+                                'height': '100%'
+                            });
+                            typeOfCourseAndFormOfEducation.append(FormOfEducation,typeOfCourse);
+                            cardButtonContainer.append(cardButton);
+                            cardBody.append(cardText, cardLine,typeOfCourseAndFormOfEducation, cardButtonContainer);
+                            card.append(cardTitle, cardBody);
+                            coursesList.append(card);
+                            i++;
+                        },
+                            error: function() {
+                                console.error('Error retrieving courses from the server.');
+                            }});
+                },
+                error: function() {
+                    console.error('Error retrieving courses from the server.');
+                }
             });
-            var cardTitle = $('<h5>').addClass('card-title course-card').text(course.nameOfCourse).css({
-                'bottom': '0',
-                'left': '0',
-                'right': '0',
-                'color': '#fff',
-                'padding': '10px',
-                'background-color': 'rgb(199,199,199)',
-                'margin-bottom': '0',
-                'text-align':'start'
-            });
-            var cardBody = $('<div>').addClass('card-body').css({
-                'display': 'flex',
-                'flex-direction': 'column',
-                'justify-content': 'space-between',
-                'height': '100%'
-            });
-            var cardText = $('<p>').addClass('card-text').text(course.description).css({
-                'text-align':'start',
-                'margin': '0 20px 0 20px'
-
-            });
-            var cardButtonContainer = $('<div>').css({
-                'display':'flex',
-                'align-items':'center',
-                'justify-content':'end'
-            });
-            var cardButton = $('<a>').addClass('btn btn-course').attr('href', '#').text('Подробнее').css('width','150px');
-            var cardLine = $('<hr>').css({
-                'border': 'none',
-                'height': '1px',
-                'background-color': 'rgb(189,189,189)',
-                'margin': '20px 0 0 0'
-            });
-            cardButtonContainer.append(cardButton);
-            cardBody.append(cardText, cardLine, cardButtonContainer);
-            card.append(cardTitle, cardBody);
-            coursesList.append(card);
         });
     }
 

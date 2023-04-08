@@ -1,11 +1,12 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org" style="background-color: #FFFFFF">
 <head>
-  <title>SoftLineEC - учет курсов</title>
+  <title>SoftLineEC - изменение деталей курса</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
   <link th:href="@{/css/main.css}" rel="stylesheet" />
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link rel="shortcut icon" href="/images/slLogo.svg">
 </head>
 <body style="background-color: #FFFFFF">
 <form th:action="${'/CreateNewCourse/details/edit'}" method="post">
@@ -34,13 +35,14 @@
 
   document.getElementById("load-block").addEventListener("click", function() {
     $.get("/blockAddSample", {num: blockNum}, function(data) {
-      if(blockNum<5) {
+      if(blockNum<15) {
         const newBlock = $("#container").append(data);
         $(".block").each(function (index) {
-            const inputElement = document.querySelector('.number')
+          const inputElement = document.querySelectorAll('.number')[index];
             const maskOptions = {
-              mask: '00'
+              mask: '000'
               }
+              console.log(inputElement);
           IMask(inputElement, maskOptions);
           $(this).find(".block-num").text(index + 1);
           $(this).attr("data-block-num", index + 1);

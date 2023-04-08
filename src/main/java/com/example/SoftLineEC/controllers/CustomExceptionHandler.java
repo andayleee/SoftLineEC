@@ -11,7 +11,7 @@ public class CustomExceptionHandler {
     @ResponseBody
     public ErrorMessage handleException(Exception ex) {
         ErrorMessage error = new ErrorMessage();
-        error.setMessage("Ошибка авторизации");
+        error.setMessage("Что-то пошло не так :/");
         return error;
     }
 
@@ -19,7 +19,6 @@ public class CustomExceptionHandler {
 
 class ErrorMessage {
     private String message;
-    // геттеры и сеттеры
     public void setMessage(String message) {
         this.message = message;
     }

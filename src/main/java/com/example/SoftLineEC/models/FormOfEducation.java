@@ -10,7 +10,7 @@ import java.util.Collection;
 @Entity
 public class FormOfEducation {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idFormOfEducation;
     @NotBlank(message = "Значение не может быть пустым")
     @Size(min = 1,max = 255,message = "Значение не может быть меньше 1 и больше 255 символов")

@@ -6,7 +6,7 @@ import javax.validation.constraints.Size;
 @Entity
 public class AnswerOptions {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idAnswerOptions;
     @NotBlank(message = "Значение не может быть пустым")
     @Size(min = 1,max = 2000,message = "Значение не может быть меньше 1 и больше 2000 символов")

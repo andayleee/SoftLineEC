@@ -88,7 +88,7 @@ public class CreateCourseController {
     {
         Long idCourse = (Long) session.getAttribute("idCourse");
         if(!courseRepository.existsById(idCourse)){
-
+            return "redirect:/CreateNewCourse/details";
         }
         return "CourseDetailsEdit";
     }
@@ -97,7 +97,7 @@ public class CreateCourseController {
     public String CourseDescriptionPage(HttpSession session, Model model) {
         Long idCourse = (Long) session.getAttribute("idCourse");
         if(!courseRepository.existsById(idCourse)){
-            return "redirect:/Course";
+            return "redirect:/CreateNewCourse/details";
         }
         Optional<Course> course = courseRepository.findById(idCourse);
         ArrayList<Course> res = new ArrayList<>();

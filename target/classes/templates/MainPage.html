@@ -4,7 +4,7 @@
   <title >SoftLineEC</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-
+    <link rel="shortcut icon" href="/images/slLogo.svg">
     <!-- Latest compiled JavaScript -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
@@ -14,9 +14,14 @@
 </head>
 <style>
     .card {
-        width: 100%;
+        width: 80%;
+        align-self: center;
     }
-
+    .search-container{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 </style>
 <body class="body">
 <div th:insert="blocks/header.html"/>
@@ -24,8 +29,7 @@
     <div class="boxes">
         <h2 class="title123">УЧЕБНЫЙ ЦЕНТР SOFTLINE</h2>
         <div class="divspace"></div>
-        <h2 class="title12">Почему выбирают Учебный центр Softline?</h2>
-        <div class="divspace"></div>
+        <h2 class="title12" style="margin-bottom: 50px">Почему выбирают Учебный центр Softline?</h2>
     </div>
     <div class="row">
         <div class="col-sm">
@@ -62,53 +66,193 @@
         </div>
     </div>
     <div class="boxes">
-        <h2 class="title12" style="text-align: start; padding-left: 40px; margin-top: 20px">Доступные курсы</h2>
+        <h1 class="title12" style="margin-top: 5vh">Все курсы</h1>
         <div style="height: 5vh"></div>
-        <div id="courses-list" style="width: 100%"></div>
+        <div class="search-container">
+            <input id="search-input" type="text" placeholder="Поиск курсов...">
+            <button id="search-button" type="button" class="btn btn-course" style="margin: 0px">Найти</button>
+        </div>
+        <div style="height: 5vh"></div>
+        <div id="pagination-container" style="width: 100%;margin-bottom: 50px"></div>
+        <div id="courses-list" style="width: 100%; display: flex; justify-content: center; flex-direction: column"></div>
+        <button type="submit" id="go-to" class="custom-btn btn-16">Вернуться</button>
+        <div style="height: 10vh"></div>
     </div>
 </form>
 <script>
-    const coursesListContainer = $('#courses-list');
+    var currentPage = 1;
+    var itemsPerPage = 4;
+    var coursesData;
+
     $.ajax({
-        url: '/check-courses', // URL для запроса
-        type: 'POST', // метод запроса
+        url: '/check-courses',
+        type: 'POST',
         success: function(courses) {
             console.log(courses);
-            var coursesList = $('#courses-list');
-            courses.forEach(function(course) {
-                var card = $('<div>').addClass('card').css({
-                    'box-shadow': '0 4px 8px 0 rgba(0,0,0,0.2)',
-                    'max-width': '100%',
-                    'margin-bottom': '50px',
-                    'display': 'flex',
-                    'flex-direction': 'column',
-                    'height': '100%'
-                });
-                var cardTitle = $('<h5>').addClass('card-title').text(course.nameOfCourse).css({
-                    'bottom': '0',
-                    'left': '0',
-                    'right': '0',
-                    'color': '#fff',
-                    'padding': '10px',
-                    'background-color': 'rgb(199,199,199)',
-                    'margin-bottom': '0'
-                });
-                var cardBody = $('<div>').addClass('card-body').css({
-                    'display': 'flex',
-                    'flex-direction': 'column',
-                    'justify-content': 'space-between',
-                    'height': '100%'}
-                );
-                var cardText = $('<p>').addClass('card-text').text(course.description);
-                var cardButton = $('<a>').addClass('btn btn-primary').attr('href', '#').text('Подробнее').css('width','150px');
-                cardBody.append(cardText, cardButton);
-                card.append(cardTitle, cardBody);
-                coursesList.append(card);
-            });
+            displayItems(courses);
+            displayPagination(courses);
+            coursesData = courses;
+            console.log(coursesData);
         },
         error: function() {
             console.error('Error retrieving courses from the server.');
         }
+    });
+
+    $('#search-button').click(function() {
+        var query = $('#search-input').val().toLowerCase();
+        var filteredCourses = coursesData.filter(function(course) {
+            return course.nameOfCourse.toLowerCase().includes(query);
+        });
+        currentPage = 1;
+        displayItems(filteredCourses);
+        displayPagination(filteredCourses);
+    });
+
+    function displayItems(courses) {
+        var i = 0;
+        var startIndex = (currentPage - 1) * itemsPerPage;
+        var endIndex = startIndex + itemsPerPage;
+        var coursesToDisplay = courses.slice(startIndex, endIndex);
+        var coursesList = $('#courses-list');
+        coursesList.empty();
+        coursesToDisplay.forEach(function(course) {
+            $.ajax({
+                url: '/check-coursesType-' + course.idCourse,
+                type: 'POST',
+                success: function(courseType) {
+                    $.ajax({
+                        url: '/check-formOf-' + course.idCourse,
+                        type: 'POST',
+                        success: function(formOfEducation) {
+                            var card = $('<div>').addClass('card').css({
+                                'box-shadow': '0 4px 8px 0 rgba(0,0,0,0.2)',
+                                'max-width': '100%',
+                                'margin-bottom': '50px',
+                                'display': 'flex',
+                                'flex-direction': 'column',
+                                'height': '100%'
+                            }).attr('id', coursesToDisplay[i].idCourse);
+                            var cardTitle = $('<h5>').addClass('card-title course-card').text(course.nameOfCourse).css({
+                                'bottom': '0',
+                                'left': '0',
+                                'right': '0',
+                                'color': '#fff',
+                                'padding': '10px',
+                                'background-color': 'rgb(199,199,199)',
+                                'margin-bottom': '0',
+                                'text-align':'start'
+                            });
+                            var cardBody = $('<div>').addClass('card-body').css({
+                                'display': 'flex',
+                                'flex-direction': 'column',
+                                'justify-content': 'space-between',
+                                'height': '100%'
+                            });
+                            var cardText = $('<p>').addClass('card-text').text(course.description).css({
+                                'text-align':'start',
+                                'margin': '0 20px 0 20px'
+                            });
+                            var cardButtonContainer = $('<div>').css({
+                                'display':'flex',
+                                'align-items':'center',
+                                'justify-content':'end',
+                                'margin-top':'-15px'
+                            });
+                            var cardButton = $('<a>').addClass('btn btn-course').attr('href', '/main/Courses-' + coursesToDisplay[i].idCourse).text('Подробнее').css('width','150px');
+                            var cardLine = $('<hr>').css({
+                                'border': 'none',
+                                'height': '1px',
+                                'background-color': 'rgb(189,189,189)',
+                                'margin': '20px 0 0 0'
+                            });
+                            var typeOfCourse = $('<p>').addClass('card-text').text(courseType).css({
+                                'color':'#d02d49'
+                            });
+                            var FormOfEducation = $('<p>').addClass('card-text').text("Форма обучения: " + formOfEducation).css({
+                                'color':'#d02d49'
+                            });
+                            var typeOfCourseAndFormOfEducation = $('<div>').addClass('card-body').css({
+                                'display': 'flex',
+                                'align-items':'end',
+                                'justify-content': 'space-between',
+                                'height': '100%'
+                            });
+                            typeOfCourseAndFormOfEducation.append(FormOfEducation,typeOfCourse);
+                            cardButtonContainer.append(cardButton);
+                            cardBody.append(cardText, cardLine,typeOfCourseAndFormOfEducation, cardButtonContainer);
+                            card.append(cardTitle, cardBody);
+                            coursesList.append(card);
+                            i++;
+                        },
+                            error: function() {
+                                console.error('Error retrieving courses from the server.');
+                            }});
+                },
+                error: function() {
+                    console.error('Error retrieving courses from the server.');
+                }
+            });
+        });
+    }
+
+    function displayPagination(courses) {
+        var totalPages = Math.ceil(courses.length / itemsPerPage);
+        var paginationContainer = $('#pagination-container');
+        paginationContainer.empty();
+        for (var i = 1; i <= totalPages; i++) {
+            var button = $('<button>').addClass('btn btn-secondary').attr('type', 'button').text(i).css({
+                'margin-left': '20px',
+                'width':'50px'
+            });;
+            if (i === currentPage) {
+                button.addClass('active');
+            }
+            if (totalPages > 10 && i != 1 && i != totalPages && (i < currentPage - 2 || i > currentPage + 2)) {
+                button.css('display','none');
+            }
+                button.click(function() {
+                currentPage = parseInt($(this).text());
+                displayItems(courses);
+                displayPagination(courses);
+            });
+            paginationContainer.append(button);
+        }
+        var prevButton = $('<button>').addClass('btn btn-course').attr('type', 'button').text('Назад').css('margin-left','20px');
+        if (currentPage === 1) {
+            prevButton.prop('disabled', true);
+        }
+        else {
+            prevButton.click(function() {
+                currentPage--;
+                displayItems(courses);
+                displayPagination(courses);
+            });
+        }
+
+        var nextButton = $('<button>').addClass('btn btn-course').attr('type', 'button').text('Вперед').css('margin-left','20px');
+        if (currentPage === totalPages) {
+            nextButton.prop('disabled', true);
+        }
+        else {
+            nextButton.click(function() {
+                currentPage++;
+                displayItems(courses);
+                displayPagination(courses);
+            });
+        }
+
+        paginationContainer.prepend(prevButton);
+        paginationContainer.append(nextButton);
+    }
+
+    var button = document.getElementById("go-to");
+
+    button.addEventListener("click", function(event) {
+        event.preventDefault();
+        var paginationcontainer = document.getElementById("pagination-container");
+        var scrollTopPos = paginationcontainer.getBoundingClientRect().top + window.pageYOffset - 0.5 * window.innerHeight;
+        document.documentElement.scrollTop = scrollTopPos;
     });
 </script>
 </body>

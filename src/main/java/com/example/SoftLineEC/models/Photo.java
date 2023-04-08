@@ -7,7 +7,7 @@ import javax.persistence.*;
 @Entity
 public class Photo {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idPhoto;
     private String photoPath;
     @JsonBackReference
