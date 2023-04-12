@@ -9,11 +9,9 @@ import com.example.SoftLineEC.repositories.LectureRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -28,10 +26,10 @@ public class MainPageController {
     @Autowired
     private LectureRepository lectureRepository;
     @GetMapping("/main")
-    public String mainPage(Model model) {return "MainPage";}
+    public String mainPage() {return "MainPage";}
     @RequestMapping(value = "/check-courses", method = RequestMethod.POST)
     @ResponseBody
-    public List<Course> checkCourses(HttpSession session) {
+    public List<Course> checkCourses() {
         Iterable<Course> course = courseRepository.findAll();
         List<Course> courses = new ArrayList<>();
         Iterator<Course> iterator = course.iterator();

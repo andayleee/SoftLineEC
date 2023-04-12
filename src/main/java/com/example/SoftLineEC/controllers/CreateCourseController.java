@@ -105,19 +105,19 @@ public class CreateCourseController {
     @GetMapping("/blockAddSample")
     public String getBlock(@RequestParam("num") String num, Model model) {
         model.addAttribute("num", num);
-        return "blockAddSample :: copy"; // Это возвращает имя шаблона Thymeleaf и фрагмент, который нужно заменить в HTML коде
+        return "blockAddSample :: copy";
     }
 
     @GetMapping("/lectureAddSample")
     public String getLecture(@RequestParam("num") String num, @RequestParam("nameOfLectur") String nameOfLectur, Model model) {
         model.addAttribute("num", num);
         model.addAttribute("nameOfLectur", nameOfLectur);
-        return "lectureAddSample :: copy1"; // Это возвращает имя шаблона Thymeleaf и фрагмент, который нужно заменить в HTML коде
+        return "lectureAddSample :: copy1";
     }
 
     @RequestMapping(value = "/blockAddSample", method = RequestMethod.POST)
     @ResponseBody
-    public String handleBlockAddSampl(@RequestBody Map<String, Object> data, HttpSession session) {
+    public String handleBlockAddSample(@RequestBody Map<String, Object> data, HttpSession session) {
         Long idCourse = (Long) session.getAttribute("idCourse");
         List<String> nameOfBlock = (List<String>) data.get("nameOfBlock");
         List<String> description = (List<String>) data.get("description");
@@ -150,10 +150,11 @@ public class CreateCourseController {
 
     @RequestMapping(value = "/check-blocks", method = RequestMethod.POST)
     @ResponseBody
-    public List<Block> checkBlocks(HttpSession session) {
+    public List<Block> checkBlocks(HttpSession session)
+    {
         Long idCourse = (Long) session.getAttribute("idCourse");
         Optional<Course> course = courseRepository.findById(idCourse);
-        List<Block> blocks = blockRepository.findBlocksByCourseID(course.get()); // blockRepository - экземпляр репозитория, отвечающего за блоки в базе данных
+        List<Block> blocks = blockRepository.findBlocksByCourseID(course.get());
 
         return blocks;
     }
@@ -162,7 +163,7 @@ public class CreateCourseController {
     @ResponseBody
     public List<Lecture> checkLectures(@PathVariable("id") Long idBlock) {
         Optional<Block> block = blockRepository.findById(idBlock);
-        List<Lecture> lectures = lectureRepository.findLecturesByBlockID(block.get()); // blockRepository - экземпляр репозитория, отвечающего за блоки в базе данных
+        List<Lecture> lectures = lectureRepository.findLecturesByBlockID(block.get());
 
         return lectures;
     }
@@ -373,7 +374,7 @@ public class CreateCourseController {
     public List<Photo> checkLectures(HttpSession session) {
         Long idLecture = (Long) session.getAttribute("idLecture");
         Optional<Lecture> lecture = lectureRepository.findById(idLecture);
-        List<Photo> photos = photoRepository.findPhotosByLectureID(lecture.get()); // blockRepository - экземпляр репозитория, отвечающего за блоки в базе данных
+        List<Photo> photos = photoRepository.findPhotosByLectureID(lecture.get());
         return photos;
     }
 
