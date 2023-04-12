@@ -19,18 +19,18 @@ public class Course {
     private long idCourse;
     @Column(unique = true)
     @NotBlank(message = "Значение не может быть пустым")
-    @Size(min = 1,max = 255,message = "Значение не может быть больше 255 символов")
+    @Size(min = 1, max = 255, message = "Значение не может быть больше 255 символов")
     private String nameOfCourse;
     private Date dateOfCreation;
-    @Size(max = 5000,message = "Значение не может быть меньше 1 и больше 5000 символов")
+    @Size(max = 5000, message = "Значение не может быть меньше 1 и больше 5000 символов")
     private String description;
-    @Size(max = 1000,message = "Значение не может быть меньше 1 и больше 1000 символов")
+    @Size(max = 1000, message = "Значение не может быть меньше 1 и больше 1000 символов")
     private String resources;
-    @Size(max = 5000,message = "Значение не может быть меньше 1 и больше 5000 символов")
+    @Size(max = 5000, message = "Значение не может быть меньше 1 и больше 5000 символов")
     private String goal;
-    @Size(max = 800,message = "Значение не может быть меньше 1 и больше 800 символов")
+    @Size(max = 800, message = "Значение не может быть меньше 1 и больше 800 символов")
     private String tasks;
-    @Size(max = 5000,message = "Значение не может быть меньше 1 и больше 5000 символов")
+    @Size(max = 5000, message = "Значение не может быть меньше 1 и больше 5000 символов")
     private String categoriesOfStudents;
     @JsonBackReference
     @ManyToOne(optional = true)
@@ -39,7 +39,7 @@ public class Course {
     @ManyToOne(optional = true)
     private FormOfEducation formOfEducationID;
     @JsonManagedReference
-    @OneToMany(mappedBy = "courseID", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "courseID", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     private Collection<Block> tenants;
 
     public Course(String nameOfCourse, Date dateOfCreation, String description, String resources, String goal, String tasks, String categoriesOfStudents, CourseType courseTypeID, FormOfEducation formOfEducationID) {
@@ -54,7 +54,8 @@ public class Course {
         this.formOfEducationID = formOfEducationID;
     }
 
-    public Course(){}
+    public Course() {
+    }
 
     public long getIdCourse() {
         return idCourse;

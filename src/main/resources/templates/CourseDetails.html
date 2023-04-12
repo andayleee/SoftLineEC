@@ -1,36 +1,38 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org" style="background-color: #FFFFFF">
 <head>
-    <title>SoftLineEC - Детали курса</title><link th:href="@{/css/main.css}" rel="stylesheet" />
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>SoftLineEC - Детали курса</title>
+    <link th:href="@{/css/main.css}" rel="stylesheet"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="shortcut icon" href="/images/slLogo.svg">
 </head>
 <body style="background-color: #FFFFFF">
 <form th:action="${'/CreateNewCourse/details'}" method="post">
-<div th:insert="blocks/header.html"/>
-<div th:insert="blocks/nav.html"/>
-<div style="margin-top: 15vh; margin-left: 20vw; margin-right: 12vw;">
-    <h3 style="font-size: 30px; margin-bottom: 20px">Программа курса</h3>
-    <p style="text-align: left; margin-bottom: 20px; display: none" id="nonText" >В курсе пока нет ни одного блока. <br/>
-    Создайте первый блок, чтобы добавить лекции.</p>
-    <h1 style="display: none" id="tableLabel">Таблица блоков:</h1>
-    <div style="display: none" id="blockTable"></div>
-    <a href="/CreateNewCourse/details/edit" type="submit" class="btn">Добавить блоки и лекции</a>
-    <h1 style="display: none" id="lectureLabel">Таблица лекций:</h1>
-    <div style="display: none" id="lectureTable"></div>
-</div>
+    <div th:insert="blocks/header.html"/>
+    <div th:insert="blocks/nav.html"/>
+    <div style="margin-top: 15vh; margin-left: 20vw; margin-right: 12vw;">
+        <h3 style="font-size: 30px; margin-bottom: 20px">Программа курса</h3>
+        <p style="text-align: left; margin-bottom: 20px; display: none" id="nonText">В курсе пока нет ни одного блока.
+            <br/>
+            Создайте первый блок, чтобы добавить лекции.</p>
+        <h1 style="display: none" id="tableLabel">Таблица блоков:</h1>
+        <div style="display: none" id="blockTable"></div>
+        <a href="/CreateNewCourse/details/edit" type="submit" class="btn">Добавить блоки и лекции</a>
+        <h1 style="display: none" id="lectureLabel">Таблица лекций:</h1>
+        <div style="display: none" id="lectureTable"></div>
+    </div>
 </form>
 <script type="text/javascript" th:src="@{/js/textAreaResize.js}" src="/js/textAreaResize.js"></script>
 <script src="https://unpkg.com/imask" type="text/javascript"></script> <!-- Подключаем плагин через CDN -->
 <script type="text/javascript" th:src="@{/js/jquery.maskedinput.js}" src="/js/jquery.maskedinput.js"></script>
 <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
         $.ajax({
             type: "POST",
             url: "/check-blocks",
-            success: function(blocks) {
+            success: function (blocks) {
                 console.log(blocks);
                 if (blocks.length > 0) {
                     var element = document.getElementById("tableLabel");
@@ -41,8 +43,8 @@
                     element3.style.display = "none";
                     var table = "<table id='blockTableTable'><thead><tr><th>Название блока</th><th>Описание блока</th><th style='width: 10vw'>Продолжительность (ч.)</th><th style='width: 1vw'></th><th style='width: 1vw'></th><th style='width: 1vw'></th></tr></thead>";
                     table += "<tbody>";
-                    $.each(blocks, function(index, block) {
-                        table += '<tr id-data='+block.idBlock+'>';
+                    $.each(blocks, function (index, block) {
+                        table += '<tr id-data=' + block.idBlock + '>';
                         table += "<td>" + block.nameOfBlock + "</td>";
                         table += "<td>" + block.description + "</td>";
                         table += "<td>" + block.duration + "</td>";
@@ -60,17 +62,18 @@
                     element3.style.display = "block";
                 }
             },
-            error: function() {
+            error: function () {
                 alert("Ошибка при загрузке данных");
             }
         });
     });
+
     function deleteBlock(id) {
         const table = document.getElementById("blockTableTable");
         $.ajax({
             type: "DELETE",
             url: "/blocks/" + id,
-            success: function() {
+            success: function () {
                 var element = document.getElementById("lectureLabel");
                 element.style.display = "none";
                 var element2 = document.getElementById("lectureTable");
@@ -88,27 +91,29 @@
                     element3.style.display = "none";
                 }
             },
-            error: function() {
+            error: function () {
                 console.error("Ошибка при удалении блока");
             }
         });
     }
+
     function editBlock(id) {
         $.ajax({
             url: "/CreateNewCourse/details/Block/Edit",
             type: "POST",
-            data: { id: id },
-            success: function() {
+            data: {id: id},
+            success: function () {
                 window.location.href = "/CreateNewCourse/details/Block/Edit";
             }
         });
     }
+
     function showLectures(id) {
 
         $.ajax({
             type: "POST",
-            url: "/check-lectures/"+ id,
-            success: function(lectures) {
+            url: "/check-lectures/" + id,
+            success: function (lectures) {
                 console.log(lectures);
                 if (lectures.length > 0) {
                     var element = document.getElementById("lectureLabel");
@@ -117,8 +122,8 @@
                     element2.style.display = "block";
                     var table1 = "<table id='lectureTableTable'><thead><tr><th>Название лекции</th><th style='width: 1vw'></th><th style='width: 1vw'></th><th style='width: 1vw'></th></tr></thead>";
                     table1 += "<tbody>";
-                    $.each(lectures, function(index, lecture) {
-                        table1 += '<tr id-data='+lecture.idLecture+'>';
+                    $.each(lectures, function (index, lecture) {
+                        table1 += '<tr id-data=' + lecture.idLecture + '>';
                         table1 += "<td>" + lecture.nameOfLecture + "</td>";
 
                         table1 += "<td><button onclick='editLecture(" + lecture.idLecture + ")'>✎</button></td>";
@@ -132,19 +137,20 @@
                     $("#lectureTable").html("Нет лекций в базе данных");
                 }
             },
-            error: function() {
+            error: function () {
                 alert("Ошибка при загрузке данных");
             }
         });
     }
+
     function deleteLecture(id) {
         const table = document.getElementById("lectureTableTable");
         $.ajax({
             type: "DELETE",
             url: "/lecture/" + id,
-            success: function() {
+            success: function () {
                 $("#lectureTable tr[id-data='" + id + "']").remove();
-                if (table.rows.length==1) { // проверяем количество строк
+                if (table.rows.length == 1) { // проверяем количество строк
                     table.style.display = 'none';
                     var element = document.getElementById("lectureLabel");
                     element.style.display = "none";
@@ -154,27 +160,29 @@
                     element.style.display = "block";
                 }
             },
-            error: function() {
+            error: function () {
                 console.error("Ошибка при удалении лекции");
             }
         });
     }
+
     function editLecture(id) {
         $.ajax({
             url: "/CreateNewCourse/details/Lecture/Edit",
             type: "POST",
-            data: { id: id },
-            success: function() {
+            data: {id: id},
+            success: function () {
                 window.location.href = "/CreateNewCourse/details/Lecture/Edit";
             }
         });
     }
+
     function showDetails(id) {
         $.ajax({
             url: "/CreateNewCourse/details/Lecture/Edit/Content",
             type: "POST",
-            data: { id: id },
-            success: function() {
+            data: {id: id},
+            success: function () {
                 window.location.href = "/CreateNewCourse/details/Lecture/Edit/Content";
             }
         });

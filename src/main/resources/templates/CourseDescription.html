@@ -1,111 +1,115 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org" style="background-color: #FFFFFF">
 <head>
-  <title>SoftLineEC - описание курса</title>
-  <link th:href="@{/css/main.css}" rel="stylesheet" />
-  <link rel="shortcut icon" href="/images/slLogo.svg">
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>SoftLineEC - описание курса</title>
+    <link th:href="@{/css/main.css}" rel="stylesheet"/>
+    <link rel="shortcut icon" href="/images/slLogo.svg">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <style>
-  p{
-    text-align: left;
-  }
+    p {
+        text-align: left;
+    }
 </style>
 <body style="height: 100vh; background-color: #FFFFFF">
-<form th:action="${'/CourseDescription'}" th:each="el: ${Course}" th:object="${Course}" method="post" >
-  <div th:insert="blocks/header.html"/>
-  <div style="z-index: 1000" th:insert="blocks/nav.html"/>
-  <div class="course divcousre">
-    <div class="group" >
-      <input type="text" th:value="${el.nameOfCourse}"  class="nameOfCourse" name="nameOfCourse" required>
-      <span class="highlight"></span>
-      <span class="bar"></span>
-      <label>Название курса</label>
+<form th:action="${'/CourseDescription'}" th:each="el: ${Course}" th:object="${Course}" method="post">
+    <div th:insert="blocks/header.html"/>
+    <div style="z-index: 1000" th:insert="blocks/nav.html"/>
+    <div class="course divcousre">
+        <div class="group">
+            <input type="text" th:value="${el.nameOfCourse}" class="nameOfCourse" name="nameOfCourse" required>
+            <span class="highlight"></span>
+            <span class="bar"></span>
+            <label>Название курса</label>
+        </div>
+        <div class="group">
+            <p>Описание</p>
+            <textarea class="textar description" th:value="${el.description}" th:text="${el.description}"
+                      name="description" required></textarea>
+        </div>
+        <div class="group">
+            <p>Ресурсы</p>
+            <textarea class="textar resources" th:value="${el.resources}" th:text="${el.resources}" name="resources"
+                      required></textarea>
+        </div>
+        <div class="group">
+            <p>Цель</p>
+            <textarea class="textar goal" th:value="${el.goal}" th:text="${el.goal}" name="goal" required></textarea>
+        </div>
+        <div class="group">
+            <p>Задачи</p>
+            <textarea class="textar tasks" th:value="${el.tasks}" th:text="${el.tasks}" name="tasks"
+                      required></textarea>
+        </div>
+        <div class="group">
+            <p>Категории обучающихся</p>
+            <textarea th:value="${el.categoriesOfStudents}" th:text="${el.categoriesOfStudents}"
+                      class="categoriesOfStudents textar tasks" name="categoriesOfStudents" required/>
+        </div>
+        <button type="submit" id="save-course" class="custom-btn btn-16">Изменить информацию о курсе</button>
     </div>
-    <div class="group">
-      <p>Описание</p>
-      <textarea class="textar description" th:value="${el.description}" th:text="${el.description}" name="description" required></textarea>
-    </div>
-    <div class="group">
-      <p>Ресурсы</p>
-      <textarea class="textar resources" th:value="${el.resources}" th:text="${el.resources}"  name="resources" required></textarea>
-    </div>
-    <div class="group">
-      <p>Цель</p>
-      <textarea class="textar goal" th:value="${el.goal}" th:text="${el.goal}"  name="goal" required></textarea>
-    </div>
-    <div class="group">
-      <p>Задачи</p>
-      <textarea class="textar tasks" th:value="${el.tasks}" th:text="${el.tasks}"  name="tasks" required></textarea>
-    </div>
-    <div class="group">
-      <p>Категории обучающихся</p>
-      <textarea th:value="${el.categoriesOfStudents}" th:text="${el.categoriesOfStudents}" class="categoriesOfStudents textar tasks"  name="categoriesOfStudents" required/>
-    </div>
-      <button type="submit" id="save-course" class="custom-btn btn-16">Изменить информацию о курсе</button>
-  </div>
 </form>
 <script type="text/javascript" th:src="@{/js/textAreaResize.js}" src="/js/textAreaResize.js"></script>
 <script src="https://unpkg.com/imask" type="text/javascript"></script>
 <script type="text/javascript" th:src="@{/js/jquery.maskedinput.js}" src="/js/jquery.maskedinput.js"></script>
 <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
 <script>
-  document.getElementById("save-course").addEventListener("click", function() {
-    var nameOfCourseValues = [];
-    var descriptionValues = [];
-    var resourcesValues = [];
-    var goalValues = [];
-    var tasksValues = [];
-    var categoriesOfStudentsValues = [];
-    $('.course').each(function() {
-      var value = $(this).find('.nameOfCourse').val();
-      nameOfCourseValues.push(value);
-      var value1 = $(this).find('.description').val();
-      descriptionValues.push(value1);
-      var value2 = $(this).find('.resources').val();
-      resourcesValues.push(value2);
-      var value3 = $(this).find('.goal').val();
-      goalValues.push(value3);
-      var value4 = $(this).find('.tasks').val();
-      tasksValues.push(value4);
-      var value5 = $(this).find('.categoriesOfStudents').val();
-      categoriesOfStudentsValues.push(value5);
-    });
-    console.log(nameOfCourseValues);
-    console.log(descriptionValues);
-    console.log(resourcesValues);
-    console.log(goalValues);
-    console.log(tasksValues);
-    console.log(categoriesOfStudentsValues);
-    var data = {
-      nameOfCourse: nameOfCourseValues,
-      description: descriptionValues,
-      resources: resourcesValues,
-      goal: goalValues,
-      tasks: tasksValues,
-      categoriesOfStudents: categoriesOfStudentsValues
-    };
-    console.log(JSON.stringify(data));
-    if (nameOfCourseValues.includes(null) || nameOfCourseValues.includes("") || descriptionValues.includes(null) || descriptionValues.includes("")||resourcesValues.includes(null) || resourcesValues.includes("")  || goalValues.includes(null) || goalValues.includes("") || tasksValues.includes(null) || tasksValues.includes("") || categoriesOfStudentsValues.includes(null) || categoriesOfStudentsValues.includes("")) {
-      alert("Введите все данные");
-    } else {
-      $.ajax({
-        url: '/handleCourseEdit',
-        type: 'POST',
-        data: JSON.stringify(data),
-        contentType: "application/json;charset=UTF-8",
-        success: function (data) {
-          console.log("sucsess");
-          window.location.href = "/CreateNewCourse/details";
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-          console.error(textStatus, errorThrown);
-          alert("Данные невалидны!");
+    document.getElementById("save-course").addEventListener("click", function () {
+        var nameOfCourseValues = [];
+        var descriptionValues = [];
+        var resourcesValues = [];
+        var goalValues = [];
+        var tasksValues = [];
+        var categoriesOfStudentsValues = [];
+        $('.course').each(function () {
+            var value = $(this).find('.nameOfCourse').val();
+            nameOfCourseValues.push(value);
+            var value1 = $(this).find('.description').val();
+            descriptionValues.push(value1);
+            var value2 = $(this).find('.resources').val();
+            resourcesValues.push(value2);
+            var value3 = $(this).find('.goal').val();
+            goalValues.push(value3);
+            var value4 = $(this).find('.tasks').val();
+            tasksValues.push(value4);
+            var value5 = $(this).find('.categoriesOfStudents').val();
+            categoriesOfStudentsValues.push(value5);
+        });
+        console.log(nameOfCourseValues);
+        console.log(descriptionValues);
+        console.log(resourcesValues);
+        console.log(goalValues);
+        console.log(tasksValues);
+        console.log(categoriesOfStudentsValues);
+        var data = {
+            nameOfCourse: nameOfCourseValues,
+            description: descriptionValues,
+            resources: resourcesValues,
+            goal: goalValues,
+            tasks: tasksValues,
+            categoriesOfStudents: categoriesOfStudentsValues
+        };
+        console.log(JSON.stringify(data));
+        if (nameOfCourseValues.includes(null) || nameOfCourseValues.includes("") || descriptionValues.includes(null) || descriptionValues.includes("") || resourcesValues.includes(null) || resourcesValues.includes("") || goalValues.includes(null) || goalValues.includes("") || tasksValues.includes(null) || tasksValues.includes("") || categoriesOfStudentsValues.includes(null) || categoriesOfStudentsValues.includes("")) {
+            alert("Введите все данные");
+        } else {
+            $.ajax({
+                url: '/handleCourseEdit',
+                type: 'GET',
+                data: JSON.stringify(data),
+                contentType: "application/json;charset=UTF-8",
+                success: function (data) {
+                    console.log("sucsess");
+                    window.location.href = "/CreateNewCourse/details";
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.error(textStatus, errorThrown);
+                    alert("Данные невалидны!");
+                }
+            });
         }
-      });
-    }
-  });
+    });
 </script>
 </body>
 </html>

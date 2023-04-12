@@ -20,7 +20,7 @@ public class Question {
     private int score;
     @ManyToOne(optional = true)
     private Test testID;
-    @OneToMany(mappedBy = "questionID", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "questionID", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     private Collection<AnswerOptions> tenants;
 
     public Question(String nameOfQuestion, int score, Test testID) {

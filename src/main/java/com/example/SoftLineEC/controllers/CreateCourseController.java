@@ -43,23 +43,21 @@ public class CreateCourseController {
     @GetMapping("/CreateNewCourse")
     public String CreateNewCoursePage(@ModelAttribute("Course") Course Course, Model addr) {
         Iterable<CourseType> courseType = courseTypeRepository.findAll();
-        addr.addAttribute("CourseTypes",courseType);
+        addr.addAttribute("CourseTypes", courseType);
         Iterable<FormOfEducation> formOfEducations = formOfEducationRepository.findAll();
-        addr.addAttribute("FormOfEducations",formOfEducations);
+        addr.addAttribute("FormOfEducations", formOfEducations);
         return "CreateNewCourse";
     }
 
     @PostMapping("/CreateNewCourse")
     public String CoursesAdd(@ModelAttribute("Course") @Valid Course course, BindingResult bindingResult,
                              @RequestParam String nameOfCourseType, @RequestParam String typeOfEducation,
-                             HttpSession session, Model addr)
-    {
-        if (bindingResult.hasErrors())
-        {
+                             HttpSession session, Model addr) {
+        if (bindingResult.hasErrors()) {
             Iterable<CourseType> courseType = courseTypeRepository.findAll();
-            addr.addAttribute("CourseTypes",courseType);
+            addr.addAttribute("CourseTypes", courseType);
             Iterable<FormOfEducation> formOfEducations = formOfEducationRepository.findAll();
-            addr.addAttribute("FormOfEducations",formOfEducations);
+            addr.addAttribute("FormOfEducations", formOfEducations);
             return "CreateNewCourse";
         }
         course.setCourseTypeID(courseTypeRepository.findByNameOfCourseType(nameOfCourseType));
@@ -74,20 +72,18 @@ public class CreateCourseController {
     }
 
     @GetMapping("/CreateNewCourse/details")
-    public String CourseEdit(HttpSession session, Model model)
-    {
+    public String CourseEdit(HttpSession session, Model model) {
         Long idCourse = (Long) session.getAttribute("idCourse");
-        if(!courseRepository.existsById(idCourse)){
+        if (!courseRepository.existsById(idCourse)) {
             return "redirect:/CreateNewCourse";
         }
         return "CourseDetails";
     }
 
     @GetMapping("/CreateNewCourse/details/edit")
-    public String CourseEditt(HttpSession session, Model model)
-    {
+    public String CourseEditt(HttpSession session, Model model) {
         Long idCourse = (Long) session.getAttribute("idCourse");
-        if(!courseRepository.existsById(idCourse)){
+        if (!courseRepository.existsById(idCourse)) {
             return "redirect:/CreateNewCourse/details";
         }
         return "CourseDetailsEdit";
@@ -96,7 +92,7 @@ public class CreateCourseController {
     @GetMapping("/CourseDescription")
     public String CourseDescriptionPage(HttpSession session, Model model) {
         Long idCourse = (Long) session.getAttribute("idCourse");
-        if(!courseRepository.existsById(idCourse)){
+        if (!courseRepository.existsById(idCourse)) {
             return "redirect:/CreateNewCourse/details";
         }
         Optional<Course> course = courseRepository.findById(idCourse);
@@ -129,7 +125,7 @@ public class CreateCourseController {
         List<String> nameOfLecture = (List<String>) data.get("nameOfLecture");
         List<String> blockNum = (List<String>) data.get("blockNum");
         List<String> blockTrueNum = (List<String>) data.get("blockTrueNum");
-        for(int i = 0; i < nameOfBlock.size(); i++){
+        for (int i = 0; i < nameOfBlock.size(); i++) {
             Block block = new Block();
             Optional<Course> course = courseRepository.findById(idCourse);
             block.setNameOfBlock(nameOfBlock.get(i));
@@ -138,7 +134,7 @@ public class CreateCourseController {
             String blockTrueNum1 = blockTrueNum.get(i);
             block.setCourseID(course.get());
             blockRepository.save(block);
-            for(int j = 0; j < nameOfLecture.size(); j++) {
+            for (int j = 0; j < nameOfLecture.size(); j++) {
                 Lecture lecture = new Lecture();
                 Optional<Block> block1 = blockRepository.findById(block.getIdBlock());
                 String blockTrueNum2 = blockNum.get(j);
@@ -157,17 +153,18 @@ public class CreateCourseController {
     public List<Block> checkBlocks(HttpSession session) {
         Long idCourse = (Long) session.getAttribute("idCourse");
         Optional<Course> course = courseRepository.findById(idCourse);
-        List<Block> blocks = blockRepository.findBlocksByCourseID(course.get()) ; // blockRepository - экземпляр репозитория, отвечающего за блоки в базе данных
+        List<Block> blocks = blockRepository.findBlocksByCourseID(course.get()); // blockRepository - экземпляр репозитория, отвечающего за блоки в базе данных
 
-        return blocks ;
+        return blocks;
     }
+
     @RequestMapping(value = "/check-lectures/{id}", method = RequestMethod.POST)
     @ResponseBody
     public List<Lecture> checkLectures(@PathVariable("id") Long idBlock) {
         Optional<Block> block = blockRepository.findById(idBlock);
         List<Lecture> lectures = lectureRepository.findLecturesByBlockID(block.get()); // blockRepository - экземпляр репозитория, отвечающего за блоки в базе данных
 
-        return lectures ;
+        return lectures;
     }
 
     @DeleteMapping("/blocks/{id}")
@@ -182,10 +179,9 @@ public class CreateCourseController {
     }
 
     @GetMapping("/CreateNewCourse/details/Block/Edit")
-    public String CourseDetailsEdit(Model model, HttpSession session)
-    {
+    public String CourseDetailsEdit(Model model, HttpSession session) {
         Long idBlock = (Long) session.getAttribute("idBlock");
-        if(!blockRepository.existsById(idBlock)){
+        if (!blockRepository.existsById(idBlock)) {
             return "redirect:/CreateNewCourse/details";
         }
         Optional<Block> block = blockRepository.findById(idBlock);
@@ -194,7 +190,8 @@ public class CreateCourseController {
         model.addAttribute("Block", res);
         return "CourseDetailsBlockEdit";
     }
-    @RequestMapping(value="/CreateNewCourse/details/Block/Edit", method=RequestMethod.POST)
+
+    @RequestMapping(value = "/CreateNewCourse/details/Block/Edit", method = RequestMethod.POST)
     @ResponseBody
     public int CourseDetailsEditt(@RequestParam("id") int id, Model model, HttpSession session) {
         long idBlock = id;
@@ -202,6 +199,7 @@ public class CreateCourseController {
         model.addAttribute("id", id);
         return id;
     }
+
     @RequestMapping(value = "/handleBlockEdit", method = RequestMethod.POST)
     @ResponseBody
     public String handleBlockEdit(@RequestBody Map<String, Object> data, HttpSession session) {
@@ -210,7 +208,7 @@ public class CreateCourseController {
         List<String> nameOfBlock = (List<String>) data.get("nameOfBlock");
         List<String> description = (List<String>) data.get("description");
         List<String> duration = (List<String>) data.get("duration");
-        for(int i = 0; i < nameOfBlock.size(); i++){
+        for (int i = 0; i < nameOfBlock.size(); i++) {
             Block block = blockRepository.findBlockByIdBlock(idBlock);
             Optional<Course> course = courseRepository.findById(idCourse);
             block.setNameOfBlock(nameOfBlock.get(i));
@@ -221,6 +219,7 @@ public class CreateCourseController {
         }
         return "OK";
     }
+
     @DeleteMapping("/lecture/{id}")
     public ResponseEntity<?> deleteLectureById(@PathVariable("id") Long idLecture) {
         try {
@@ -241,7 +240,7 @@ public class CreateCourseController {
         List<String> goal = (List<String>) data.get("goal");
         List<String> tasks = (List<String>) data.get("tasks");
         List<String> categoriesOfStudents = (List<String>) data.get("categoriesOfStudents");
-        for(int i = 0; i < nameOfCourse.size(); i++){
+        for (int i = 0; i < nameOfCourse.size(); i++) {
             Course course = courseRepository.findCoursesByNameOfCourse(nameOfCourse.get(i));
             Optional<CourseType> courseType = courseTypeRepository.findById(course.getCourseTypeID().getIdCourseType());
             Optional<FormOfEducation> formOfEducation = formOfEducationRepository.findById(course.getFormOfEducationID().getIdFormOfEducation());
@@ -261,10 +260,9 @@ public class CreateCourseController {
     }
 
     @GetMapping("/CreateNewCourse/details/Lecture/Edit")
-    public String CourseDetailsLectureEdit(Model model, HttpSession session)
-    {
+    public String CourseDetailsLectureEdit(Model model, HttpSession session) {
         Long idLecture = (Long) session.getAttribute("idLecture");
-        if(!lectureRepository.existsById(idLecture)){
+        if (!lectureRepository.existsById(idLecture)) {
             return "redirect:/CreateNewCourse/details";
         }
         Optional<Lecture> lecture = lectureRepository.findById(idLecture);
@@ -273,7 +271,8 @@ public class CreateCourseController {
         model.addAttribute("Lecture", res);
         return "CourseDetailsLectureEdit";
     }
-    @RequestMapping(value="/CreateNewCourse/details/Lecture/Edit", method=RequestMethod.POST)
+
+    @RequestMapping(value = "/CreateNewCourse/details/Lecture/Edit", method = RequestMethod.POST)
     @ResponseBody
     public int CourseDetailsLectureEditt(@RequestParam("id") int id, Model model, HttpSession session) {
         long idLecture = id;
@@ -281,6 +280,7 @@ public class CreateCourseController {
         model.addAttribute("id", id);
         return id;
     }
+
     @RequestMapping(value = "/handleLectureEdit", method = RequestMethod.POST)
     @ResponseBody
     public String handleLectureEdit(@RequestBody Map<String, Object> data, HttpSession session) {
@@ -288,7 +288,7 @@ public class CreateCourseController {
         List<String> nameOfLecture = (List<String>) data.get("nameOfLecture");
         List<String> description = (List<String>) data.get("description");
         List<String> additionalLiterature = (List<String>) data.get("additionalLiterature");
-        for(int i = 0; i < nameOfLecture.size(); i++){
+        for (int i = 0; i < nameOfLecture.size(); i++) {
             Lecture lecture = lectureRepository.findLectureByIdLecture(idLecture);
             Block block1 = lecture.getBlockID();
             Optional<Block> block = blockRepository.findById(block1.getIdBlock());
@@ -303,10 +303,9 @@ public class CreateCourseController {
     }
 
     @GetMapping("/CreateNewCourse/details/Lecture/Edit/Content")
-    public String CourseDetailsLectureContentEdit(Model model, HttpSession session)
-    {
+    public String CourseDetailsLectureContentEdit(Model model, HttpSession session) {
         Long idLecture = (Long) session.getAttribute("idLecture");
-        if(!lectureRepository.existsById(idLecture)){
+        if (!lectureRepository.existsById(idLecture)) {
             return "redirect:/CreateNewCourse/details";
         }
         Optional<Lecture> lecture = lectureRepository.findById(idLecture);
@@ -315,7 +314,8 @@ public class CreateCourseController {
         model.addAttribute("Lecture", res);
         return "CourseDetailsLectureContentEdit";
     }
-    @RequestMapping(value="/CreateNewCourse/details/Lecture/Edit/Content", method=RequestMethod.POST)
+
+    @RequestMapping(value = "/CreateNewCourse/details/Lecture/Edit/Content", method = RequestMethod.POST)
     @ResponseBody
     public int CourseDetailsLectureContentEditt(@RequestParam("id") int id, Model model, HttpSession session) {
         long idLecture = id;
@@ -330,15 +330,15 @@ public class CreateCourseController {
                                                    @RequestParam("files") List<MultipartFile> files, HttpSession session) throws IOException {
 
         Long idLecture = (Long) session.getAttribute("idLecture");
-            Lecture lecture = lectureRepository.findLectureByIdLecture(idLecture);
-            Block block1 = lecture.getBlockID();
-            Optional<Block> block = blockRepository.findById(block1.getIdBlock());
-            lecture.setNameOfLecture(lecture.getNameOfLecture());
-            lecture.setDescription(lecture.getDescription());
-            lecture.setAdditionalLiterature(lecture.getAdditionalLiterature());
-            lecture.setContent(content);
-            lecture.setBlockID(block.get());
-            lectureRepository.save(lecture);
+        Lecture lecture = lectureRepository.findLectureByIdLecture(idLecture);
+        Block block1 = lecture.getBlockID();
+        Optional<Block> block = blockRepository.findById(block1.getIdBlock());
+        lecture.setNameOfLecture(lecture.getNameOfLecture());
+        lecture.setDescription(lecture.getDescription());
+        lecture.setAdditionalLiterature(lecture.getAdditionalLiterature());
+        lecture.setContent(content);
+        lecture.setBlockID(block.get());
+        lectureRepository.save(lecture);
         for (MultipartFile file : files) {
             Photo photo = new Photo();
             FileUploadService.saveFile(file);
@@ -374,15 +374,16 @@ public class CreateCourseController {
         Long idLecture = (Long) session.getAttribute("idLecture");
         Optional<Lecture> lecture = lectureRepository.findById(idLecture);
         List<Photo> photos = photoRepository.findPhotosByLectureID(lecture.get()); // blockRepository - экземпляр репозитория, отвечающего за блоки в базе данных
-        return photos ;
+        return photos;
     }
+
     @RequestMapping(value = "/check-lectures-details-text", method = RequestMethod.POST)
     @ResponseBody
     public String checkLecturesText(HttpSession session) {
         Long idLecture = (Long) session.getAttribute("idLecture");
         Optional<Lecture> lecture = lectureRepository.findById(idLecture);
         String content = lecture.get().getContent();
-        return content ;
+        return content;
     }
 
     @DeleteMapping("/photo/{id}")

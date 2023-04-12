@@ -18,7 +18,7 @@ public class Test {
     @JsonBackReference
     @ManyToOne(optional = true)
     private Lecture lectureID;
-    @OneToMany(mappedBy = "testID", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "testID", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     private Collection<Question> tenants;
 
     public Test(String nameOfTest, Lecture lectureID) {

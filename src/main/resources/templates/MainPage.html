@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
   <title >SoftLineEC</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -65,7 +65,7 @@
             <img style="position: static" th:src="@{/images/Laptop.png}" alt="1"/>
         </div>
     </div>
-    <div class="boxes">
+    <div class="boxes" sec:authorize="isAuthenticated()">
         <h1 class="title12" style="margin-top: 5vh">Все курсы</h1>
         <div style="height: 5vh"></div>
         <div class="search-container">
@@ -81,7 +81,7 @@
 </form>
 <script>
     var currentPage = 1;
-    var itemsPerPage = 4;
+    var itemsPerPage = 5;
     var coursesData;
 
     $.ajax({
@@ -212,9 +212,9 @@
                 button.css('display','none');
             }
                 button.click(function() {
-                currentPage = parseInt($(this).text());
-                displayItems(courses);
-                displayPagination(courses);
+                    currentPage = parseInt($(this).text());
+                    displayItems(courses);
+                    displayPagination(courses);
             });
             paginationContainer.append(button);
         }
@@ -256,4 +256,7 @@
     });
 </script>
 </body>
+<footer style="height: 40vh">
+
+</footer>
 </html>

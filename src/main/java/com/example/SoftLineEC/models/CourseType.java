@@ -1,7 +1,6 @@
 package com.example.SoftLineEC.models;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;

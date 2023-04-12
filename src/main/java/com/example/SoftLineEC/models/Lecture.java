@@ -29,7 +29,7 @@ public class Lecture {
     @ManyToOne(optional = true)
     private Block blockID;
     @JsonManagedReference
-    @OneToMany(mappedBy = "lectureID", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "lectureID", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     private Collection<Test> tenants;
     @JsonManagedReference
     @Fetch(FetchMode.SUBSELECT)

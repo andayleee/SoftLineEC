@@ -1,196 +1,190 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org" style="background-color: #FFFFFF">
 <head>
-  <title>SoftLineEC - изменение содержания лекции</title><link th:href="@{/css/main.css}" rel="stylesheet" />
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
-  <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <link rel="shortcut icon" href="/images/slLogo.svg">
+    <title>SoftLineEC - изменение содержания лекции</title>
+    <link th:href="@{/css/main.css}" rel="stylesheet"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="shortcut icon" href="/images/slLogo.svg">
 </head>
-<style>
-  .ql-toolbar {
-    display: flex;
-    flex-wrap: nowrap;
-  }
-  .ql-container {
-    min-height: 40px;
-  }
-</style>
 <body style="background-color: #FFFFFF">
-<form th:action="${'/CreateNewCourse/details/Lecture/Edit/Content'}" method="post" th:each="el: ${Lecture}" th:object="${Lecture}">
-  <div th:insert="blocks/header.html"/>
-  <div th:insert="blocks/nav.html"/>
-  <div class="lecture" style="margin-top: 15vh; margin-left: 20vw; margin-right: 12vw;">
-    <div class="boxes">
-      <h1 class="title">Изменение содержания лекции</h1>
+<form th:action="${'/CreateNewCourse/details/Lecture/Edit/Content'}" method="post" th:each="el: ${Lecture}"
+      th:object="${Lecture}">
+    <div th:insert="blocks/header.html"/>
+    <div th:insert="blocks/nav.html"/>
+    <div class="lecture" style="margin-top: 15vh; margin-left: 20vw; margin-right: 12vw;">
+        <div class="boxes">
+            <h1 class="title">Изменение содержания лекции</h1>
+        </div>
+        <div id="editor" contenteditable="true" style="text-align: start"></div>
+        <div id="images-container"
+             style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center"></div>
+        <button type="submit" id="add-photo-button" class="custom-btn btn-16">Добавить фото</button>
+        <div id="container"></div>
+        <button type="submit" id="save-lecture" class="custom-btn btn-16">Изменить лекцию</button>
     </div>
-    <div id="editor" contenteditable="true" style="text-align: start"></div>
-    <div id="images-container" style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center"></div>
-    <button type="submit" id="add-photo-button" class="custom-btn btn-16">Добавить фото</button>
-    <div id="container"></div>
-    <button type="submit" id="save-lecture" class="custom-btn btn-16">Изменить лекцию</button>
-  </div>
 </form>
 <script>
-  var toolbarOptions = [
-    [{ 'font': [] }],
-    [{ 'size': ['small', false, 'large', 'huge'] }],
-    [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-    ['bold'],
-    ['italic'],
-    ['underline'],
-    ['strike'],
-    [{ 'color': [] }, { 'background': [] }],
-    ['blockquote', 'code-block'],
-    [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-    [{ 'script': 'sub'}, { 'script': 'super' }],
-    [{ 'indent': '-1'}, { 'indent': '+1' }],
-    [{ 'align': [] }],
-    ['clean']
-  ];
+    var toolbarOptions = [
+        [{'font': []}],
+        [{'size': ['small', false, 'large', 'huge']}],
+        [{'header': [1, 2, 3, 4, 5, 6, false]}],
+        ['bold'],
+        ['italic'],
+        ['underline'],
+        ['strike'],
+        [{'color': []}, {'background': []}],
+        ['blockquote', 'code-block'],
+        [{'list': 'ordered'}, {'list': 'bullet'}],
+        [{'script': 'sub'}, {'script': 'super'}],
+        [{'indent': '-1'}, {'indent': '+1'}],
+        [{'align': []}],
+        ['clean']
+    ];
 
-  var quill = new Quill('#editor', {
-    modules: {
-      toolbar: toolbarOptions
-    },
-    theme: 'snow'
-  });
-  var container = document.getElementById('container');
-  var countOfButton = 0;
-  const imagesContainer = document.getElementById("images-container");
+    var quill = new Quill('#editor', {
+        modules: {
+            toolbar: toolbarOptions
+        },
+        theme: 'snow'
+    });
+    var container = document.getElementById('container');
+    var countOfButton = 0;
+    const imagesContainer = document.getElementById("images-container");
 
-  $(document).ready(function() {
-    $.ajax({
-      type: "POST",
-      url: "/check-lectures-details",
-      success: function(photos) {
-        for (let i = 0; i < photos.length; i++) {
-          const imageContainer = document.createElement("div");
-          imageContainer.classList.add("image-container");
-          imageContainer.style='padding-top:30px;width: 40%; height: 100%; object-fit: cover;';
-          const imageElement = document.createElement("img");
-          imageElement.src = photos[i].photoPath;
-          imageElement.id = photos[i].idPhoto;
-          imageElement.style = 'width: 100%; height: 100%; object-fit: cover; ';
-          const deleteButton = document.createElement("button");
-          deleteButton.innerText = "Удалить";
-          deleteButton.addEventListener("click", () => {
-            $.ajax({
-              type: "DELETE",
-              url: "/photo/" + photos[i].idPhoto,
-              success: function() {
-                imageContainer.remove();
-              },
-              error: function() {
-                console.error("Ошибка при удалении блока");
-              }
+    $(document).ready(function () {
+        $.ajax({
+            type: "POST",
+            url: "/check-lectures-details",
+            success: function (photos) {
+                for (let i = 0; i < photos.length; i++) {
+                    const imageContainer = document.createElement("div");
+                    imageContainer.classList.add("image-container");
+                    imageContainer.style = 'padding-top:30px;width: 40%; height: 100%; object-fit: cover;';
+                    const imageElement = document.createElement("img");
+                    imageElement.src = photos[i].photoPath;
+                    imageElement.id = photos[i].idPhoto;
+                    imageElement.style = 'width: 100%; height: 100%; object-fit: cover; ';
+                    const deleteButton = document.createElement("button");
+                    deleteButton.innerText = "Удалить";
+                    deleteButton.addEventListener("click", () => {
+                        $.ajax({
+                            type: "DELETE",
+                            url: "/photo/" + photos[i].idPhoto,
+                            success: function () {
+                                imageContainer.remove();
+                            },
+                            error: function () {
+                                console.error("Ошибка при удалении блока");
+                            }
+                        });
+                    });
+                    imageContainer.appendChild(imageElement);
+                    imageContainer.appendChild(deleteButton);
+                    imagesContainer.appendChild(imageContainer);
+                }
+            },
+            error: function () {
+                alert("Ошибка при загрузке данных");
+            }
+        });
+        $.ajax({
+            type: "POST",
+            url: "/check-lectures-details-text",
+            success: function (content) {
+                console.log(content);
+                const data = JSON.parse(content);
+                quill.setContents(data);
+            },
+            error: function () {
+                alert("Ошибка при загрузке данных");
+            }
+        });
+    });
+
+
+    document.getElementById("add-photo-button").addEventListener("click", function () {
+        if (countOfButton < 6) {
+            var newdiv = document.createElement('div');
+            var deleteBtn = document.createElement('button');
+            deleteBtn.textContent = 'x'; // установить текст кнопки
+            deleteBtn.id = countOfButton.toString();
+            deleteBtn.className = countOfButton.toString();
+            deleteBtn.addEventListener('click', function () {
+                deletePhoto(deleteBtn.id);
             });
-          });
-            imageContainer.appendChild(imageElement);
-            imageContainer.appendChild(deleteButton);
-          imagesContainer.appendChild(imageContainer);
+            var newInput = document.createElement('input');
+            newInput.type = 'file';
+            newInput.id = countOfButton.toString();
+            newInput.style = 'margin-right: 5vw';
+            newInput.className = 'custom-btn btn-16 inputPhoto';
+            newdiv.style = 'display: flex';
+            newdiv.className = 'photo';
+            newdiv.appendChild(newInput);
+            newdiv.appendChild(deleteBtn);
+            container.appendChild(newdiv);
+            countOfButton++;
+        } else {
+            alert("Достигнуто максимальное кол-во фото");
         }
-      },
-      error: function() {
-        alert("Ошибка при загрузке данных");
-      }
     });
-    $.ajax({
-      type: "POST",
-      url: "/check-lectures-details-text",
-      success: function(content) {
-        console.log(content);
-        const data = JSON.parse(content);
-        quill.setContents(data);
-      },
-      error: function() {
-        alert("Ошибка при загрузке данных");
-      }
+
+    function deletePhoto(id) {
+        if (countOfButton > 1) {
+            var element = document.getElementsByClassName(id)[0];
+            var imgButton = document.getElementById(id);
+            imgButton.remove();
+            element.remove();
+            countOfButton--;
+        } else {
+        }
+    }
+
+    document.getElementById("save-lecture").addEventListener("click", function () {
+        var content = quill.getContents();
+        var contentText = quill.getText().replace(/\s/g, '');
+        var formData = new FormData();
+        console.log(contentText);
+        if (contentText.length === 0) {
+            alert("Заполните текст лекции");
+        } else {
+            formData.append('content', JSON.stringify(content)); // обязательно нужно преобразовать содержимое в строку JSON
+            const files = document.querySelectorAll('#container input[type="file"]');
+            if (files.length != 0) {
+                for (let i = 0; i < files.length; i++) {
+                    const file = files[i].files[0];
+                    formData.append('files', file);
+                    console.log(file.name);
+                }
+                console.log(formData.get('content'));
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', '/handleLectureContentEdit');
+                xhr.send(formData);
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        console.log(xhr.responseText);
+                        window.location.href = "/CreateNewCourse/details";
+                    } else {
+                        console.log('Ошибка ' + xhr.status + ': ' + xhr.statusText);
+                    }
+                }
+            } else {
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', '/handleLectureContentEditWithoutPhoto');
+                xhr.send(formData);
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        console.log(xhr.responseText);
+                        window.location.href = "/CreateNewCourse/details";
+                    } else {
+                        console.log('Ошибка ' + xhr.status + ': ' + xhr.statusText);
+                    }
+                }
+            }
+        }
     });
-  });
-
-
-  document.getElementById("add-photo-button").addEventListener("click", function() {
-    if(countOfButton<6) {
-      var newdiv = document.createElement('div');
-      var deleteBtn = document.createElement('button');
-      deleteBtn.textContent = 'x'; // установить текст кнопки
-      deleteBtn.id = countOfButton.toString();
-      deleteBtn.className = countOfButton.toString();
-      deleteBtn.addEventListener('click', function() {
-        deletePhoto(deleteBtn.id);
-      });
-      var newInput = document.createElement('input');
-      newInput.type = 'file';
-      newInput.id = countOfButton.toString();
-      newInput.style = 'margin-right: 5vw';
-      newInput.className = 'custom-btn btn-16 inputPhoto';
-      newdiv.style = 'display: flex';
-      newdiv.className='photo';
-      newdiv.appendChild(newInput);
-      newdiv.appendChild(deleteBtn);
-      container.appendChild(newdiv);
-      countOfButton++;
-    }
-    else {
-      alert("Достигнуто максимальное кол-во фото");
-    }
-  });
-  function deletePhoto(id) {
-    if(countOfButton>1) {
-      var element = document.getElementsByClassName(id)[0];
-      var imgButton = document.getElementById(id);
-      imgButton.remove();
-      element.remove();
-      countOfButton--;
-    }else {
-    }
-  }
-
-  document.getElementById("save-lecture").addEventListener("click", function() {
-    var content = quill.getContents();
-    var contentText = quill.getText().replace(/\s/g, '');
-    var formData = new FormData();
-    console.log(contentText);
-    if (contentText.length === 0) {
-      alert("Заполните текст лекции");
-    } else {
-      formData.append('content', JSON.stringify(content)); // обязательно нужно преобразовать содержимое в строку JSON
-      const files = document.querySelectorAll('#container input[type="file"]');
-      if (files.length != 0) {
-        for (let i = 0; i < files.length; i++) {
-          const file = files[i].files[0];
-          formData.append('files', file);
-          console.log(file.name);
-        }
-        console.log(formData.get('content'));
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', '/handleLectureContentEdit');
-        xhr.send(formData);
-        xhr.onreadystatechange = function () {
-          if (xhr.readyState === 4 && xhr.status === 200) {
-            console.log(xhr.responseText);
-            window.location.href = "/CreateNewCourse/details";
-          } else {
-            console.log('Ошибка ' + xhr.status + ': ' + xhr.statusText);
-          }
-        }
-      } else {
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', '/handleLectureContentEditWithoutPhoto');
-        xhr.send(formData);
-        xhr.onreadystatechange = function () {
-          if (xhr.readyState === 4 && xhr.status === 200) {
-            console.log(xhr.responseText);
-            window.location.href = "/CreateNewCourse/details";
-          } else {
-            console.log('Ошибка ' + xhr.status + ': ' + xhr.statusText);
-          }
-        }
-      }
-    }
-  });
 </script>
 </body>
 </html>

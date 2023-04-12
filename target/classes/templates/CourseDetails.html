@@ -1,13 +1,14 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org" style="background-color: #FFFFFF">
 <head>
-    <title>SoftLineEC - учет курсов</title><link th:href="@{/css/main.css}" rel="stylesheet" />
+    <title>SoftLineEC - Детали курса</title><link th:href="@{/css/main.css}" rel="stylesheet" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="shortcut icon" href="/images/slLogo.svg">
 </head>
 <body style="background-color: #FFFFFF">
 <form th:action="${'/CreateNewCourse/details'}" method="post">
-<div th:insert="blocks/header.html"/>
+    <div th:insert="blocks/header.html"/>
 <div th:insert="blocks/nav.html"/>
 <div style="margin-top: 15vh; margin-left: 20vw; margin-right: 12vw;">
     <h3 style="font-size: 30px; margin-bottom: 20px">Программа курса</h3>
