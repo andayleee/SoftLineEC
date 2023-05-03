@@ -1,71 +1,75 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>SoftLineEC - учет курсов</title>
-  <link th:href="@{/css/main.css}" rel="stylesheet" />
-  <link th:href="@{/js/textAreaResize.js}" rel="script" />
+    <title>SoftLineEC - учет курсов</title>
+    <link th:href="@{/css/main.css}" rel="stylesheet"/>
+    <link th:href="@{/js/textAreaResize.js}" rel="script"/>
     <link rel="shortcut icon" href="/images/slLogo.svg">
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <div th:insert="blocks/header.html"/>
 <body>
 <form th:action="${'/CourseAdd'}" th:object="${Course}" method="post" class="center">
     <div class="boxes">
-      <h1 class="title">Добавление курса</h1>
+        <h1 class="title">Добавление курса</h1>
     </div>
-    <div class="form group" style="color: red" th:if="${#fields.hasErrors('nameOfCourse')}" th:errors="*{nameOfCourse}"></div>
-    <div class="group" >
-      <input type="text" th:field="*{nameOfCourse}" name="nameOfCourse" >
-      <span class="highlight"></span>
-      <span class="bar"></span>
-      <label>Название курса</label>
-    </div>
-    <div class="form group" style="color: red" th:if="${#fields.hasErrors('dateOfCreation')}" th:errors="*{dateOfCreation}"></div>
+    <div class="form group" style="color: red" th:if="${#fields.hasErrors('nameOfCourse')}"
+         th:errors="*{nameOfCourse}"></div>
     <div class="group">
-      <input type="date" value="" th:field="*{dateOfCreation}" name="dateOfCreation" >
-      <span class="highlight"></span>
-      <span class="bar"></span>
-      <label>Дата создания</label>
+        <input type="text" th:field="*{nameOfCourse}" name="nameOfCourse">
+        <span class="highlight"></span>
+        <span class="bar"></span>
+        <label>Название курса</label>
     </div>
-    <div class="form group" style="color: red" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></div>
+    <div class="form group" style="color: red" th:if="${#fields.hasErrors('dateOfCreation')}"
+         th:errors="*{dateOfCreation}"></div>
     <div class="group">
-      <textarea class="textar" placeholder="Описание" th:field="*{description}" name="description" ></textarea>
+        <input type="date" value="" th:field="*{dateOfCreation}" name="dateOfCreation">
+        <span class="highlight"></span>
+        <span class="bar"></span>
+        <label>Дата создания</label>
+    </div>
+    <div class="form group" style="color: red" th:if="${#fields.hasErrors('description')}"
+         th:errors="*{description}"></div>
+    <div class="group">
+        <textarea class="textar" placeholder="Описание" th:field="*{description}" name="description"></textarea>
     </div>
     <div class="form group" style="color: red" th:if="${#fields.hasErrors('resources')}" th:errors="*{resources}"></div>
     <div class="group">
-      <textarea class="textar" placeholder="Ресурсы" th:field="*{resources}" name="resources" ></textarea>
+        <textarea class="textar" placeholder="Ресурсы" th:field="*{resources}" name="resources"></textarea>
     </div>
     <div class="form group" style="color: red" th:if="${#fields.hasErrors('goal')}" th:errors="*{goal}"></div>
     <div class="group">
-      <textarea class="textar" placeholder="Цель" th:field="*{goal}" name="goal" ></textarea>
+        <textarea class="textar" placeholder="Цель" th:field="*{goal}" name="goal"></textarea>
     </div>
     <div class="form group" style="color: red" th:if="${#fields.hasErrors('tasks')}" th:errors="*{tasks}"></div>
     <div class="group">
-      <textarea class="textar" placeholder="Задачи" th:field="*{tasks}" name="tasks" ></textarea>
+        <textarea class="textar" placeholder="Задачи" th:field="*{tasks}" name="tasks"></textarea>
     </div>
-    <div class="form group" style="color: red" th:if="${#fields.hasErrors('categoriesOfStudents')}" th:errors="*{categoriesOfStudents}"></div>
+    <div class="form group" style="color: red" th:if="${#fields.hasErrors('categoriesOfStudents')}"
+         th:errors="*{categoriesOfStudents}"></div>
     <div class="group">
-      <input type="text"  th:field="*{categoriesOfStudents}" name="categoriesOfStudents" >
-      <span class="highlight"></span>
-      <span class="bar"></span>
-      <label>Категории обучающихся</label>
-    </div>
-    <div class="group">
-      <select class="selec"  name="nameOfCourseType" required>
-        <div th:each="element : ${CourseTypes}">
-          <option th:text="${element.getNameOfCourseType()}"></option>
-        </div>
-      </select>
+        <input type="text" th:field="*{categoriesOfStudents}" name="categoriesOfStudents">
+        <span class="highlight"></span>
+        <span class="bar"></span>
+        <label>Категории обучающихся</label>
     </div>
     <div class="group">
-      <select class="selec"  name="typeOfEducation" required>
-        <div th:each="element : ${FormOfEducations}">
-          <option th:text="${element.getTypeOfEducation()}"></option>
-        </div>
-      </select>
+        <select class="selec" name="nameOfCourseType" required>
+            <div th:each="element : ${CourseTypes}">
+                <option th:text="${element.getNameOfCourseType()}"></option>
+            </div>
+        </select>
+    </div>
+    <div class="group">
+        <select class="selec" name="typeOfEducation" required>
+            <div th:each="element : ${FormOfEducations}">
+                <option th:text="${element.getTypeOfEducation()}"></option>
+            </div>
+        </select>
     </div>
     <form th:action="${'/CourseAdd'}">
-      <button type="submit" class="custom-btn btn-16">Добавить курс</button>
+        <button type="submit" class="custom-btn btn-16">Добавить курс</button>
     </form>
 </form>
 <script type="text/javascript" th:src="@{/js/textAreaResize.js}" src="/js/textAreaResize.js"></script>

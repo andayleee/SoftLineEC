@@ -1,196 +1,132 @@
-<nav class="px-2 bg-white border-gray-200 dark:bg-gray-900 dark:border-gray-700" style="position: fixed; top: 0; width: 100%; z-index: 499; box-shadow: 0px -10px 40px #1B1B1B;"
-     xmlns:sec="http://www.w3.org/1999/xhtml" >
-  <script src="https://unpkg.com/flowbite@1.5.3/dist/flowbite.js"></script>
-  <link rel="stylesheet" href="https://unpkg.com/flowbite@1.5.3/dist/flowbite.min.css"/>
-  <link th:href="@{/images/SoftLineLogo.png}" rel="import"/>
-  <div class="container flex flex-wrap justify-between items-center mx-auto" style="align-items: center">
-    <a href="/main">
-      <img th:src="@{/images/SoftLineLogo.png}" height="20" width="100" alt="Logo"/>
-    </a>
-    <div class="flex items-center md:order-2">
-      <form sec:authorize="!isAuthenticated()" th:action="@{/login}" method="post" >
-        <button type="submit" sec:authorize="!isAuthenticated()" href="/login"
-                class="text-gray-800 hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 md:px-5 md:py-2.5 mr-1 md:mr-2 focus:outline-none">
-          Войти
-        </button>
-        <a href="/registration"
-           class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 md:px-5 md:py-2.5 mr-1 md:mr-2  focus:outline-none">
-          Регистрация</a>
-      </form>
-      <form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
-        <a type="submit" href="/login"
-                class="btn-outline-primary1">
-          Выйти
+<nav class="px-2 bg-white border-gray-200 dark:bg-gray-900 dark:border-gray-700"
+     style="position: fixed; top: 0; width: 100%; z-index: 499; box-shadow: 0px -10px 40px #1B1B1B;"
+     xmlns:sec="http://www.w3.org/1999/xhtml">
+    <script src="https://unpkg.com/flowbite@1.5.3/dist/flowbite.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/flowbite@1.5.3/dist/flowbite.min.css"/>
+    <link th:href="@{/images/SoftLineLogo.png}" rel="import"/>
+    <div class="container flex flex-wrap justify-between items-center mx-auto" style="align-items: center">
+        <a href="/main">
+            <img th:src="@{/images/SoftLineLogo.png}" height="20" width="100" alt="Logo"/>
         </a>
-      </form>
-    </div>
-
-    <div class="hidden w-full md:block md:w-auto" id="mobile-menu" style="z-index: 500; height: 50px; display: flex; align-items: center;">
-<!--      <ul  class="flex flex-col items-center bg-gray-50 rounded-lg border border-gray-100 md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">-->
-<!--        <li>-->
-<!--          <a href="/main"-->
-<!--             class="block py-2 pr-4 pl-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-white dark:bg-blue-600 md:dark:bg-transparent"-->
-<!--             aria-current="page">Главная страница</a>-->
-<!--        </li>-->
-        <a sec:authorize="hasAuthority('ADMIN')" >
-          <button id="dropdownNavbarLink" data-dropdown-toggle="dropdownNavbar"
-                  class="flex justify-between items-center py-2 pr-4 pl-3 w-full font-medium text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-gray-400 dark:hover:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">
-            Учет данных
-            <svg class="ml-1 w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
-                 xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd"
-                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                    clip-rule="evenodd"></path>
-            </svg>
-          </button>
-          <div id="dropdownNavbar"
-               class="hidden z-10 w-44 font-normal bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600" style="padding-left: 10px;">
-            <ul class="py-1 text-sm text-gray-700 dark:text-gray-400"
-                aria-labelledby="dropdownLargeButton">
-
-              <li class="nav-item" sec:authorize="hasAuthority('ADMIN')">
-                <a class="flex items-center  w-full font-medium text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-gray-400 dark:hover:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent"
-                   href="/CourseType" data-mdb-ripple="true" data-mdb-ripple-color="light" style="margin-top: 5px">Тип курса</a>
-              </li>
-              <li class="nav-item" sec:authorize="hasAuthority('ADMIN')">
-                <a class="flex justify-between items-center  w-full font-medium text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-gray-400 dark:hover:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent"
-                   href="/FormOfEducation" data-mdb-ripple="true" data-mdb-ripple-color="light" style="margin-top: 10px">Форма обучения</a>
-              </li>
-              <li class="nav-item" sec:authorize="hasAuthority('ADMIN')">
-                <a class="flex justify-between items-center  w-full font-medium text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-gray-400 dark:hover:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent"
-                   href="/Course" data-mdb-ripple="true" data-mdb-ripple-color="light" style="margin-top: 10px">Курс</a>
-              </li>
-              <li class="nav-item" sec:authorize="hasAuthority('ADMIN')">
-                <a class="flex justify-between items-center  w-full font-medium text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-gray-400 dark:hover:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent"
-                   href="/Block" data-mdb-ripple="true" data-mdb-ripple-color="light" style="margin-top: 10px">Блок</a>
-              </li>
-              <li class="nav-item" sec:authorize="hasAuthority('ADMIN')">
-                <a class="flex justify-between items-center  w-full font-medium text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-gray-400 dark:hover:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent"
-                   href="/Lecture" data-mdb-ripple="true" data-mdb-ripple-color="light" style="margin-top: 10px">Лекция</a>
-              </li>
-              <li class="nav-item" sec:authorize="hasAuthority('ADMIN')">
-                <a class="flex justify-between items-center  w-full font-medium text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-gray-400 dark:hover:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent"
-                   href="/Test" data-mdb-ripple="true" data-mdb-ripple-color="light" style="margin-top: 10px">Тест</a>
-              </li>
-              <li class="nav-item" sec:authorize="hasAuthority('ADMIN')">
-                <a class="flex justify-between items-center  w-full font-medium text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-gray-400 dark:hover:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent"
-                   href="/Question" data-mdb-ripple="true" data-mdb-ripple-color="light" style="margin-top: 10px">Вопрос</a>
-              </li>
-              <li class="nav-item" sec:authorize="hasAuthority('ADMIN')">
-                <a class="flex justify-between items-center  w-full font-medium text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-gray-400 dark:hover:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent"
-                   href="/AnswerOptions" data-mdb-ripple="true" data-mdb-ripple-color="light" style="margin-top: 10px">Вариант ответа</a>
-              </li>
-              <li class="nav-item" sec:authorize="hasAuthority('ADMIN')">
-                <a class="flex justify-between items-center  w-full font-medium text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-gray-400 dark:hover:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent"
-                   href="/admin/a" data-mdb-ripple="true" data-mdb-ripple-color="light" style="margin: 10px 0 10px 0">Админ</a>
-              </li>
-            </ul>
-          </div>
-        </a>
-      <div style="width: 50px"></div>
-      <a sec:authorize="hasAuthority('ADMIN') or hasAuthority('EMPLOYEE')">
-        <button id="dropdownNavbarLink2" data-dropdown-toggle="dropdownNavbar2"
-                class="flex justify-between items-center py-2 pr-4 pl-3 w-full font-medium text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-gray-400 dark:hover:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">
-          Создание курса
-          <svg class="ml-1 w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
-               xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd"
-                  d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                  clip-rule="evenodd"></path>
-          </svg>
-        </button>
-        <div id="dropdownNavbar2"
-             class="hidden z-10 w-44 font-normal bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600" style="padding-left: 10px">
-          <ul class="py-1 text-sm text-gray-700 dark:text-gray-400"
-              aria-labelledby="dropdownLargeButton">
-
-            <li class="nav-item" sec:authorize="hasAuthority('ADMIN') or hasAuthority('EMPLOYEE')">
-              <a class="flex justify-between items-center  w-full font-medium text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-gray-400 dark:hover:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent"
-                 href="/CreateNewCourse" data-mdb-ripple="true" data-mdb-ripple-color="light" style="margin: 10px 0 10px 0">Новый курс</a>
-            </li>
-          </ul>
+        <div class="flex items-center md:order-2">
+            <form sec:authorize="!isAuthenticated()" th:action="@{/login}" method="post">
+                <button type="submit" sec:authorize="!isAuthenticated()" href="/login"
+                        class="text-gray-800 hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 md:px-5 md:py-2.5 mr-1 md:mr-2 focus:outline-none">
+                    Войти
+                </button>
+                <a href="/registration"
+                   class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 md:px-5 md:py-2.5 mr-1 md:mr-2  focus:outline-none">
+                    Регистрация</a>
+            </form>
+            <form sec:authorize="isAuthenticated()" method="post" >
+                <a type="submit" href="/ProfileInfo"
+                   class="btn-outline-primary1">
+                    Личный кабинет
+                </a>
+            </form>
+            <form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post" style="margin-left: 20px">
+                <a type="submit" href="/login"
+                   class="btn-outline-primary1">
+                    Выйти
+                </a>
+            </form>
         </div>
-      </a>
-<!--        <li sec:authorize="hasAuthority('ADMIN') or hasAuthority('PURCHASES')">-->
-<!--          <button id="teachDropdownNavbarLink" data-dropdown-toggle="teachDropdownNavbar"-->
-<!--                  class="flex justify-between items-center py-2 pr-4 pl-3 w-full font-medium text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-gray-400 dark:hover:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">-->
-<!--            Отдел закупок рейсов-->
-<!--            <svg class="ml-1 w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"-->
-<!--                 xmlns="http://www.w3.org/2000/svg">-->
-<!--              <path fill-rule="evenodd"-->
-<!--                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"-->
-<!--                    clip-rule="evenodd"></path>-->
-<!--            </svg>-->
-<!--          </button>-->
-<!--          &lt;!&ndash; Dropdown menu &ndash;&gt;-->
-<!--          <div id="teachDropdownNavbar"-->
-<!--               class="hidden z-10 w-44 font-normal bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">-->
-<!--            <ul class="py-1 text-sm text-gray-700 dark:text-gray-400"-->
-<!--                aria-labelledby="dropdownLargeButton">-->
 
-<!--              <li class="nav-item"-->
-<!--                  sec:authorize="hasAuthority('ADMIN') or hasAuthority('PURCHASES')">-->
-<!--                <a class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"-->
-<!--                   href="/" data-mdb-ripple="true" data-mdb-ripple-color="light">Рейс</a>-->
-<!--              </li>-->
-<!--              <li class="nav-item"-->
-<!--                  sec:authorize="hasAuthority('ADMIN') or hasAuthority('PURCHASES')">-->
-<!--                <a class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"-->
-<!--                   href="/contract" data-mdb-ripple="true" data-mdb-ripple-color="light">Контракт</a>-->
-<!--              </li>-->
-<!--              <li class="nav-item"-->
-<!--                  sec:authorize="hasAuthority('ADMIN') or hasAuthority('PURCHASES')">-->
-<!--                <a class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"-->
-<!--                   href="/flight/seat/add" data-mdb-ripple="true" data-mdb-ripple-color="light">Места на рейсе</a>-->
-<!--              </li>-->
-<!--              <li class="nav-item"-->
-<!--                  sec:authorize="hasAuthority('ADMIN') or hasAuthority('PURCHASES')">-->
-<!--                <a class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"-->
-<!--                   href="/seat" data-mdb-ripple="true"-->
-<!--                   data-mdb-ripple-color="light">Места</a>-->
-<!--              </li>-->
+        <div class="hidden w-full md:block md:w-auto" id="mobile-menu"
+             style="z-index: 500; height: 50px; display: flex; align-items: center;">
+            <a sec:authorize="hasAuthority('ADMIN')">
+                <button id="dropdownNavbarLink" data-dropdown-toggle="dropdownNavbar"
+                        class="flex justify-between items-center py-2 pr-4 pl-3 w-full font-medium text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-gray-400 dark:hover:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">
+                    Учет данных
+                    <svg class="ml-1 w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                              d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                              clip-rule="evenodd"></path>
+                    </svg>
+                </button>
+                <div id="dropdownNavbar"
+                     class="hidden z-10 w-44 font-normal bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600"
+                     style="padding-left: 10px;">
+                    <ul class="py-1 text-sm text-gray-700 dark:text-gray-400"
+                        aria-labelledby="dropdownLargeButton">
 
-<!--            </ul>-->
-<!--          </div>-->
-<!--        </li>-->
-<!--        <li sec:authorize="hasAuthority('ADMIN') or hasAuthority('SALES')">-->
-<!--          <button id="userDropdownNavbarLink" data-dropdown-toggle="userDropdownNavbar"-->
-<!--                  class="flex justify-between items-center py-2 pr-4 pl-3 w-full font-medium text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-gray-400 dark:hover:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">-->
-<!--            Отдел продажи билетов-->
-<!--            <svg class="ml-1 w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"-->
-<!--                 xmlns="http://www.w3.org/2000/svg">-->
-<!--              <path fill-rule="evenodd"-->
-<!--                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"-->
-<!--                    clip-rule="evenodd"></path>-->
-<!--            </svg>-->
-<!--          </button>-->
-<!--          &lt;!&ndash; Dropdown menu &ndash;&gt;-->
-<!--          <div id="userDropdownNavbar"-->
-<!--               class="hidden z-10 w-44 font-normal bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">-->
-<!--            <ul class="py-1 text-sm text-gray-700 dark:text-gray-400"-->
-<!--                aria-labelledby="dropdownLargeButton">-->
+                        <li class="nav-item" sec:authorize="hasAuthority('ADMIN')">
+                            <a class="flex items-center  w-full font-medium text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-gray-400 dark:hover:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent"
+                               href="/CourseType" data-mdb-ripple="true" data-mdb-ripple-color="light"
+                               style="margin-top: 5px">Тип курса</a>
+                        </li>
+                        <li class="nav-item" sec:authorize="hasAuthority('ADMIN')">
+                            <a class="flex justify-between items-center  w-full font-medium text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-gray-400 dark:hover:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent"
+                               href="/FormOfEducation" data-mdb-ripple="true" data-mdb-ripple-color="light"
+                               style="margin-top: 10px">Форма обучения</a>
+                        </li>
+                        <li class="nav-item" sec:authorize="hasAuthority('ADMIN')">
+                            <a class="flex justify-between items-center  w-full font-medium text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-gray-400 dark:hover:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent"
+                               href="/Course" data-mdb-ripple="true" data-mdb-ripple-color="light"
+                               style="margin-top: 10px">Курс</a>
+                        </li>
+                        <li class="nav-item" sec:authorize="hasAuthority('ADMIN')">
+                            <a class="flex justify-between items-center  w-full font-medium text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-gray-400 dark:hover:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent"
+                               href="/Block" data-mdb-ripple="true" data-mdb-ripple-color="light"
+                               style="margin-top: 10px">Блок</a>
+                        </li>
+                        <li class="nav-item" sec:authorize="hasAuthority('ADMIN')">
+                            <a class="flex justify-between items-center  w-full font-medium text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-gray-400 dark:hover:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent"
+                               href="/Lecture" data-mdb-ripple="true" data-mdb-ripple-color="light"
+                               style="margin-top: 10px">Лекция</a>
+                        </li>
+                        <li class="nav-item" sec:authorize="hasAuthority('ADMIN')">
+                            <a class="flex justify-between items-center  w-full font-medium text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-gray-400 dark:hover:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent"
+                               href="/Test" data-mdb-ripple="true" data-mdb-ripple-color="light"
+                               style="margin-top: 10px">Тест</a>
+                        </li>
+                        <li class="nav-item" sec:authorize="hasAuthority('ADMIN')">
+                            <a class="flex justify-between items-center  w-full font-medium text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-gray-400 dark:hover:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent"
+                               href="/Question" data-mdb-ripple="true" data-mdb-ripple-color="light"
+                               style="margin-top: 10px">Вопрос</a>
+                        </li>
+                        <li class="nav-item" sec:authorize="hasAuthority('ADMIN')">
+                            <a class="flex justify-between items-center  w-full font-medium text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-gray-400 dark:hover:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent"
+                               href="/AnswerOptions" data-mdb-ripple="true" data-mdb-ripple-color="light"
+                               style="margin-top: 10px">Вариант ответа</a>
+                        </li>
+                        <li class="nav-item" sec:authorize="hasAuthority('ADMIN')">
+                            <a class="flex justify-between items-center  w-full font-medium text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-gray-400 dark:hover:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent"
+                               href="/admin/a" data-mdb-ripple="true" data-mdb-ripple-color="light"
+                               style="margin: 10px 0 10px 0">Админ</a>
+                        </li>
+                    </ul>
+                </div>
+            </a>
+            <div style="width: 50px"></div>
+            <a sec:authorize="hasAuthority('ADMIN') or hasAuthority('EMPLOYEE')">
+                <button id="dropdownNavbarLink2" data-dropdown-toggle="dropdownNavbar2"
+                        class="flex justify-between items-center py-2 pr-4 pl-3 w-full font-medium text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-gray-400 dark:hover:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">
+                    Создание курса
+                    <svg class="ml-1 w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                              d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                              clip-rule="evenodd"></path>
+                    </svg>
+                </button>
+                <div id="dropdownNavbar2"
+                     class="hidden z-10 w-44 font-normal bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600"
+                     style="padding-left: 10px">
+                    <ul class="py-1 text-sm text-gray-700 dark:text-gray-400"
+                        aria-labelledby="dropdownLargeButton">
 
-<!--              <li class="nav-item"-->
-<!--                  sec:authorize="hasAuthority('SALES') or hasAuthority('ADMIN')">-->
-<!--                <a class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"-->
-<!--                   href="/ticket" data-mdb-ripple="true" data-mdb-ripple-color="light">Билет</a>-->
-<!--              </li>-->
-<!--              <li class="nav-item"-->
-<!--                  sec:authorize="hasAuthority('SALES') or hasAuthority('ADMIN')">-->
-<!--                <a class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"-->
-<!--                   href="/ticketList" data-mdb-ripple="true" data-mdb-ripple-color="light">Список билетов</a>-->
-<!--              </li>-->
-<!--              <li class="nav-item"-->
-<!--                  sec:authorize="hasAuthority('SALES') or hasAuthority('ADMIN')">-->
-<!--                <a class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"-->
-<!--                   href="/cheque" data-mdb-ripple="true" data-mdb-ripple-color="light">Чек</a>-->
-<!--              </li>-->
-<!--            </ul>-->
-<!--          </div>-->
-<!--        </li>-->
-<!--      </ul>-->
+                        <li class="nav-item" sec:authorize="hasAuthority('ADMIN') or hasAuthority('EMPLOYEE')">
+                            <a class="flex justify-between items-center  w-full font-medium text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-gray-400 dark:hover:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent"
+                               href="/CreateNewCourse" data-mdb-ripple="true" data-mdb-ripple-color="light"
+                               style="margin: 10px 0 10px 0">Новый курс</a>
+                        </li>
+                    </ul>
+                </div>
+            </a>
+        </div>
     </div>
-  </div>
 </nav>
 
 

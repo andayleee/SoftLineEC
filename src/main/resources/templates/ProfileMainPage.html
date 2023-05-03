@@ -1,0 +1,135 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" style="background-color: #FFFFFF">
+<head>
+    <title>SoftLineEC - информация о профиле</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link th:href="@{/css/main.css}" rel="stylesheet"/>
+    <link rel="shortcut icon" href="/images/slLogo.svg">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body class="body">
+<div th:insert="blocks/header.html"/>
+<div class="center">
+    <h1 class="titleProfile">информация о профиле</h1>
+    <div class="row" style="margin-left: 30px; padding-top: 30px;">
+        <div class="col-3">
+            <div class="imageContainerProfile">
+                <img class="imageProfile" id="userPhoto">
+                <input id="photo-upload" type="file" accept=".png, .jpg, .jpeg, .svg" class="btn btn-course inputPhoto" style="width: 100%"/>
+                <button type="submit" id="save-photo" class="custom-btn btn-16" style="width: 100%">Изменить фото</button>
+            </div>
+        </div>
+        <div class="col-9">
+            <div class="row">
+                <div class="col-9">
+                    <h1 id="FIO" class="title12"></h1>
+                    <div class="row" id="PhoneNumberRow" style="margin-top: 30px">
+                        <div class="col-3">
+                            <p style="text-align: end">Телефон</p>
+                        </div>
+                        <div class="col-9">
+                            <p style="text-align: start" id="PhoneNumber"></p>
+                        </div>
+                    </div>
+                    <div class="row" id="edInstitutionRow" style="margin-top: 15px">
+                        <div class="col-3">
+                            <p style="text-align: end">Оброзоват. уч.</p>
+                        </div>
+                        <div class="col-9">
+                            <p style="text-align: start" id="edInstitution"></p>
+                        </div>
+                    </div>
+                    <div class="row" id="CountryAndCityRow" style="margin-top: 15px">
+                        <div class="col-3">
+                            <p style="text-align: end">Страна и город</p>
+                        </div>
+                        <div class="col-9">
+                            <p style="text-align: start" id="CountryAndCity"></p>
+                        </div>
+                    </div>
+                    <div class="row" id="DateOfBirthRow" style="margin-top: 15px">
+                        <div class="col-3">
+                            <p style="text-align: end">Дата рождения</p>
+                        </div>
+                        <div class="col-9">
+                            <p style="text-align: start" id="DateOfBirth"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <a href="/ProfileInfo/Update">Изменить</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        $.ajax({
+            url: '/check-user-info',
+            type: 'GET',
+            success: function (info) {
+                if (info.userSur !== null && info.userNamee !== null) {
+                    if (info.userPatr !== null) {
+                        $('#FIO').text(info.userSur + " " + info.userNamee + " " + info.userPatr);
+                    } else {
+                        $('#FIO').text(info.userSur + " " + info.userNamee);
+                    }
+                }
+                if (info.photoLink !== "" && info.photoLink !== null) {
+                    const image = document.querySelector('.imageProfile');
+                    image.src = info.photoLink;
+                } else {
+                    const image = document.querySelector('.imageProfile');
+                    image.src = "/images/Camera.png";
+                }
+                if(info.phoneNumber !== null&&info.phoneNumber !== ''){
+                    $('#PhoneNumber').text(info.phoneNumber);
+                }else {
+                    $('#PhoneNumberRow').css('display', 'none');
+                }
+                if(info.edInstitution !== null&&info.edInstitution !== ''){
+                    $('#edInstitution').text(info.edInstitution);
+                }else {
+                    $('#edInstitutionRow').css('display', 'none');
+                }
+                if (info.tenants2.length > 0) {
+                    if (info.tenants2[0].cityOfAddress !== null && info.tenants2[0].countyOfAddress !== null && info.tenants2[0].cityOfAddress !== '' && info.tenants2[0].countyOfAddress !== '') {
+                        $('#CountryAndCity').text(info.tenants2[0].countyOfAddress + ", " + info.tenants2[0].cityOfAddress);
+                    }
+                }else {
+                    $('#CountryAndCityRow').css('display', 'none');
+                }
+                if(info.dateOfBirth !== null&&info.dateOfBirth !== ''){
+                    $('#DateOfBirth').text(info.dateOfBirth);
+                }else {
+                    $('#DateOfBirthRow').css('display', 'none');
+                }
+            },
+            error: function (info) {
+                console.log(info);
+            }
+        });
+    });
+    document.getElementById("save-photo").addEventListener("click", function () {
+        var inputPhoto = document.getElementById('photo-upload');
+        var file = inputPhoto.files[0];
+        var formData = new FormData();
+        formData.append('file', file);
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/handleUserPhotoEdit');
+        xhr.onload = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                console.log(xhr.responseText);
+                window.location.href = "/ProfileInfo";
+            } else {
+                console.log('Ошибка ' + xhr.status + ': ' + xhr.statusText);
+            }
+        };
+        xhr.send(formData);
+    });
+</script>
+</body>
+</html>

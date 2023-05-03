@@ -18,7 +18,13 @@
                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 md:px-5 md:py-2.5 mr-1 md:mr-2  focus:outline-none">
                     Регистрация</a>
             </form>
-            <form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
+            <form sec:authorize="isAuthenticated()" method="post" >
+                <a type="submit" href="/ProfileInfo"
+                   class="btn-outline-primary1">
+                    Личный кабинет
+                </a>
+            </form>
+            <form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post" style="margin-left: 20px">
                 <a type="submit" href="/login"
                    class="btn-outline-primary1">
                     Выйти
@@ -28,12 +34,6 @@
 
         <div class="hidden w-full md:block md:w-auto" id="mobile-menu"
              style="z-index: 500; height: 50px; display: flex; align-items: center;">
-            <!--      <ul  class="flex flex-col items-center bg-gray-50 rounded-lg border border-gray-100 md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">-->
-            <!--        <li>-->
-            <!--          <a href="/main"-->
-            <!--             class="block py-2 pr-4 pl-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-white dark:bg-blue-600 md:dark:bg-transparent"-->
-            <!--             aria-current="page">Главная страница</a>-->
-            <!--        </li>-->
             <a sec:authorize="hasAuthority('ADMIN')">
                 <button id="dropdownNavbarLink" data-dropdown-toggle="dropdownNavbar"
                         class="flex justify-between items-center py-2 pr-4 pl-3 w-full font-medium text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-gray-400 dark:hover:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">

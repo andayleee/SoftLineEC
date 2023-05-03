@@ -7,13 +7,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @ControllerAdvice
 public class CustomExceptionHandler {
 
-    @ExceptionHandler(Exception.class)
-    @ResponseBody
-    public ErrorMessage handleException(Exception ex) {
-        ErrorMessage error = new ErrorMessage();
-        error.setMessage("Что-то пошло не так :/");
-        return error;
-    }
+//    @ExceptionHandler(Exception.class)
+//    @ResponseBody
+//    public ErrorMessage handleException(Exception ex) {
+//        ErrorMessage error = new ErrorMessage();
+//        error.setMessage("Что-то пошло не так :/");
+//        return error;
+//    }
 
 }
 

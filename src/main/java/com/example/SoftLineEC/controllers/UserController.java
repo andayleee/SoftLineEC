@@ -99,6 +99,9 @@ public class UserController {
         user.setActive(true);
         user.setPassword(userData.get().getPassword());
         user.setRepeatPassword(userData.get().getRepeatPassword());
+        user.setPhotoLink(userData.get().getPhotoLink());
+        user.setPhoneNumber(userData.get().getPhoneNumber());
+        user.setEdInstitution(userData.get().getEdInstitution());
         userRepository.save(user);
         return "redirect:/admin/{id}";
     }

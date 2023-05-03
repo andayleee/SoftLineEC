@@ -9,6 +9,15 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="shortcut icon" href="/images/slLogo.svg">
 </head>
+<style>
+    .ql-toolbar {
+        display: flex;
+        flex-wrap: nowrap;
+    }
+    .ql-container {
+        min-height: 40px;
+    }
+</style>
 <body style="background-color: #FFFFFF">
 <form th:action="${'/CreateNewCourse/details/Lecture/Edit/Content'}" method="post" th:each="el: ${Lecture}"
       th:object="${Lecture}">
@@ -117,6 +126,7 @@
             });
             var newInput = document.createElement('input');
             newInput.type = 'file';
+            newInput.accept = '.png, .jpg, .jpeg, .svg';
             newInput.id = countOfButton.toString();
             newInput.style = 'margin-right: 5vw';
             newInput.className = 'custom-btn btn-16 inputPhoto';
