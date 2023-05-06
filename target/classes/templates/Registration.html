@@ -46,15 +46,15 @@
     <a href="/login" class="send-btn">Есть аккаунт?</a>
   </form>
 </div>
-<script src="https://unpkg.com/imask"></script> <!-- Подключаем плагин через CDN -->
+<script src="https://unpkg.com/imask"></script>
 <script src="js/main.js"></script>
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    const inputElement = document.querySelector('[data-mask="password"]') // ищем наш единственный input
-    const maskOptions = { // создаем объект параметров
-      mask: '********************' // задаем единственный параметр mask
+    const inputElement = document.querySelector('[data-mask="password"]')
+    const maskOptions = {
+      mask: '********************'
     }
-    IMask(inputElement, maskOptions) // запускаем плагин с переданными параметрами
+    IMask(inputElement, maskOptions)
   })
 
   const inputs = document.querySelectorAll(".user-box input");

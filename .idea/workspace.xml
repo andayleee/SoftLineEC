@@ -4,37 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6935da76-6763-4651-9e30-f14025ac4912" name="Changes" comment="КП ТРПО финал">
+    <list default="true" id="6935da76-6763-4651-9e30-f14025ac4912" name="Changes" comment="Профиль пользователя">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/SoftLineEC/controllers/CustomExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/SoftLineEC/controllers/CustomExceptionHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/SoftLineEC/controllers/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/SoftLineEC/controllers/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/SoftLineEC/models/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/SoftLineEC/models/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/SoftLineEC/models/ValidPassword.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/SoftLineEC/models/ValidPassword.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/SoftLineEC/repositories/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/SoftLineEC/repositories/UserRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/CourseDescription.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/CourseDescription.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/CourseDetailsEdit.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/CourseDetailsEdit.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/CourseDetailsLectureContentEdit.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/CourseDetailsLectureContentEdit.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/MainPage.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/MainPage.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/Registration.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/Registration.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/blocks/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/blocks/header.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/SoftLineEC/controllers/CreateCourseController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/SoftLineEC/controllers/CreateCourseController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/SoftLineEC/controllers/CustomExceptionHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/SoftLineEC/controllers/CustomExceptionHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/SoftLineEC/controllers/MainPageController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/SoftLineEC/controllers/MainPageController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/SoftLineEC/controllers/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/SoftLineEC/controllers/UserController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/SoftLineEC/models/Course.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/SoftLineEC/models/Course.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/SoftLineEC/models/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/SoftLineEC/models/User.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/SoftLineEC/repositories/UserRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/SoftLineEC/repositories/UserRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/css/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/CourseAdd.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/CourseAdd.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/CourseDescription.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/CourseDescription.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/CourseDetails.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/CourseDetails.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/CourseDetailsBlockEdit.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/CourseDetailsBlockEdit.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/CourseDetailsEdit.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/CourseDetailsEdit.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/CourseDetailsLectureContentEdit.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/CourseDetailsLectureContentEdit.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/CourseDetailsLectureEdit.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/CourseDetailsLectureEdit.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/MainPage.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/MainPage.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/blocks/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/blocks/header.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/SoftLineEC/config/WebSecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/SoftLineEC/config/WebSecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/loginreg.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/loginreg.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/Login.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/Login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/SoftLineEC/config/WebSecurityConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/SoftLineEC/config/WebSecurityConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/SoftLineEC/models/ValidPassword.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/SoftLineEC/models/ValidPassword.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/Login.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/Login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/Registration.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/Registration.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,9 +26,9 @@
         <option value="JavaScript File" />
         <option value="CSS File" />
         <option value="AnnotationType" />
+        <option value="Interface" />
         <option value="HTML File" />
         <option value="Class" />
-        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -78,23 +57,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultHtmlFileTemplate": "HTML File",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/Users/andayleee/Desktop/SoftLineEC/SoftLineEC/src/main/resources/templates",
-    "list.type.of.created.stylesheet": "CSS",
-    "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "spring.configuration.checksum": "1c114b1f90ed77b6f4088dce2018b7a5"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/andayleee/Desktop/SoftLineEC/SoftLineEC/src/main/resources/templates&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;1c114b1f90ed77b6f4088dce2018b7a5&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/resources/templates" />
@@ -190,7 +169,8 @@
       <workItem from="1681560002418" duration="2270000" />
       <workItem from="1682693764835" duration="4018000" />
       <workItem from="1682698893454" duration="12996000" />
-      <workItem from="1682876024474" duration="42064000" />
+      <workItem from="1682876024474" duration="53046000" />
+      <workItem from="1683379076086" duration="13020000" />
     </task>
     <task id="LOCAL-00001" summary="Полная реализация конструктора курсов">
       <created>1680817729581</created>
@@ -234,7 +214,14 @@
       <option name="project" value="LOCAL" />
       <updated>1681323969505</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Профиль пользователя">
+      <created>1683137703811</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1683137703811</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -258,7 +245,8 @@
     <MESSAGE value="Прям самая-самая-самая полная реализация конструктора курсов" />
     <MESSAGE value="КП ТРПО" />
     <MESSAGE value="КП ТРПО финал" />
-    <option name="LAST_COMMIT_MESSAGE" value="КП ТРПО финал" />
+    <MESSAGE value="Профиль пользователя" />
+    <option name="LAST_COMMIT_MESSAGE" value="Профиль пользователя" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>

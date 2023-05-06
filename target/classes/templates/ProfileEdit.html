@@ -1,0 +1,388 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" style="background-color: #FFFFFF">
+<head>
+  <title>SoftLineEC - информация о профиле</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  <link th:href="@{/css/main.css}" rel="stylesheet"/>
+  <link rel="shortcut icon" href="/images/slLogo.svg">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://unpkg.com/imask"></script>
+  <script src="js/main.js"></script>
+</head>
+<body class="body">
+<div th:insert="blocks/header.html"/>
+<div class="center">
+  <h1 class="titleProfile">настройки профиля</h1>
+  <div class="row" style="margin: 0px 30px 0px 30px; padding-top: 30px;">
+    <div class="col-4">
+      <button type="submit" id="profile" class="custom-btn btn-16" style="width: 100%">Профиль</button>
+    </div>
+    <div class="col-4">
+      <button type="submit" id="auth" class="custom-btn btn-16" style="width: 100%">Авторизация</button>
+    </div>
+    <div class="col-4">
+      <button type="submit" id="deleteProfile" class="custom-btn btn-16" style="width: 100%">Удаление аккаунта</button>
+    </div>
+  </div>
+  <div id="profileForm" style="margin: 0px 30px 0px 30px; padding-top: 30px;">
+<form method="post" th:object="${user_object}">
+  <form th:object="${address}">
+    <div class="row info">
+      <div class="col-4">
+        <div class="group">
+          <input type="text" th:value="${user_object.userSur}" name="userSur" class="txt userSur" style="width: 100%" required>
+          <span class="highlight"></span>
+          <span class="bar"></span>
+          <label>Фамилия</label>
+        </div>
+        <div class="group">
+          <input type="date" th:value="${user_object.dateOfBirth}" style="width: 100%" class="date" name="dateOfBirth">
+          <span class="highlight"></span>
+          <span class="bar"></span>
+          <label>Дата рождения</label>
+        </div>
+        <div class="group">
+          <input type="text" th:value="${address.cityOfAddress}" name="city" class="txt city" style="width: 100%" required>
+          <span class="highlight"></span>
+          <span class="bar"></span>
+          <label>Город</label>
+        </div>
+        <div class="group">
+          <input type="text" th:value="${address.houseOfAddress}" name="house" class="txt house" style="width: 100%" required>
+          <span class="highlight"></span>
+          <span class="bar"></span>
+          <label>Дом</label>
+        </div>
+        <div class="group">
+          <input type="text" name="PhoneNumber" th:value="${user_object.phoneNumber}" class="txt PhoneNumber" style="width: 100%" required>
+          <span class="highlight"></span>
+          <span class="bar"></span>
+          <label>Телефон</label>
+        </div>
+      </div>
+      <div class="col-4">
+        <div class="group">
+          <input type="text" th:value="${user_object.userNamee}" name="userNamee" class="txt userNamee" style="width: 100%" required>
+          <span class="highlight"></span>
+          <span class="bar"></span>
+          <label>Имя</label>
+        </div>
+        <div class="group">
+          <input type="text" th:value="${address.countyOfAddress}" name="country" class="txt country" style="width: 100%" required>
+          <span class="highlight"></span>
+          <span class="bar"></span>
+          <label>Страна</label>
+        </div>
+        <div class="group">
+          <input type="text" name="region" th:value="${address.regionOfAddress}" class="txt region" style="width: 100%" required>
+          <span class="highlight"></span>
+          <span class="bar"></span>
+          <label>Регион</label>
+        </div>
+        <div class="group">
+          <input type="text" name="frame" th:value="${address.frameOfAddress}" class="txt frame" style="width: 100%">
+          <span class="highlight"></span>
+          <span class="bar"></span>
+          <label>Корпус</label>
+        </div>
+        <div class="group">
+          <input type="text" name="edInstitution" th:value="${user_object.edInstitution}" class="txt edInstitution" style="width: 100%" required>
+          <span class="highlight"></span>
+          <span class="bar"></span>
+          <label>ОУ</label>
+        </div>
+      </div>
+      <div class="col-4">
+        <div class="group">
+          <input type="text" th:value="${user_object.userPatr}" name="userPatr" style="width: 100%" class="txt userPatr">
+          <span class="highlight"></span>
+          <span class="bar"></span>
+          <label>Отчество</label>
+        </div>
+        <div class="group">
+          <input type="text" name="index" th:value="${address.indexOfAddress}" class="txt Index" style="width: 100%" required>
+          <span class="highlight"></span>
+          <span class="bar"></span>
+          <label>Индекс</label>
+        </div>
+        <div class="group">
+          <input type="text" name="street" th:value="${address.streetOfAddress}" class="txt street" style="width: 100%" required>
+          <span class="highlight"></span>
+          <span class="bar"></span>
+          <label>Улица</label>
+        </div>
+        <div class="group">
+          <input type="text" name="apartment" th:value="${address.apartmentOfAddress}" class="txt apartment" style="width: 100%" required>
+          <span class="highlight"></span>
+          <span class="bar"></span>
+          <label>Квартира</label>
+        </div>
+      </div>
+      <p style="text-align: start">Обращаем Ваше внимание, что указанная информация о Вас будет размещена на сайте в открытом доступе. Вы самостоятельно определяете необходимость указания информации о Вас и объем персональных данных, который желаете сделать доступным для третьих лиц. </p>
+  </div>
+  </form>
+</form>
+    <button type="text" id="save-info-button" class="custom-btn btn-16" style="margin-bottom: 30px">Сохранить</button>
+  </div>
+
+    <div class="row" id="authForm" style="display: none; margin: 0px 30px 0px 30px; padding-top: 30px;">
+      <div class="col-3"></div>
+      <div class="col-6 authForm">
+        <form method="post" th:object="${user_object}">
+          <p style="text-decoration: underline dashed red; color: red; display: none" id="usernameError">
+            Пользователь с таким логином уже существует</p>
+          <div class="group" >
+            <input type="text" th:value="*{username}" name="username" id="username" class="txt username" style="width: 100%">
+            <span class="highlight"></span>
+            <span class="bar"></span>
+            <label>Логин</label>
+          </div>
+          <p style="text-decoration: underline dashed red; color: red; display: none" id="oldPasswordError">
+            Пароль не совпадает с настоящим</p>
+          <div class="group" >
+            <input type="text"  name="oldPassword" id="oldPassword" class="txt oldPassword" style="width: 100%">
+            <span class="highlight"></span>
+            <span class="bar"></span>
+            <label>Старый пароль</label>
+          </div>
+          <p style="text-decoration: underline dashed red; color: red; display: none" id="passwordError" data-tooltip="Длина пароля должна быть не менее 8 символов и не более 20 символов
+Пароль должен содержать как минимум одну строчную букву (a-z)
+Пароль должен содержать как минимум одну заглавную букву (A-Z)
+Пароль должен содержать как минимум одну цифру (0-9)
+Пароль должен содержать как минимум один специальный символ (!@#$%^&*)">
+            Неверный пароль</p>
+          <div class="group" >
+            <input type="text"  name="newPassword" id="newPassword" class="txt newPassword" style="width: 100%">
+            <span class="highlight"></span>
+            <span class="bar"></span>
+            <label>Новый пароль</label>
+          </div>
+        </form>
+        <button type="text" id="save-auth-info" class="custom-btn btn-16" style="width: 100%">Изменить</button>
+      </div>
+      <div class="col-3"></div>
+    </div>
+
+  <div class="row" id="deleteProfileForm" style="display: none; margin: 0px 30px 0px 30px; padding-top: 30px;">
+    <p sec:authorize="hasAuthority('USER')" style="text-align: start">Внимание!</br>
+      Отправляя запрос на удаление своей страницы, Вы должны отдавать себе отчет, что будут удалены ВСЕ Ваши данные, в том числе фотографии и прочая информация с дополнительных страниц.
+      Вы не сможете больше авторизовываться на сайте под своими логином и паролем.</p>
+    <p sec:authorize="hasAuthority('ADMIN') or hasAuthority('EMPLOYEE')" style="text-align: start">Данный аккаунт нельзя удалить.</p>
+    <button sec:authorize="hasAuthority('USER')" type="submit" id="deleteProfileButton" class="custom-btn btn-16" style="width: 100%; background-color: #eaabb5">Удалить</button>
+  </div>
+</div>
+<script>
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const inputElement = document.querySelector('.PhoneNumber')
+    const maskOptions = {
+      mask: '+{7}(000)000-00-00'
+    }
+    IMask(inputElement, maskOptions)
+    const inputElement2 = document.querySelector('.Index')
+    const maskOptions2 = {
+      mask: '000 000'
+    }
+    IMask(inputElement2, maskOptions2)
+  })
+  const profileButton = document.getElementById('profile');
+  profileButton.style.backgroundColor = '#eaabb5';
+  const authButton = document.getElementById('auth');
+  const deleteProfileButton = document.getElementById('deleteProfile');
+  profileButton.addEventListener('click', function(event) {
+    profileButton.style.backgroundColor = '#eaabb5';
+    authButton.style.backgroundColor = '#fff';
+    deleteProfileButton.style.backgroundColor = '#fff';
+    const element = document.getElementById("profileForm");
+    element.style.display = "block";
+    const element2 = document.getElementById("authForm");
+    element2.style.display = "none";
+    const element3 = document.getElementById("deleteProfileForm");
+    element3.style.display = "none";
+    event.preventDefault();
+  });
+  authButton.addEventListener('click', function(event) {
+    profileButton.style.backgroundColor = '#fff';
+    authButton.style.backgroundColor = '#eaabb5';
+    deleteProfileButton.style.backgroundColor = '#fff';
+    const element = document.getElementById("profileForm");
+    element.style.display = "none";
+    const element2 = document.getElementById("authForm");
+    element2.style.display = "block";
+    const element3 = document.getElementById("deleteProfileForm");
+    element3.style.display = "none";
+    event.preventDefault();
+  });
+  deleteProfileButton.addEventListener('click', function(event) {
+    profileButton.style.backgroundColor = '#fff';
+    authButton.style.backgroundColor = '#fff';
+    deleteProfileButton.style.backgroundColor = '#eaabb5';
+    const element = document.getElementById("profileForm");
+    element.style.display = "none";
+    const element2 = document.getElementById("authForm");
+    element2.style.display = "none";
+    const element3 = document.getElementById("deleteProfileForm");
+    element3.style.display = "block";
+    event.preventDefault();
+  });
+  document.getElementById("save-info-button").addEventListener("click", function () {
+    var surnameValues = [];
+    var nameValues = [];
+    var patrValues = [];
+    var dateOfBirthValues = [];
+    var countryValues = [];
+    var indexValues = [];
+    var cityValues = [];
+    var regionValues = [];
+    var streetValues = [];
+    var houseValues = [];
+    var frameValues = [];
+    var apartmentValues = [];
+    var phoheNumberValues = [];
+    var edInstitutionValues = [];
+    $('.info').each(function () {
+      var value = $(this).find('.userSur').val();
+      surnameValues.push(value);
+      var value1 = $(this).find('.userNamee').val();
+      nameValues.push(value1);
+      var value2 = $(this).find('.userPatr').val();
+      patrValues.push(value2);
+      var value3 = $(this).find('.date').val();
+      dateOfBirthValues.push(value3);
+      var value4 = $(this).find('.country').val();
+      countryValues.push(value4);
+      var value5 = $(this).find('.Index').val();
+      indexValues.push(value5);
+      var value6 = $(this).find('.city').val();
+      cityValues.push(value6);
+      var value7 = $(this).find('.region').val();
+      regionValues.push(value7);
+      var value8 = $(this).find('.street').val();
+      streetValues.push(value8);
+      var value9 = $(this).find('.house').val();
+      houseValues.push(value9);
+      var value10 = $(this).find('.frame').val();
+      frameValues.push(value10);
+      var value11 = $(this).find('.apartment').val();
+      apartmentValues.push(value11);
+      var value12 = $(this).find('.PhoneNumber').val();
+      phoheNumberValues.push(value12);
+      var value13 = $(this).find('.edInstitution').val();
+      edInstitutionValues.push(value13);
+    });
+    var data = {
+      surname: surnameValues,
+      name: nameValues,
+      patr: patrValues,
+      dateOfBirth: dateOfBirthValues,
+      country: countryValues,
+      index: indexValues,
+      city: cityValues,
+      region: regionValues,
+      street: streetValues,
+      house: houseValues,
+      frame: frameValues,
+      apartment: apartmentValues,
+      phoneNumber: phoheNumberValues,
+      edInstitution: edInstitutionValues,
+    };
+    if (surnameValues.includes(null) || surnameValues.includes("") || nameValues.includes(null) || nameValues.includes("") || dateOfBirthValues.includes(null) || dateOfBirthValues.includes("") || countryValues.includes(null) || countryValues.includes("") || indexValues.includes(null) || indexValues.includes("") || cityValues.includes(null) || cityValues.includes("")
+            || regionValues.includes(null) || regionValues.includes("") || streetValues.includes(null) || streetValues.includes("") || houseValues.includes(null) || houseValues.includes("") || apartmentValues.includes(null) || apartmentValues.includes("") || phoheNumberValues.includes(null) || phoheNumberValues.includes("") || edInstitutionValues.includes(null) || edInstitutionValues.includes("")) {
+      alert("Введите все данные");
+    } else {
+      $.ajax({
+        url: '/handleProfileInfoEdit',
+        type: 'POST',
+        data: JSON.stringify(data),
+        contentType: "application/json;charset=UTF-8",
+        success: function () {
+          console.log("sucsess");
+          window.location.href = "/ProfileInfo";
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+          console.error(textStatus, errorThrown);
+          alert("Данные невалидны!");
+        }
+      });
+    }
+  });
+  document.getElementById("save-auth-info").addEventListener("click", function () {
+    const element2 = document.getElementById("usernameError");
+    element2.style.display = "none";
+    const element3 = document.getElementById("passwordError");
+    element3.style.display = "none";
+    const element4 = document.getElementById("oldPasswordError");
+    element4.style.display = "none";
+    var username = [];
+    var oldPassword = [];
+    var newPassword = [];
+    $('.authForm').each(function () {
+      var value = $(this).find('.username').val();
+      username.push(value);
+      var value1 = $(this).find('.oldPassword').val();
+      oldPassword.push(value1);
+      var value2 = $(this).find('.newPassword').val();
+      newPassword.push(value2);
+    });
+    var data = {
+      username: username,
+      oldPassword: oldPassword,
+      newPassword: newPassword
+    };
+    if (username.includes(null) || username.includes("") || oldPassword.includes(null) || oldPassword.includes("") || newPassword.includes(null) || newPassword.includes("")){
+      alert("Введите все данные");
+    }else {
+      const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,20}$/;
+      if (!PASSWORD_REGEX.test(newPassword[0])) {
+        const element3 = document.getElementById("passwordError");
+        element3.style.display = "block";
+      }else {
+        $.ajax({
+          url: '/handleProfileAuthInfoEdit',
+          type: 'POST',
+          contentType: 'application/json',
+          data: JSON.stringify(data),
+          success: function (data, status, xhr) {
+            if (data=="Пароль не совпадает с настоящим"){
+              const element4 = document.getElementById("oldPasswordError");
+              element4.style.display = "block";
+            }
+            if (data=="Пользователь с таким логином уже существует"){
+              const element2 = document.getElementById("usernameError");
+              element2.style.display = "block";
+            }
+            if (data=="Данные успешно сохранены"){
+              alert(data);
+              const element1 = document.getElementById("oldPassword");
+              const element2 = document.getElementById("newPassword");
+              element1.value = "";
+              element2.value = "";
+            }
+          },
+          error: function (xhr, status, error) {
+            console.error(xhr.status, error);
+            alert("Ошибка: " + error);
+          }
+        });
+      }
+    }
+  });
+  document.getElementById("deleteProfileButton").addEventListener("click", function () {
+    $.ajax({
+      url: '/handleUserDelete',
+      method: 'DELETE',
+      success: function(data) {
+        alert(data);
+        window.location.href = "/login";
+      },
+      error: function(jqXHR, textStatus) {
+        alert(textStatus);
+      }
+    });
+  });
+
+
+</script>
+</body>
+</html>
