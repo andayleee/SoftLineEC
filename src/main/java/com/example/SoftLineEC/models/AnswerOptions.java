@@ -1,4 +1,6 @@
 package com.example.SoftLineEC.models;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -12,6 +14,7 @@ public class AnswerOptions {
     @Size(min = 1,max = 2000,message = "Значение не может быть меньше 1 и больше 2000 символов")
     private String content;
     private boolean valid;
+    @JsonBackReference
     @ManyToOne(optional = true)
     private Question questionID;
 

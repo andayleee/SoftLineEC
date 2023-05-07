@@ -31,7 +31,10 @@ public class User {
     private String edInstitution;
     private Date dateOfBirth;
     @JsonManagedReference
-    @OneToMany(mappedBy = "userID", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "userID", fetch = FetchType.LAZY)
+    private Collection<Course> tenants;
+    @JsonManagedReference
+    @OneToMany(mappedBy = "userID", fetch = FetchType.LAZY)
     private Collection<Address> tenants2;
 
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
@@ -150,6 +153,14 @@ public class User {
 
     public void setEdInstitution(String edInstitution) {
         this.edInstitution = edInstitution;
+    }
+
+    public Collection<Course> getTenants() {
+        return tenants;
+    }
+
+    public void setTenants(Collection<Course> tenants) {
+        this.tenants = tenants;
     }
 
     public Collection<Address> getTenants2() {

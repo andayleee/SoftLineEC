@@ -4,16 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6935da76-6763-4651-9e30-f14025ac4912" name="Changes" comment="Профиль пользователя">
+    <list default="true" id="6935da76-6763-4651-9e30-f14025ac4912" name="Changes" comment="Восстановление доступа">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/SoftLineEC/config/WebSecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/SoftLineEC/config/WebSecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/loginreg.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/loginreg.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/Login.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/Login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/SoftLineEC/config/WebSecurityConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/SoftLineEC/config/WebSecurityConfig.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/SoftLineEC/models/ValidPassword.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/SoftLineEC/models/ValidPassword.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/Login.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/Login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/Registration.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/Registration.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/SoftLineEC/controllers/CreateCourseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/SoftLineEC/controllers/CreateCourseController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/SoftLineEC/models/AnswerOptions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/SoftLineEC/models/AnswerOptions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/SoftLineEC/models/Course.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/SoftLineEC/models/Course.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/SoftLineEC/models/Question.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/SoftLineEC/models/Question.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/SoftLineEC/models/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/SoftLineEC/models/Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/SoftLineEC/models/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/SoftLineEC/models/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/SoftLineEC/repositories/TestRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/SoftLineEC/repositories/TestRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/CourseDescription.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/CourseDescription.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/CourseDetailsLectureContentEdit.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/CourseDetailsLectureContentEdit.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/blocks/nav.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/blocks/nav.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/SoftLineEC/controllers/CreateCourseController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/SoftLineEC/controllers/CreateCourseController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/css/loginreg.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/css/loginreg.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,8 +32,8 @@
         <option value="CSS File" />
         <option value="AnnotationType" />
         <option value="Interface" />
-        <option value="HTML File" />
         <option value="Class" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -170,7 +175,7 @@
       <workItem from="1682693764835" duration="4018000" />
       <workItem from="1682698893454" duration="12996000" />
       <workItem from="1682876024474" duration="53046000" />
-      <workItem from="1683379076086" duration="13020000" />
+      <workItem from="1683379076086" duration="39700000" />
     </task>
     <task id="LOCAL-00001" summary="Полная реализация конструктора курсов">
       <created>1680817729581</created>
@@ -221,7 +226,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683137703811</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Восстановление доступа">
+      <created>1683393178992</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1683393178992</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -246,7 +258,8 @@
     <MESSAGE value="КП ТРПО" />
     <MESSAGE value="КП ТРПО финал" />
     <MESSAGE value="Профиль пользователя" />
-    <option name="LAST_COMMIT_MESSAGE" value="Профиль пользователя" />
+    <MESSAGE value="Восстановление доступа" />
+    <option name="LAST_COMMIT_MESSAGE" value="Восстановление доступа" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>

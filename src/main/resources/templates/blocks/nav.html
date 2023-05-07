@@ -8,7 +8,7 @@
     background-color: #333;
     color: #fff;
     padding: 20px;
-    z-index: 1;
+    z-index: 10;
   }
 
   .sidebar a {
@@ -20,9 +20,11 @@
 
   .dropdown {
     position: relative;
+    z-index: 10;
   }
 
   .dropdown-content {
+    z-index: 10;
     display: none;
     position: absolute;
     top: 0;
@@ -33,12 +35,14 @@
   }
 
   .dropdown-content a {
+    z-index: 10;
     color: #fff;
     padding: 10px;
     display: block;
   }
 
   .dropdown:hover .dropdown-content {
+    z-index: 10;
     display: block;
   }
 

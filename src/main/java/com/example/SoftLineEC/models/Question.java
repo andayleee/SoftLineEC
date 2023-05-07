@@ -1,5 +1,8 @@
 package com.example.SoftLineEC.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -18,8 +21,10 @@ public class Question {
     @Min(value=0, message="Стоимость не может быть меньше 0")
     @Max(value=99, message="Стоимость не может быть больше 99")
     private int score;
+    @JsonBackReference
     @ManyToOne(optional = true)
     private Test testID;
+    @JsonManagedReference
     @OneToMany(mappedBy = "questionID", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     private Collection<AnswerOptions> tenants;
 

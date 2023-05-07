@@ -38,11 +38,15 @@ public class Course {
     @JsonBackReference
     @ManyToOne(optional = true)
     private FormOfEducation formOfEducationID;
+
+    @JsonBackReference
+    @ManyToOne(optional = true)
+    private User userID;
     @JsonManagedReference
     @OneToMany(mappedBy = "courseID", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     private Collection<Block> tenants;
 
-    public Course(String nameOfCourse, Date dateOfCreation, String description, String resources, String goal, String tasks, String categoriesOfStudents, CourseType courseTypeID, FormOfEducation formOfEducationID) {
+    public Course(String nameOfCourse, Date dateOfCreation, String description, String resources, String goal, String tasks, String categoriesOfStudents, CourseType courseTypeID, FormOfEducation formOfEducationID, User userID) {
         this.nameOfCourse = nameOfCourse;
         this.dateOfCreation = dateOfCreation;
         this.description = description;
@@ -52,6 +56,7 @@ public class Course {
         this.categoriesOfStudents = categoriesOfStudents;
         this.courseTypeID = courseTypeID;
         this.formOfEducationID = formOfEducationID;
+        this.userID = userID;
     }
 
     public Course() {
@@ -135,6 +140,14 @@ public class Course {
 
     public void setFormOfEducationID(FormOfEducation formOfEducationID) {
         this.formOfEducationID = formOfEducationID;
+    }
+
+    public User getUserID() {
+        return userID;
+    }
+
+    public void setUserID(User userID) {
+        this.userID = userID;
     }
 
     public Collection<Block> getTenants() {

@@ -1,6 +1,7 @@
 package com.example.SoftLineEC.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -18,6 +19,7 @@ public class Test {
     @JsonBackReference
     @ManyToOne(optional = true)
     private Lecture lectureID;
+    @JsonManagedReference
     @OneToMany(mappedBy = "testID", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     private Collection<Question> tenants;
 

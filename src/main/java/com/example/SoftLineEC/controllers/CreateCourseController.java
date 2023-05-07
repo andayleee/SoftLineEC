@@ -6,6 +6,8 @@ import com.example.SoftLineEC.services.FileUploadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -40,6 +42,18 @@ public class CreateCourseController {
     @Autowired
     private PhotoRepository photoRepository;
 
+    @Autowired
+    private TestRepository testRepository;
+
+    @Autowired
+    private QuestionRepository questionRepository;
+
+    @Autowired
+    private  AnswerOptionsRepository answerOptionsRepository;
+
+    @Autowired
+    private UserRepository userRepository;
+
     @GetMapping("/CreateNewCourse")
     public String CreateNewCoursePage(@ModelAttribute("Course") Course Course, Model addr) {
         Iterable<CourseType> courseType = courseTypeRepository.findAll();
@@ -52,7 +66,7 @@ public class CreateCourseController {
     @PostMapping("/CreateNewCourse")
     public String CoursesAdd(@ModelAttribute("Course") @Valid Course course, BindingResult bindingResult,
                              @RequestParam String nameOfCourseType, @RequestParam String typeOfEducation,
-                             HttpSession session, Model addr) {
+                             HttpSession session, Model addr, Authentication authentication) {
         if (bindingResult.hasErrors()) {
             Iterable<CourseType> courseType = courseTypeRepository.findAll();
             addr.addAttribute("CourseTypes", courseType);
@@ -62,6 +76,12 @@ public class CreateCourseController {
         }
         course.setCourseTypeID(courseTypeRepository.findByNameOfCourseType(nameOfCourseType));
         course.setFormOfEducationID(formOfEducationRepository.findByTypeOfEducation(typeOfEducation));
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        String username = userDetails.getUsername();
+        User user = userRepository.findUserByUsername(username);
+        long idUser = user.getId();
+        session.setAttribute("idUser", idUser);
+        course.setUserID(user);
         LocalDate localDate = LocalDate.now();
         Date date = Date.valueOf(localDate);
         course.setDateOfCreation(date);
@@ -115,6 +135,19 @@ public class CreateCourseController {
         return "lectureAddSample :: copy1";
     }
 
+    @GetMapping("/questionAddSample")
+    public String getQuestion(@RequestParam("num") String num, Model model) {
+        model.addAttribute("num", num);
+        return "questionAddSample :: copy";
+    }
+
+    @GetMapping("/answerOptionsAddSample")
+    public String getAnswerOptions(@RequestParam("num") String num, @RequestParam("nameOfLectur") String nameOfLectur, Model model) {
+        model.addAttribute("num", num);
+        model.addAttribute("nameOfLectur", nameOfLectur);
+        return "answerOptionsAddSample :: copy1";
+    }
+
     @RequestMapping(value = "/blockAddSample", method = RequestMethod.POST)
     @ResponseBody
     public String handleBlockAddSample(@RequestBody Map<String, Object> data, HttpSession session) {
@@ -146,6 +179,57 @@ public class CreateCourseController {
             }
         }
         return "OK";
+    }
+
+    @RequestMapping(value = "/questionAddSample", method = RequestMethod.POST)
+    @ResponseBody
+    public String handleQuestionAddSample(@RequestBody Map<String, Object> data, HttpSession session) {
+        Long idLecture = (Long) session.getAttribute("idLecture");
+        Lecture lecture = lectureRepository.findLectureByIdLecture(idLecture);
+        List<String> nameOfTest = (List<String>) data.get("nameOfTest");
+        List<String> nameOfQuestion = (List<String>) data.get("nameOfQuestion");
+        List<String> score = (List<String>) data.get("score");
+        List<String> nameOfAnswerOptions = (List<String>) data.get("nameOfAnswerOptions");
+        List<Boolean> isValid = (List<Boolean>) data.get("isValid");
+        List<String> blockNum = (List<String>) data.get("blockNum");
+        List<String> blockTrueNum = (List<String>) data.get("blockTrueNum");
+        Test test = new Test();
+        test.setNameOfTest(nameOfTest.get(0));
+        test.setLectureID(lecture);
+        testRepository.save(test);
+        Test test1 = testRepository.findByNameOfTest(nameOfTest.get(0));
+        for (int i = 0; i < nameOfQuestion.size(); i++) {
+            Question question = new Question(nameOfQuestion.get(i), Integer.parseInt(score.get(i)), test1);
+            String blockTrueNum1 = blockTrueNum.get(i);
+            questionRepository.save(question);
+            for (int j = 0; j < nameOfAnswerOptions.size(); j++) {
+                AnswerOptions answerOptions = new AnswerOptions();
+                Optional<Question> question1 = questionRepository.findById(question.getIdQuestion());
+                String blockTrueNum2 = blockNum.get(j);
+                if (blockTrueNum1.equals(blockTrueNum2)) {
+                    answerOptions.setContent(nameOfAnswerOptions.get(j));
+                    if (isValid.get(j) == true) {
+                        answerOptions.setValid(true);
+                    }else {
+                        answerOptions.setValid(false);
+                    }
+                    answerOptions.setQuestionID(question1.get());
+                    answerOptionsRepository.save(answerOptions);
+                }
+            }
+        }
+        return "OK";
+    }
+
+    @DeleteMapping("/delete-test/{id}")
+    public ResponseEntity<String> deleteTest(@PathVariable Long id) {
+        try {
+            Test test = testRepository.findTestByIdTest(id);
+            testRepository.delete(test);
+            return new ResponseEntity<>("Тест успешно удален", HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Тест не удален", HttpStatus.OK);
+        }
     }
 
     @RequestMapping(value = "/check-blocks", method = RequestMethod.POST)
@@ -385,6 +469,19 @@ public class CreateCourseController {
         Optional<Lecture> lecture = lectureRepository.findById(idLecture);
         String content = lecture.get().getContent();
         return content;
+    }
+    @RequestMapping(value = "/check-lectures-test", method = RequestMethod.POST)
+    @ResponseBody
+    public Optional<Test> checkLecturesTest(HttpSession session) {
+        try {
+            Long idLecture = (Long) session.getAttribute("idLecture");
+            Lecture lecture1 = lectureRepository.findLectureByIdLecture(idLecture);
+            Optional<Test> test = testRepository.findTestByLectureID(lecture1);
+            return test;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @DeleteMapping("/photo/{id}")

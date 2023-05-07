@@ -196,6 +196,7 @@ a:hover {
 }
 
 .custom-btn {
+    z-index: 0;
     margin-top: 10px;
     text-align: center;
     color: #fff;
@@ -511,25 +512,51 @@ input:focus ~ .highlight {
 }
 
 [data-tooltip] {
-    position: relative; /* Относительное позиционирование */
-    z-index: 2;
+    position: relative;
+    z-index: 3;
     cursor: help;
 }
 [data-tooltip]::after {
-    content: attr(data-tooltip); /* Выводим текст */
-    position: absolute; /* Абсолютное позиционирование */
-    width: 700px; /* Ширина подсказки */
-    left: 0; top: 0; /* Положение подсказки */
-    background: rgba(84, 0, 0, 0.02); /* Синий цвет фона */
-    color: #ff0000; /* Цвет текста */
-    padding: 0.5em; /* Поля вокруг текста */
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Параметры тени */
-    pointer-events: none; /* Подсказка */
-    opacity: 0; /* Подсказка невидима */
-    transition: 1s; /* Время появления подсказки */
+    content: attr(data-tooltip);
+    position: absolute;
+    width: 700px;
+    left: 0; top: 0;
+    background: rgba(84, 0, 0, 0.02);
+    color: #ff0000;
+    padding: 0.5em;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    pointer-events: none;
+    opacity: 0;
+    transition: 1s;
     backdrop-filter: blur(10px);
 }
 [data-tooltip]:hover::after {
-    opacity: 1; /* Показываем подсказку */
-    top: 2em; /* Положение подсказки */
+    opacity: 1;
+    top: 2em;
+}
+
+.questions-list {
+    margin-top: 20px;
+}
+
+.question-item {
+    margin-bottom: 20px;
+}
+
+.question-title {
+    font-weight: bold;
+}
+
+.answers-list {
+    list-style: none;
+    margin-left: 0;
+    padding-left: 20px;
+}
+
+.answer-item {
+    margin-top: 10px;
+}
+
+input[type="checkbox"] {
+    margin-right: 10px;
 }

@@ -90,7 +90,7 @@
         } else {
             $.ajax({
                 url: '/handleCourseEdit',
-                type: 'GET',
+                type: 'POST',
                 data: JSON.stringify(data),
                 contentType: "application/json;charset=UTF-8",
                 success: function (data) {
