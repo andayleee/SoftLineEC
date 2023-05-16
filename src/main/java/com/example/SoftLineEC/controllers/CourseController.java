@@ -1,15 +1,14 @@
 package com.example.SoftLineEC.controllers;
 
 import com.example.SoftLineEC.models.*;
-import com.example.SoftLineEC.repositories.CourseRepository;
-import com.example.SoftLineEC.repositories.CourseTypeRepository;
-import com.example.SoftLineEC.repositories.FormOfEducationRepository;
+import com.example.SoftLineEC.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +22,10 @@ public class CourseController {
     private CourseTypeRepository courseTypeRepository;
     @Autowired
     private FormOfEducationRepository formOfEducationRepository;
+    @Autowired
+    private ThemeRepository themeRepository;
+    @Autowired
+    private UserRepository userRepository;
     @GetMapping("/Course")
     public String Course(@RequestParam(defaultValue = "") String search, Model model)
     {
@@ -39,12 +42,14 @@ public class CourseController {
         addr.addAttribute("CourseTypes",courseType);
         Iterable<FormOfEducation> formOfEducations = formOfEducationRepository.findAll();
         addr.addAttribute("FormOfEducations",formOfEducations);
+        Iterable<Theme> themes = themeRepository.findAll();
+        addr.addAttribute("Theme",themes);
         return "CourseAdd";
     }
 
     @PostMapping("/CourseAdd")
     public String CourseAddAdd(@ModelAttribute("Course") @Valid Course course, BindingResult bindingResult,
-                               @RequestParam String nameOfCourseType,@RequestParam String typeOfEducation, Model addr)
+                               @RequestParam String nameOfCourseType, @RequestParam String typeOfEducation, @RequestParam String nameOfTheme, Model addr, HttpSession session)
     {
         if (bindingResult.hasErrors())
         {
@@ -52,12 +57,17 @@ public class CourseController {
             addr.addAttribute("CourseTypes",courseType);
             Iterable<FormOfEducation> formOfEducations = formOfEducationRepository.findAll();
             addr.addAttribute("FormOfEducations",formOfEducations);
+            Iterable<Theme> themes = themeRepository.findAll();
+            addr.addAttribute("Theme",themes);
             return "CourseAdd";
         }
+        Long idUser = (Long) session.getAttribute("idUser");
         course.setCourseTypeID(courseTypeRepository.findByNameOfCourseType(nameOfCourseType));
         course.setFormOfEducationID(formOfEducationRepository.findByTypeOfEducation(typeOfEducation));
+        course.setThemeID(themeRepository.findThemeByNameOfTheme(nameOfTheme));
+        course.setUserID(userRepository.findUserByid(idUser));
         courseRepository.save(course);
-        return "CourseMain";
+        return "redirect:/Course";
     }
 
     @GetMapping("/Course/{idCourse}/edit")
@@ -74,17 +84,22 @@ public class CourseController {
         model.addAttribute("CourseTypes",courseType);
         Iterable<FormOfEducation> formOfEducations = formOfEducationRepository.findAll();
         model.addAttribute("FormOfEducations",formOfEducations);
+        Iterable<Theme> themes = themeRepository.findAll();
+        model.addAttribute("Theme",themes);
         return "CourseEdit";
     }
 
     @PostMapping("/Course/{idCourse}/edit")
     public String CourseUpdate(@PathVariable("idCourse")long idCourse, @ModelAttribute("Course")
-                               @Valid Course course, BindingResult bindingResult, @RequestParam String nameOfCourseType,@RequestParam String typeOfEducation)
+                               @Valid Course course, BindingResult bindingResult, @RequestParam String nameOfCourseType,@RequestParam String typeOfEducation, @RequestParam String nameOfTheme, HttpSession session)
     {
         if (bindingResult.hasErrors())
             return "CourseEdit";
         course.setCourseTypeID(courseTypeRepository.findByNameOfCourseType(nameOfCourseType));
         course.setFormOfEducationID(formOfEducationRepository.findByTypeOfEducation(typeOfEducation));
+        course.setThemeID(themeRepository.findThemeByNameOfTheme(nameOfTheme));
+        Long idUser = (Long) session.getAttribute("idUser");
+        course.setUserID(userRepository.findUserByid(idUser));
         courseRepository.save(course);
         return "redirect:/Course";
     }

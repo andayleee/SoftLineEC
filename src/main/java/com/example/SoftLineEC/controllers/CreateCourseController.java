@@ -54,28 +54,61 @@ public class CreateCourseController {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private ThemeRepository themeRepository;
+
     @GetMapping("/CreateNewCourse")
     public String CreateNewCoursePage(@ModelAttribute("Course") Course Course, Model addr) {
         Iterable<CourseType> courseType = courseTypeRepository.findAll();
         addr.addAttribute("CourseTypes", courseType);
         Iterable<FormOfEducation> formOfEducations = formOfEducationRepository.findAll();
         addr.addAttribute("FormOfEducations", formOfEducations);
+        Iterable<Theme> themes = themeRepository.findAll();
+        addr.addAttribute("Theme", themes);
         return "CreateNewCourse";
+    }
+
+    @GetMapping("/CreatedCourses")
+    public String CreatedCoursesPage(@ModelAttribute("Course") Course Course, Model addr, Authentication authentication) {
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        String username = userDetails.getUsername();
+        User user = userRepository.findUserByUsername(username);
+        Iterable<Course> course = courseRepository.findCoursesByUserID(user);
+        addr.addAttribute("Course", course);
+        return "CreatedCourses";
+    }
+
+    @GetMapping("/course")
+    public String getCoursePage(@RequestParam("id") Long courseId, HttpSession session) {
+        session.setAttribute("idCourse", courseId);
+        return "redirect:/CreateNewCourse/details";
+    }
+
+    @RequestMapping(value = "/check-course-name", method = RequestMethod.GET)
+    @ResponseBody
+    public String CheckCourseName(HttpSession session) {
+        Long idCourse = (Long) session.getAttribute("idCourse");
+        Optional<Course> course = courseRepository.findById(idCourse);
+        String content = course.get().getNameOfCourse();
+        return content;
     }
 
     @PostMapping("/CreateNewCourse")
     public String CoursesAdd(@ModelAttribute("Course") @Valid Course course, BindingResult bindingResult,
-                             @RequestParam String nameOfCourseType, @RequestParam String typeOfEducation,
+                             @RequestParam String nameOfCourseType, @RequestParam String typeOfEducation, @RequestParam String nameOfTheme,
                              HttpSession session, Model addr, Authentication authentication) {
         if (bindingResult.hasErrors()) {
             Iterable<CourseType> courseType = courseTypeRepository.findAll();
             addr.addAttribute("CourseTypes", courseType);
             Iterable<FormOfEducation> formOfEducations = formOfEducationRepository.findAll();
             addr.addAttribute("FormOfEducations", formOfEducations);
+            Iterable<Theme> themes = themeRepository.findAll();
+            addr.addAttribute("Theme", themes);
             return "CreateNewCourse";
         }
         course.setCourseTypeID(courseTypeRepository.findByNameOfCourseType(nameOfCourseType));
         course.setFormOfEducationID(formOfEducationRepository.findByTypeOfEducation(typeOfEducation));
+        course.setThemeID(themeRepository.findThemeByNameOfTheme(nameOfTheme));
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         String username = userDetails.getUsername();
         User user = userRepository.findUserByUsername(username);

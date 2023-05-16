@@ -2,7 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
   <title >SoftLineEC</title>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="shortcut icon" href="/images/slLogo.svg">
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
@@ -21,81 +22,346 @@
         align-items: center;
         justify-content: center;
     }
+    .modal-dialog {
+        max-width: 500px !important;
+    }
+    .modal-body {
+        padding: 20px;
+    }
+    .modal-dialog-centered {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 </style>
 <body class="body">
 <div th:insert="blocks/header.html"/>
-<form th:action="${'/main'}" class="center">
+<form th:action="${'/main'}" class="center" style="padding-top: 0">
     <div class="boxes">
-        <h2 class="title123">УЧЕБНЫЙ ЦЕНТР SOFTLINE</h2>
+        <div style="background-color: #EBECF0; padding-top: 15vh">
+            <h2 class="title123" style="margin: 0">УЧЕБНЫЙ ЦЕНТР SOFTLINE</h2>
+            <div class="divspace"></div>
+        </div>
+        <div class="row" sec:authorize="hasAuthority('USER')" style="padding: 20px 20px 0px 20px">
+            <div class="col-4">
+                <button type="button" id="mainPage" class="custom-btn btn-16" style="width: 100%; margin: auto; background-color: #eaabb5">Главная</button>
+            </div>
+            <div class="col-4">
+                <button type="button" id="inProgress" class="custom-btn btn-16" style="width: 100%; margin: auto">В процессе</button>
+            </div>
+            <div class="col-4">
+                <button type="button" id="Completed" class="custom-btn btn-16" style="width: 100%; margin: auto">Пройденные</button>
+            </div>
+        </div>
         <div class="divspace"></div>
-        <h2 class="title12" style="margin-bottom: 50px">Почему выбирают Учебный центр Softline?</h2>
     </div>
-    <div class="row">
-        <div class="col-sm">
-            <div class="row" style="margin-bottom: 50px">
-                <div class="col-sm">
-                    <img style="margin: auto;" th:src="@{/images/Grid1.png}" alt="1"/>
-                    <h2>Международные<br/>
-                        сертификаты в центрах<br/>
-                        тестирования Softline</h2>
+    <div id="mainPageDiv" class="mainPageDiv">
+        <div class="row">
+            <h2 class="title12" style="margin-bottom: 50px">Почему выбирают Учебный центр Softline?</h2>
+        </div>
+        <div class="row imagesRow">
+            <div class="col-sm">
+                <div class="row" style="margin-bottom: 50px">
+                    <div class="col-6">
+                        <img style="margin: auto;" th:src="@{/images/Grid1.png}" alt="1"/>
+                        <h2>Международные<br/>
+                            сертификаты в центрах<br/>
+                            тестирования Softline</h2>
+                    </div>
+                    <div class="col-6">
+                        <img style="margin: auto;" th:src="@{/images/Grid2.png}" alt="1"/>
+                        <h2>Возможность <br/>
+                            обучения из любой<br/>
+                            точки мира</h2>
+                    </div>
                 </div>
-                <div class="col-sm">
-                    <img style="margin: auto;" th:src="@{/images/Grid2.png}" alt="1"/>
-                    <h2>Возможность <br/>
-                        обучения из любой<br/>
-                        точки мира</h2>
+                <div class="row" style="margin-bottom: 50px">
+                    <div class="col-6">
+                        <img style="margin: auto" th:src="@{/images/Grid3.png}" alt="1"/>
+                        <h2>Авторизации<br/>
+                            ведущих<br/>
+                            производителей ПО</h2>
+                    </div>
+                    <div class="col-6">
+                        <img style="margin: auto" th:src="@{/images/Grid4.png}" alt="1"/>
+                        <h2>Гибкий индивидуальный<br/>
+                            подход в обучении</h2>
+                    </div>
                 </div>
             </div>
-            <div class="row" style="margin-bottom: 50px">
-                <div class="col-sm">
-                    <img style="margin: auto" th:src="@{/images/Grid3.png}" alt="1"/>
-                    <h2>Авторизации<br/>
-                        ведущих<br/>
-                        производителей ПО</h2>
-                </div>
-                <div class="col-sm">
-                    <img style="margin: auto" th:src="@{/images/Grid4.png}" alt="1"/>
-                    <h2>Гибкий индивидуальный<br/>
-                        подход в обучении</h2>
+            <div class="col-sm">
+                <img style="position: static" th:src="@{/images/Laptop.png}" alt="1"/>
+            </div>
+        </div>
+        <div class="boxes" sec:authorize="isAuthenticated()">
+            <h1 class="title12" style="margin-top: 5vh">Все курсы</h1>
+            <div style="height: 5vh"></div>
+            <div class="search-container">
+                <input id="search-input" type="text" placeholder="Поиск курсов...">
+                <button id="search-button" type="button" class="btn btn-course" style="margin: 0px">Найти</button>
+            </div>
+            <div style="height: 5vh"></div>
+            <div id="pagination-container" style="width: 100%;margin-bottom: 50px"></div>
+            <div id="courses-list" style="width: 100%; min-height: 40vh; display: flex; justify-content: center; flex-direction: column"></div>
+            <button type="submit" id="go-to" class="custom-btn btn-16">Вернуться</button>
+            <div style="height: 10vh"></div>
+        </div>
+    </div>
+    <div id="inProgressDiv" style="display: none">
+        <p id="noneCourses" style="display: none">Пока что нет ни одного курса. Чтобы начать выберите курс на главной странице.</p>
+        <div id="courses-inProgress-list" style="width: 100%; display: flex; justify-content: center; flex-direction: column"></div>
+    </div>
+    <div id="completedDiv" style="display: none">
+        <p id="noneCoursesComplete" style="display: none">Пока что нет ни одного курса. Для начала их требуется изучить.</p>
+        <div id="courses-Completes-list" style="width: 100%; display: flex; justify-content: center; flex-direction: column"></div>
+        <div class="modal fade" id="myModal">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Сохранение сертификата</h5>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        После нажатия кнопки "Создать" сертификат будет загружен на ваше устройство.
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary create-button">Создать</button>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-sm">
-            <img style="position: static" th:src="@{/images/Laptop.png}" alt="1"/>
-        </div>
-    </div>
-    <div class="boxes" sec:authorize="isAuthenticated()">
-        <h1 class="title12" style="margin-top: 5vh">Все курсы</h1>
-        <div style="height: 5vh"></div>
-        <div class="search-container">
-            <input id="search-input" type="text" placeholder="Поиск курсов...">
-            <button id="search-button" type="button" class="btn btn-course" style="margin: 0px">Найти</button>
-        </div>
-        <div style="height: 5vh"></div>
-        <div id="pagination-container" style="width: 100%;margin-bottom: 50px"></div>
-        <div id="courses-list" style="width: 100%; display: flex; justify-content: center; flex-direction: column"></div>
-        <button type="submit" id="go-to" class="custom-btn btn-16">Вернуться</button>
-        <div style="height: 10vh"></div>
     </div>
 </form>
 <script>
     var currentPage = 1;
     var itemsPerPage = 5;
     var coursesData;
+    var userCoursesData;
+    var idCourse;
 
-    $.ajax({
-        url: '/check-courses',
-        type: 'POST',
-        success: function(courses) {
-            console.log(courses);
-            displayItems(courses);
-            displayPagination(courses);
-            coursesData = courses;
-            console.log(coursesData);
-        },
-        error: function() {
-            console.error('Error retrieving courses from the server.');
+    $(document).ready(function() {
+        $(document).on('click', '.cert-button', function() {
+            idCourse = $(this).closest('.cardPhone').attr('id');
+        });
+        $('#myModal').on('shown.bs.modal', function () {
+            $('#myInput').trigger('focus');
+        })
+        $('.create-button').click(function() {
+            const pdfUrl = '/create-certificate?idCourse=' + idCourse;
+            window.open(pdfUrl, '_blank');
+        });
+    });
+
+
+    document.addEventListener('DOMContentLoaded', () => {
+        $.ajax({
+            url: '/check-courses',
+            type: 'POST',
+            success: function(courses) {
+                displayItems(courses);
+                displayPagination(courses);
+                coursesData = courses;
+                console.log(coursesData);
+            },
+            error: function() {
+                console.error('Error retrieving courses from the server.');
+            }
+        });
+    });
+
+    const mainPageButton = document.getElementById('mainPage');
+    const inProgressButton = document.getElementById('inProgress');
+    const CompletedProfileButton = document.getElementById('Completed');
+    mainPageButton.addEventListener('click', function(event) {
+        mainPageButton.style.backgroundColor = '#eaabb5';
+        inProgressButton.style.backgroundColor = '#fff';
+        CompletedProfileButton.style.backgroundColor = '#fff';
+        const element = document.getElementById("mainPageDiv");
+        element.style.display = "block";
+        const element2 = document.getElementById("inProgressDiv");
+        element2.style.display = "none";
+        const element3 = document.getElementById("completedDiv");
+        element3.style.display = "none";
+        event.preventDefault();
+    });
+    function isEmpty(obj) {
+        if (obj == null) return true;
+        if (Array.isArray(obj) || typeof obj === 'string') return obj.length === 0;
+        for (var key in obj) {
+            if (Object.prototype.hasOwnProperty.call(obj, key))
+                return false;
         }
+        return true;
+    }
+    inProgressButton.addEventListener('click', function(event) {
+        mainPageButton.style.backgroundColor = '#fff';
+        inProgressButton.style.backgroundColor = '#eaabb5';
+        CompletedProfileButton.style.backgroundColor = '#fff';
+        const element = document.getElementById("mainPageDiv");
+        element.style.display = "none";
+        const element2 = document.getElementById("inProgressDiv");
+        element2.style.display = "block";
+        const element3 = document.getElementById("completedDiv");
+        element3.style.display = "none";
+        $.ajax({
+            url: '/check-inProgress-courses',
+            type: 'POST',
+            success: function(data) {
+                console.log(data);
+                var i = 0;
+                var coursesList = $('#courses-inProgress-list');
+                coursesList.empty();
+                userCoursesData = data;
+                if (isEmpty(data)) {
+                    var noneCourses = $('#noneCourses');
+                    console.log(noneCourses);
+                    noneCourses.css('display', 'block');
+                } else {
+                    userCoursesData.forEach(function(course) {
+                        var card = $('<div>').addClass('card').css({
+                            'height': '100%'
+                        }).attr('id', course.idCourse);
+                        var cardTitle = $('<h5>').addClass('card-title course-card').text(course.nameOfCourse).css({
+                            'bottom': '0',
+                            'left': '0',
+                            'right': '0',
+                            'color': '#fff',
+                            'padding': '10px',
+                            'background-color': 'rgb(199,199,199)',
+                            'margin-bottom': '0',
+                            'text-align':'start'
+                        });
+                        var cardBody = $('<div>').addClass('card-body').css({
+                            'display': 'flex',
+                            'flex-direction': 'column',
+                            'justify-content': 'space-between',
+                            'height': '100%'
+                        });
+                        var cardText = $('<p>').addClass('card-text').text(course.description).css({
+                            'text-align':'start',
+                            'margin': '0 20px 0 20px'
+                        });
+                        var cardButtonContainer = $('<div>').css({
+                            'display':'flex',
+                            'align-items':'center',
+                            'justify-content':'end',
+                            'margin-top':'0'
+                        });
+                        var cardButton = $('<a>').addClass('btn btn-course').attr('href', '/main/Courses-' + course.idCourse).text('Продолжить').css('width','150px');
+                        var cardLine = $('<hr>').css({
+                            'border': 'none',
+                            'height': '1px',
+                            'background-color': 'rgb(189,189,189)',
+                            'margin': '20px 0 0 0'
+                        });
+                        cardButtonContainer.append(cardButton);
+                        cardBody.append(cardText, cardLine, cardButtonContainer);
+                        card.addClass("cardPhone");
+                        card.append(cardTitle, cardBody);
+                        coursesList.append(card);
+                        i++;
+                    });
+                }
+            },
+            error: function() {
+                console.error('Error retrieving courses from the server.');
+            }
+        });
+        event.preventDefault();
+    });
+    CompletedProfileButton.addEventListener('click', function(event) {
+        mainPageButton.style.backgroundColor = '#fff';
+        inProgressButton.style.backgroundColor = '#fff';
+        CompletedProfileButton.style.backgroundColor = '#eaabb5';
+        const element = document.getElementById("mainPageDiv");
+        element.style.display = "none";
+        const element2 = document.getElementById("inProgressDiv");
+        element2.style.display = "none";
+        const element3 = document.getElementById("completedDiv");
+        element3.style.display = "block";
+        $.ajax({
+            url: '/check-completes-courses',
+            type: 'POST',
+            success: function(data) {
+                console.log(data);
+                var i = 0;
+                var coursesList = $('#courses-Completes-list');
+                coursesList.empty();
+                userCoursesData = data;
+                if (isEmpty(data)) {
+                    var noneCourses = $('#noneCoursesComplete');
+                    console.log(noneCourses);
+                    noneCourses.css('display', 'block');
+                } else {
+                    userCoursesData.forEach(function(course) {
+                        var card = $('<div>').addClass('card').css({
+                            'height': '100%'
+                        }).attr('id', course.idCourse);
+                        var cardTitle = $('<h5>').addClass('card-title course-card').text(course.nameOfCourse).css({
+                            'bottom': '0',
+                            'left': '0',
+                            'right': '0',
+                            'color': '#fff',
+                            'padding': '10px',
+                            'background-color': 'rgb(199,199,199)',
+                            'margin-bottom': '0',
+                            'text-align':'start'
+                        });
+                        var cardBody = $('<div>').addClass('card-body').css({
+                            'display': 'flex',
+                            'flex-direction': 'column',
+                            'justify-content': 'space-between',
+                            'height': '100%'
+                        });
+                        var cardText = $('<p>').addClass('card-text').text(course.description).css({
+                            'text-align':'start',
+                            'margin': '0 20px 0 20px'
+                        });
+                        var cardButtonContainer = $('<div>').css({
+                            'display':'flex',
+                            'align-items':'center',
+                            'justify-content':'end',
+                            'margin-top':'0'
+                        });
+                        var cardButton = $('<a>').addClass('btn btn-course').attr('href', '/main/Courses-' + course.idCourse).text('Подробнее').css('width','150px');
+                        var makeCertificateButton = $('<a>').addClass('btn btn-course cert-button').text('Сертификат').css('width','150px').attr('data-toggle', 'modal').attr('data-target', '#myModal');
+                        var testResultsTest = $('<p>').addClass('card-text testResultsTest').css({
+                            'text-align':'start',
+                            'margin': '0 20px 0 20px'
+                        });
+                        var cardLine = $('<hr>').css({
+                            'border': 'none',
+                            'height': '1px',
+                            'background-color': 'rgb(189,189,189)',
+                            'margin': '20px 0 0 0'
+                        });
+                        cardButtonContainer.append(testResultsTest,makeCertificateButton,cardButton);
+                        cardBody.append(cardText, cardLine, cardButtonContainer);
+                        card.addClass("cardPhone");
+                        card.append(cardTitle, cardBody);
+                        coursesList.append(card);
+                        i++;
+                        $.ajax({
+                            type: "POST",
+                            url: "/check-test-success-main",
+                            data: JSON.stringify(course.idCourse),
+                            contentType: "application/json",
+                            success: function (content) {
+                                $(`#${content[3]}`).find('.testResultsTest').text(content[2]);
+                                console.log(content);
+                            },
+                            error: function () {
+
+                            }
+                        });
+                    });
+                }
+            },
+            error: function() {
+                console.error('Error retrieving courses from the server.');
+            }
+        });
+        event.preventDefault();
     });
 
     $('#search-button').click(function() {
@@ -125,11 +391,6 @@
                         type: 'POST',
                         success: function(formOfEducation) {
                             var card = $('<div>').addClass('card').css({
-                                'box-shadow': '0 4px 8px 0 rgba(0,0,0,0.2)',
-                                'max-width': '100%',
-                                'margin-bottom': '50px',
-                                'display': 'flex',
-                                'flex-direction': 'column',
                                 'height': '100%'
                             }).attr('id', coursesToDisplay[i].idCourse);
                             var cardTitle = $('<h5>').addClass('card-title course-card').text(course.nameOfCourse).css({
@@ -158,7 +419,7 @@
                                 'justify-content':'end',
                                 'margin-top':'-15px'
                             });
-                            var cardButton = $('<a>').addClass('btn btn-course').attr('href', '/main/Courses-' + coursesToDisplay[i].idCourse).text('Подробнее').css('width','150px');
+                            var cardButton = $('<a>').addClass('btn btn-course').attr('href', '/main/Courses-' + course.idCourse).text('Подробнее').css('width','150px');
                             var cardLine = $('<hr>').css({
                                 'border': 'none',
                                 'height': '1px',
@@ -180,6 +441,7 @@
                             typeOfCourseAndFormOfEducation.append(FormOfEducation,typeOfCourse);
                             cardButtonContainer.append(cardButton);
                             cardBody.append(cardText, cardLine,typeOfCourseAndFormOfEducation, cardButtonContainer);
+                            card.addClass("cardPhone");
                             card.append(cardTitle, cardBody);
                             coursesList.append(card);
                             i++;
@@ -200,7 +462,7 @@
         var paginationContainer = $('#pagination-container');
         paginationContainer.empty();
         for (var i = 1; i <= totalPages; i++) {
-            var button = $('<button>').addClass('btn btn-secondary').attr('type', 'button').text(i).css({
+            var button = $('<button>').addClass('btn btn-secondary paginationButton').attr('type', 'button').text(i).css({
                 'margin-left': '20px',
                 'width':'50px'
             });;
@@ -255,7 +517,5 @@
     });
 </script>
 </body>
-<footer style="height: 40vh">
-
-</footer>
+<div th:insert="blocks/footer.html"/>
 </html>

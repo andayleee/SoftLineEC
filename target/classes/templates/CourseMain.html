@@ -47,6 +47,8 @@
         <th>Категории обучающихся</th>
         <th>Тип курса</th>
         <th>Форма обучения</th>
+        <th>Тема курса</th>
+        <th>Создатель</th>
         <th style="width: 20px"></th>
         <th style="width: 20px"></th>
       </tr>
@@ -68,6 +70,16 @@
           <td>
             <from th:each="addr : ${el.getFormOfEducationID()}">
               <a th:text="${addr.getTypeOfEducation()}"></a>
+            </from>
+          </td>
+          <td>
+            <from th:each="addr : ${el.getThemeID()}">
+              <a th:text="${addr.getNameOfTheme()}"></a>
+            </from>
+          </td>
+          <td>
+            <from th:each="addr : ${el.getUserID()}">
+              <a th:text="${addr.getUsername()}"></a>
             </from>
           </td>
           <td><a th:href="'/Course/' + ${el.idCourse} + '/edit'">↵</a></td>

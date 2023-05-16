@@ -3,7 +3,7 @@
     position: fixed;
     top: 0;
     left: 0;
-    width: 200px;
+    width: 15vw;
     height: 100%;
     background-color: #333;
     color: #fff;
@@ -68,24 +68,41 @@
 </style>
 <div class="sidebar">
   <div style="margin-top: 70px"/>
-  <a style="font-size: 30px; margin-bottom: 30px">Курс</a>
+  <a style="font-size: 30px; margin-bottom: 30px" href="/CreateNewCourse/details">Курс</a>
+  <p id="nameOfCourse" style="text-align: start; margin:-10px 0px 15px 0px"></p>
   <div class="dropdown">
-    <button class="dropbtn">О курсе
+    <a class="dropbtn">О курсе
       <i class="fa fa-caret-down"></i>
-    </button>
+    </a>
     <div class="dropdown-content">
       <a href="/CourseDescription">Описание</a>
       <a href="/CreateNewCourse/details">Содержание</a>
     </div>
   </div>
-<!--  <div class="dropdown">-->
-<!--    <button class="dropbtn">Настройка-->
-<!--      <i class="fa fa-caret-down"></i>-->
-<!--    </button>-->
-<!--    <div class="dropdown-content">-->
-<!--      <a href="#">Файлы</a>-->
-<!--      <a href="#">Сертификаты</a>-->
-<!--      <a href="#">Права доступа</a>-->
-<!--    </div>-->
-<!--  </div>-->
+  <div class="dropdown">
+    <a class="dropbtn">Настройка
+      <i class="fa fa-caret-down"></i>
+    </a>
+    <div class="dropdown-content">
+      <a href="#">Файлы</a>
+      <a href="#">Сертификаты</a>
+      <a href="#">Права доступа</a>
+    </div>
+  </div>
 </div>
+
+<script>
+  $(document).ready(function () {
+    var textNameOfCourse = $(this).find("#nameOfCourse");
+    $.ajax({
+      type: "GET",
+      url: "/check-course-name",
+      success: function (content) {
+        textNameOfCourse.text(content);
+      },
+      error: function () {
+        alert("Ошибка при загрузке данных");
+      }
+    });
+  });
+</script>

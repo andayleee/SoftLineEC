@@ -5,12 +5,9 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Size;
 import java.sql.Date;
 import java.util.Collection;
-import java.util.List;
 
 @Entity
 public class Course {
@@ -42,11 +39,19 @@ public class Course {
     @JsonBackReference
     @ManyToOne(optional = true)
     private User userID;
+
+    @JsonBackReference
+    @ManyToOne(optional = true)
+    private Theme themeID;
     @JsonManagedReference
-    @OneToMany(mappedBy = "courseID", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "courseID", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private Collection<Block> tenants;
 
-    public Course(String nameOfCourse, Date dateOfCreation, String description, String resources, String goal, String tasks, String categoriesOfStudents, CourseType courseTypeID, FormOfEducation formOfEducationID, User userID) {
+    @JsonManagedReference
+    @OneToMany(mappedBy = "courseID", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    private Collection<UsersCourses> tenants2;
+
+    public Course(String nameOfCourse, Date dateOfCreation, String description, String resources, String goal, String tasks, String categoriesOfStudents, CourseType courseTypeID, FormOfEducation formOfEducationID, User userID, Theme themeID) {
         this.nameOfCourse = nameOfCourse;
         this.dateOfCreation = dateOfCreation;
         this.description = description;
@@ -57,6 +62,7 @@ public class Course {
         this.courseTypeID = courseTypeID;
         this.formOfEducationID = formOfEducationID;
         this.userID = userID;
+        this.themeID = themeID;
     }
 
     public Course() {
@@ -150,11 +156,27 @@ public class Course {
         this.userID = userID;
     }
 
+    public Theme getThemeID() {
+        return themeID;
+    }
+
+    public void setThemeID(Theme themeID) {
+        this.themeID = themeID;
+    }
+
     public Collection<Block> getTenants() {
         return tenants;
     }
 
     public void setTenants(Collection<Block> tenants) {
         this.tenants = tenants;
+    }
+
+    public Collection<UsersCourses> getTenants2() {
+        return tenants2;
+    }
+
+    public void setTenants2(Collection<UsersCourses> tenants2) {
+        this.tenants2 = tenants2;
     }
 }

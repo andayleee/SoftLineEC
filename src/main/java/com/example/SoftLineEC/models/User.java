@@ -37,6 +37,10 @@ public class User {
     @OneToMany(mappedBy = "userID", fetch = FetchType.LAZY)
     private Collection<Address> tenants2;
 
+    @JsonManagedReference
+    @OneToMany(mappedBy = "userID", fetch = FetchType.LAZY)
+    private Collection<UsersCourses> tenants3;
+
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @CollectionTable(name="user_role", joinColumns = @JoinColumn(name = "user_id"))
     @Enumerated(EnumType.STRING)
@@ -169,6 +173,14 @@ public class User {
 
     public void setTenants2(Collection<Address> tenants2) {
         this.tenants2 = tenants2;
+    }
+
+    public Collection<UsersCourses> getTenants3() {
+        return tenants3;
+    }
+
+    public void setTenants3(Collection<UsersCourses> tenants3) {
+        this.tenants3 = tenants3;
     }
 
     public Date getDateOfBirth() {

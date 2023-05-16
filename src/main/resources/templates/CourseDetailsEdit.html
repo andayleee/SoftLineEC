@@ -10,7 +10,6 @@
     <link rel="shortcut icon" href="/images/slLogo.svg">
 </head>
 <body style="background-color: #FFFFFF">
-<form th:action="${'/CreateNewCourse/details/edit'}" method="post">
     <div th:insert="blocks/header.html"/>
     <div th:insert="blocks/nav.html"/>
     <div class="divcousre">
@@ -25,7 +24,6 @@
         <div id="container"/>
     </div>
     <button type="submit" class="btn" id="save-block" style="display: none">Сохранить</button>
-</form>
 <script type="text/javascript" th:src="@{/js/textAreaResize.js}" src="/js/textAreaResize.js"></script>
 <script src="https://unpkg.com/imask" type="text/javascript"></script> <!-- Подключаем плагин через CDN -->
 <script type="text/javascript" th:src="@{/js/jquery.maskedinput.js}" src="/js/jquery.maskedinput.js"></script>

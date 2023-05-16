@@ -68,6 +68,13 @@
             </div>
         </select>
     </div>
+    <div class="group">
+        <select class="selec" name="nameOfTheme" required>
+            <div th:each="element : ${Theme}">
+                <option th:text="${element.getNameOfTheme()}"></option>
+            </div>
+        </select>
+    </div>
     <form th:action="${'/CourseAdd'}">
         <button type="submit" class="custom-btn btn-16">Добавить курс</button>
     </form>

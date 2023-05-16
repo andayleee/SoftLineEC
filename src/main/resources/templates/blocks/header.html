@@ -11,22 +11,22 @@
         <div class="flex items-center md:order-2">
             <form sec:authorize="!isAuthenticated()" th:action="@{/login}" method="post">
                 <button type="submit" sec:authorize="!isAuthenticated()" href="/login"
-                        class="text-gray-800 hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 md:px-5 md:py-2.5 mr-1 md:mr-2 focus:outline-none">
+                        class="text-gray-800 hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 md:px-5 md:py-2.5 mr-1 md:mr-2 focus:outline-none headerLabel">
                     Войти
                 </button>
                 <a href="/registration"
-                   class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 md:px-5 md:py-2.5 mr-1 md:mr-2  focus:outline-none">
+                   class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 md:px-5 md:py-2.5 mr-1 md:mr-2  focus:outline-none headerLabel">
                     Регистрация</a>
             </form>
             <form sec:authorize="isAuthenticated()" method="post" >
                 <a type="submit" href="/ProfileInfo"
-                   class="btn-outline-primary1">
+                   class="btn-outline-primary1 headerLabel">
                     Личный кабинет
                 </a>
             </form>
             <form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post" style="margin-left: 20px">
                 <a type="submit" href="/login"
-                   class="btn-outline-primary1">
+                   class="btn-outline-primary1 headerLabel">
                     Выйти
                 </a>
             </form>
@@ -35,8 +35,8 @@
         <div class="hidden w-full md:block md:w-auto" id="mobile-menu"
              style="z-index: 500; height: 50px; display: flex; align-items: center;">
             <a sec:authorize="hasAuthority('ADMIN')">
-                <button id="dropdownNavbarLink" data-dropdown-toggle="dropdownNavbar"
-                        class="flex justify-between items-center py-2 pr-4 pl-3 w-full font-medium text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-gray-400 dark:hover:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">
+                <button id="dropdownNavbarLink" data-dropdown-toggle="dropdownNavbar" type="button"
+                        class="flex justify-between items-center py-2 pr-4 pl-3 w-full font-medium text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-gray-400 dark:hover:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent headerLabel">
                     Учет данных
                     <svg class="ml-1 w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
                          xmlns="http://www.w3.org/2000/svg">
@@ -52,47 +52,47 @@
                         aria-labelledby="dropdownLargeButton">
 
                         <li class="nav-item" sec:authorize="hasAuthority('ADMIN')">
-                            <a class="flex items-center  w-full font-medium text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-gray-400 dark:hover:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent"
+                            <a class="headerLabel flex items-center  w-full font-medium text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-gray-400 dark:hover:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent"
                                href="/CourseType" data-mdb-ripple="true" data-mdb-ripple-color="light"
                                style="margin-top: 5px">Тип курса</a>
                         </li>
                         <li class="nav-item" sec:authorize="hasAuthority('ADMIN')">
-                            <a class="flex justify-between items-center  w-full font-medium text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-gray-400 dark:hover:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent"
+                            <a class="headerLabel flex justify-between items-center  w-full font-medium text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-gray-400 dark:hover:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent"
                                href="/FormOfEducation" data-mdb-ripple="true" data-mdb-ripple-color="light"
                                style="margin-top: 10px">Форма обучения</a>
                         </li>
                         <li class="nav-item" sec:authorize="hasAuthority('ADMIN')">
-                            <a class="flex justify-between items-center  w-full font-medium text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-gray-400 dark:hover:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent"
+                            <a class="headerLabel flex justify-between items-center  w-full font-medium text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-gray-400 dark:hover:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent"
                                href="/Course" data-mdb-ripple="true" data-mdb-ripple-color="light"
                                style="margin-top: 10px">Курс</a>
                         </li>
                         <li class="nav-item" sec:authorize="hasAuthority('ADMIN')">
-                            <a class="flex justify-between items-center  w-full font-medium text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-gray-400 dark:hover:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent"
+                            <a class="headerLabel flex justify-between items-center  w-full font-medium text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-gray-400 dark:hover:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent"
                                href="/Block" data-mdb-ripple="true" data-mdb-ripple-color="light"
                                style="margin-top: 10px">Блок</a>
                         </li>
                         <li class="nav-item" sec:authorize="hasAuthority('ADMIN')">
-                            <a class="flex justify-between items-center  w-full font-medium text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-gray-400 dark:hover:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent"
+                            <a class="headerLabel flex justify-between items-center  w-full font-medium text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-gray-400 dark:hover:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent"
                                href="/Lecture" data-mdb-ripple="true" data-mdb-ripple-color="light"
                                style="margin-top: 10px">Лекция</a>
                         </li>
                         <li class="nav-item" sec:authorize="hasAuthority('ADMIN')">
-                            <a class="flex justify-between items-center  w-full font-medium text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-gray-400 dark:hover:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent"
+                            <a class="headerLabel flex justify-between items-center  w-full font-medium text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-gray-400 dark:hover:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent"
                                href="/Test" data-mdb-ripple="true" data-mdb-ripple-color="light"
                                style="margin-top: 10px">Тест</a>
                         </li>
                         <li class="nav-item" sec:authorize="hasAuthority('ADMIN')">
-                            <a class="flex justify-between items-center  w-full font-medium text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-gray-400 dark:hover:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent"
+                            <a class="headerLabel flex justify-between items-center  w-full font-medium text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-gray-400 dark:hover:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent"
                                href="/Question" data-mdb-ripple="true" data-mdb-ripple-color="light"
                                style="margin-top: 10px">Вопрос</a>
                         </li>
                         <li class="nav-item" sec:authorize="hasAuthority('ADMIN')">
-                            <a class="flex justify-between items-center  w-full font-medium text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-gray-400 dark:hover:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent"
+                            <a class="headerLabel flex justify-between items-center  w-full font-medium text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-gray-400 dark:hover:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent"
                                href="/AnswerOptions" data-mdb-ripple="true" data-mdb-ripple-color="light"
                                style="margin-top: 10px">Вариант ответа</a>
                         </li>
                         <li class="nav-item" sec:authorize="hasAuthority('ADMIN')">
-                            <a class="flex justify-between items-center  w-full font-medium text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-gray-400 dark:hover:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent"
+                            <a class="headerLabel flex justify-between items-center  w-full font-medium text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-gray-400 dark:hover:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent"
                                href="/admin/a" data-mdb-ripple="true" data-mdb-ripple-color="light"
                                style="margin: 10px 0 10px 0">Админ</a>
                         </li>
@@ -101,8 +101,8 @@
             </a>
             <div style="width: 50px"></div>
             <a sec:authorize="hasAuthority('ADMIN') or hasAuthority('EMPLOYEE')">
-                <button id="dropdownNavbarLink2" data-dropdown-toggle="dropdownNavbar2"
-                        class="flex justify-between items-center py-2 pr-4 pl-3 w-full font-medium text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-gray-400 dark:hover:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">
+                <button id="dropdownNavbarLink2" data-dropdown-toggle="dropdownNavbar2" type="button"
+                        class="headerLabel flex justify-between items-center py-2 pr-4 pl-3 w-full font-medium text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-gray-400 dark:hover:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">
                     Создание курса
                     <svg class="ml-1 w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
                          xmlns="http://www.w3.org/2000/svg">
@@ -118,9 +118,14 @@
                         aria-labelledby="dropdownLargeButton">
 
                         <li class="nav-item" sec:authorize="hasAuthority('ADMIN') or hasAuthority('EMPLOYEE')">
-                            <a class="flex justify-between items-center  w-full font-medium text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-gray-400 dark:hover:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent"
+                            <a class="headerLabel flex justify-between items-center  w-full font-medium text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-gray-400 dark:hover:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent"
                                href="/CreateNewCourse" data-mdb-ripple="true" data-mdb-ripple-color="light"
                                style="margin: 10px 0 10px 0">Новый курс</a>
+                        </li>
+                        <li class="nav-item" sec:authorize="hasAuthority('ADMIN') or hasAuthority('EMPLOYEE')">
+                            <a class="headerLabel flex justify-between items-center  w-full font-medium text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-gray-400 dark:hover:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent"
+                               href="/CreatedCourses" data-mdb-ripple="true" data-mdb-ripple-color="light"
+                               style="margin: 10px 0 10px 0">Созданные курсы</a>
                         </li>
                     </ul>
                 </div>

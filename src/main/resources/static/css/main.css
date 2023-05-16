@@ -9,6 +9,9 @@ html, body {
     background-color: #EBECF0;
     font-family: 'Steppe', sans-serif;
 }
+html{
+    background-color: #EBECF0;
+}
 .img {
     margin: auto;
     height: 50px;
@@ -20,8 +23,20 @@ html, body {
     --index1:calc(1vw);
 }
 
+@media (min-width: 1500px) {
+    :root {
+        --index: calc(0.8vw + 0.8vh);
+        --index1: calc(0.8vw);
+    }
+}
+
+
 p{
     text-align: center;
+    font-size: calc(var(--index)/1.3);
+}
+
+li{
     font-size: calc(var(--index)/1.3);
 }
 
@@ -35,26 +50,25 @@ p{
     src: url(../fonts/SyncopateBoldCyr.otf) format("opentype");
 }
 
+.divcousre{
+    margin-top: 15vh;
+    margin-left: 20vw;
+    margin-right: 12vw;
+}
+
 @media (max-width: 1000px) {
     .sidebar {
         display: none;
     }
-    .center{
-        width: 100%;
+    .divcousre{
+        margin-left: 8vw;
+        margin-right: 8vw;
     }
 }
 @media (max-width: 1000px) {
     .divcousre {
         margin-left: 0vw;
     }
-}
-
-
-.divcousre{
-    margin-top: 15vh;
-    margin-left: 20vw;
-    margin-right: 12vw;
-    background-color: transparent
 }
 
 .center {
@@ -170,7 +184,7 @@ a:hover {
 }
 
 .divspace{
-    height: calc(var(--index1) * 10);
+    height: calc(var(--index1) * 5);
 }
 
 .title12{
@@ -293,6 +307,10 @@ input[type~="date"]{
     font-size: calc(var(--index)/1.3);
     width: 50%;
 }
+input[type~="number"]{
+    font-size: calc(var(--index)/1.3);
+    width: 50%;
+}
 
 .textar{
     font-size: calc(var(--index)/1.3);
@@ -317,8 +335,8 @@ label 				 {
     font-weight:normal;
     position:absolute;
     pointer-events:none;
-    left:5px;
-    top:10px;
+    left:20px;
+    top:5px;
     transition:0.2s ease all;
     -moz-transition:0.2s ease all;
     -webkit-transition:0.2s ease all;
@@ -328,6 +346,9 @@ input:focus ~ label, input:valid ~ label 		{
     top:-20px;
     font-size: calc(var(--index)/1.3);
     color: #49516b;
+}
+input[type="checkbox"] ~ label {
+    top: 3px;
 }
 
 .bar 	{ position:relative; display:block; width:30%; }
@@ -384,6 +405,12 @@ input:focus ~ .highlight {
 
 
 .card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    max-width: 100%;
+    margin-bottom: 50px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
     backdrop-filter: blur(16px) saturate(180%);
     -webkit-backdrop-filter: blur(16px) saturate(180%);
     background-color: rgba(255, 255, 255, 0.75);
@@ -559,4 +586,123 @@ input:focus ~ .highlight {
 
 input[type="checkbox"] {
     margin-right: 10px;
+}
+
+a.send-btn {
+    margin-top: 40px;
+    color: #2c1616;
+    transition: 0.2s ease;
+}
+
+a.send-btn:hover {
+    color: #4B5563;
+    cursor: pointer;
+}
+
+.fixed-div {
+    position: fixed;
+    top: 0px;
+    left: 0;
+    width: 33vw;
+    height: 100vh;
+    overflow-y: scroll;
+    z-index: 10;
+    will-change: transform;
+    padding: 100px 0px 40px 0px;
+}
+.name-blocks:hover {
+    background-color: #eaeaea;
+    cursor: pointer;
+}
+.block-card {
+    border-radius: 10px;
+    box-shadow: 0px 10px 25px #c5c5c5;
+    border: 2px solid rgba(235,236,240,0.75);
+    border-radius: 10px;
+    margin-bottom: 60px;
+}
+.course-text{
+    text-align: start;
+}
+.row{
+    padding: 0;
+    margin: 0;
+}
+.course-description {
+    max-height: 200px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    transition: max-height 0.5s ease-in-out;
+}
+
+.course-description.expanded {
+    max-height: none;
+    overflow: visible;
+    display: block;
+    line-height: normal;
+    text-overflow: clip;
+}
+.block-link {
+    font-size: calc(var(--index)/1.6);
+    font-weight: bold;
+}
+
+.valid-answer {
+    background-color: #aeffa2;
+}
+
+.invalid-answer {
+    background-color: #ffa2a2;
+}
+
+@media only screen and (max-width: 500px) {
+    :root {
+        --index: calc(2vw + 2vh);
+        --index1: calc(2vw);
+    }
+    .title123{
+        font-size: calc(var(--index));
+    }
+    .title12{
+        font-size: calc(var(--index)/1.3);
+    }
+    .center {
+        padding-top: 50px;
+        width: 100%;
+        background-color: #fff;
+        margin: auto;
+        border-radius: 20px;
+        min-height: 100vh;
+    }
+    .course-card{
+        font-size: calc(var(--index)/1.5);
+        letter-spacing: calc(var(--index) /4);
+    }
+    .btn-course{
+        font-size: calc(var(--index)/1.8);
+    }
+    .card {
+        min-width: 100%;
+    }
+    .card-text {
+        font-size: calc(var(--index)/1.8);
+    }
+    .paginationButton{
+        display: none;
+    }
+    .headerLabel{
+        font-size: calc(var(--index)/1.8);
+    }
+    .imagesRow{
+        width: 100%;
+        margin: auto;
+    }
+    .custom-btn{
+        font-size: calc(var(--index)/1.8);
+    }
+    input{
+        font-size: calc(var(--index)/1.8);
+    }
 }

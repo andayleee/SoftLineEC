@@ -8,10 +8,9 @@
     <link rel="shortcut icon" href="/images/slLogo.svg">
 </head>
 <body style="background-color: #FFFFFF">
-<form th:action="${'/CreateNewCourse/details'}" method="post">
     <div th:insert="blocks/header.html"/>
     <div th:insert="blocks/nav.html"/>
-    <div style="margin-top: 15vh; margin-left: 20vw; margin-right: 12vw;">
+    <div class="divcousre">
         <h3 style="font-size: 30px; margin-bottom: 20px">Программа курса</h3>
         <p style="text-align: left; margin-bottom: 20px; display: none" id="nonText">В курсе пока нет ни одного блока.
             <br/>
@@ -22,7 +21,6 @@
         <h1 style="display: none" id="lectureLabel">Таблица лекций:</h1>
         <div style="display: none" id="lectureTable"></div>
     </div>
-</form>
 <script type="text/javascript" th:src="@{/js/textAreaResize.js}" src="/js/textAreaResize.js"></script>
 <script src="https://unpkg.com/imask" type="text/javascript"></script> <!-- Подключаем плагин через CDN -->
 <script type="text/javascript" th:src="@{/js/jquery.maskedinput.js}" src="/js/jquery.maskedinput.js"></script>

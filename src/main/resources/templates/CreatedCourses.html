@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>SoftLineEC - созданные курсы</title>
+    <link th:href="@{/css/main.css}" rel="stylesheet" />
+    <link th:href="@{/js/textAreaResize.js}" rel="script" />
+    <link rel="shortcut icon" href="/images/slLogo.svg">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<div th:insert="blocks/header.html"/>
+<body>
+<form th:action="${'/CreatedCourses'}" th:object="${Course}" method="post" class="center">
+    <div class="boxes">
+        <h1 class="title">Созданные курсы</h1>
+    </div>
+    <table>
+        <thead>
+        <tr>
+            <th>Наименование</th>
+            <th style="width: 10vw">Дата создания</th>
+            <th style="width: 8vw">Просмотр</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr style="text-align: center" th:each="course : ${Course}">
+            <td th:text="${course.nameOfCourse}"></td>
+            <td th:text="${course.dateOfCreation}"></td>
+            <td>
+                <a th:href="@{'/course?id=' + ${course.idCourse}}" class="send-btn">Смотреть</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</form>
+<script type="text/javascript" th:src="@{/js/textAreaResize.js}" src="/js/textAreaResize.js"></script>
+</body>
+</html>

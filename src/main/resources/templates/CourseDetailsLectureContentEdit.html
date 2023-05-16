@@ -24,7 +24,7 @@
       th:object="${Lecture}">
     <div style="z-index: 3" th:insert="blocks/header.html"/>
     <div style="z-index: 2" th:insert="blocks/nav.html"/>
-    <div class="lecture" style="margin-top: 15vh; margin-left: 20vw; margin-right: 12vw;">
+    <div class="lecture divcousre">
         <div class="boxes">
             <h1 class="title">Изменение содержания лекции</h1>
         </div>
@@ -37,7 +37,7 @@
             </div>
         </div>
         <div id="textLectureForm">
-            <div id="editor" contenteditable="true" style="text-align: start"></div>
+            <div id="editor" style="text-align: start"></div>
             <div id="images-container"
                  style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center"></div>
             <button type="submit" id="add-photo-button" class="custom-btn btn-16">Добавить фото</button>
@@ -78,7 +78,6 @@
     var toolbarOptions = [
         [{'font': []}],
         [{'size': ['small', false, 'large', 'huge']}],
-        [{'header': [1, 2, 3, 4, 5, 6, false]}],
         ['bold'],
         ['italic'],
         ['underline'],
@@ -137,14 +136,16 @@
                         existTestContainer.appendChild(testTitle);
                         const questionsList = document.createElement("div");
                         questionsList.className = "questions-list";
+                        var index = 0;
                         content.tenants.forEach((question, questionIndex) => {
                             const questionItem = document.createElement("div");
                             questionItem.className = "question-item";
                             const questionTitle = document.createElement("h3");
                             questionTitle.textContent = `${questionIndex + 1}. ${question.nameOfQuestion}`;
                             const questionScore = document.createElement("h3");
-                            questionScore.textContent = `${content.tenants[0].score} балла`;
+                            questionScore.textContent = `${content.tenants[index].score} бал.`;
                             const questionTitleItem = document.createElement("div");
+                            index++;
                             questionTitleItem.style.display = "flex";
                             questionTitleItem.style.flexDirection = "row";
                             questionTitleItem.style.justifyContent = "space-between";
