@@ -8,7 +8,9 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 import static java.lang.annotation.ElementType.*;
 import static java.lang.annotation.RetentionPolicy.*;
-
+/**
+ * Аннотация для проверки корректности пароля.
+ */
 @Target({ElementType.TYPE_USE, METHOD, FIELD, ANNOTATION_TYPE})
 @Retention(RUNTIME)
 @Constraint(validatedBy = PasswordValidator.class)

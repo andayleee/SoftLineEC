@@ -31,19 +31,42 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.List;
-
+/**
+ * Контроллер для управления главной страницей.
+ */
 @Controller
 public class MainPageController {
+    /**
+     * Репозиторий курсов.
+     */
     @Autowired
     private CourseRepository courseRepository;
+    /**
+     * Репозиторий блоков.
+     */
     @Autowired
     private BlockRepository blockRepository;
+    /**
+     * Репозиторий лекций.
+     */
     @Autowired
     private LectureRepository lectureRepository;
+    /**
+     * Репозиторий пользователей.
+     */
     @Autowired
     private UserRepository userRepository;
+    /**
+     * Репозиторий куров пользователей.
+     */
     @Autowired
     private UsersCoursesRepository usersCoursesRepository;
+    /**
+     * Обрабатывает GET-запрос на получение главной страницы.
+     * @param authentication объект Authentication, содержащий информацию об авторизованном пользователе
+     * @param session объект HttpSession, используемый для сохранения данных
+     * @return имя представления, отображающего главную страницу
+     */
     @GetMapping("/main")
     public String mainPage(Authentication authentication, HttpSession session) {
         try {
@@ -57,8 +80,10 @@ public class MainPageController {
         }
         return "MainPage";
     }
-
-
+    /**
+     * Обрабатывает POST-запрос на получение списка всех курсов.
+     * @return список всех курсов
+     */
     @RequestMapping(value = "/check-courses", method = RequestMethod.POST)
     @ResponseBody
     public List<Course> checkCourses() {
@@ -70,7 +95,13 @@ public class MainPageController {
         }
         return courses ;
     }
-
+    /**
+     * Обрабатывает GET-запрос на получение страницы со списком блоков конкретного курса.
+     * @param idCourse идентификатор курса, для которого необходимо отобразить список блоков
+     * @param model объект Model, используемый для передачи данных в представление
+     * @param session объект HttpSession, используемый для получения и сохранения данных
+     * @return имя представления, отображающего список блоков конкретного курса
+     */
     @GetMapping("/main/Courses-{idCourse}")
     public String BlockUpdate(@PathVariable("idCourse")long idCourse, Model model, HttpSession session)
     {
@@ -81,23 +112,38 @@ public class MainPageController {
         model.addAttribute("Course", res);
         return "MainPageCourseView";
     }
+    /**
+     * Обрабатывает POST-запрос на получение списка блоков конкретного курса.
+     * @param session объект HttpSession, используемый для получения данных
+     * @return список блоков конкретного курса
+     */
     @RequestMapping(value = "/check-blocks-main", method = RequestMethod.POST)
     @ResponseBody
     public List<Block> checkBlocks(HttpSession session) {
         Long idCourse = (Long) session.getAttribute("idCourse");
         Optional<Course> course = courseRepository.findById(idCourse);
-        List<Block> blocks = blockRepository.findBlocksByCourseID(course.get()) ; // blockRepository - экземпляр репозитория, отвечающего за блоки в базе данных
+        List<Block> blocks = blockRepository.findBlocksByCourseID(course.get()) ; 
 
         return blocks ;
     }
+    /**
+     * Обрабатывает POST-запрос на получение списка лекций конкретного блока.
+     * @param idBlock идентификатор блока, для которого необходимо получить список лекций
+     * @return список лекций конкретного блока
+     */
     @RequestMapping(value = "/check-lectures-main/{id}", method = RequestMethod.POST)
     @ResponseBody
     public List<Lecture> checkLectures(@PathVariable("id") Long idBlock) {
         Optional<Block> block = blockRepository.findById(idBlock);
-        List<Lecture> lectures = lectureRepository.findLecturesByBlockID(block.get()); // blockRepository - экземпляр репозитория, отвечающего за блоки в базе данных
+        List<Lecture> lectures = lectureRepository.findLecturesByBlockID(block.get()); 
 
         return lectures ;
     }
+    /**
+     * Обрабатывает POST-запрос на получение типа курса.
+     * @param idCourse идентификатор курса, для которого необходимо получить тип курса
+     * @return тип курса
+     */
     @RequestMapping(value = "/check-coursesType-{id}", method = RequestMethod.POST)
     @ResponseBody
     public String checkCoursesType(@PathVariable("id") Long idCourse) {
@@ -105,7 +151,11 @@ public class MainPageController {
         String courseType = course.get().getCourseTypeID().getNameOfCourseType();
         return courseType;
     }
-
+    /**
+     * Обрабатывает POST-запрос на получение формы обучения курса.
+     * @param idCourse идентификатор курса, для которого необходимо получить форму обучения
+     * @return форма обучения курса
+     */
     @RequestMapping(value = "/check-formOf-{id}", method = RequestMethod.POST)
     @ResponseBody
     public String checkFormOfEducation(@PathVariable("id") Long idCourse) {
@@ -113,6 +163,13 @@ public class MainPageController {
         String formOfEducation = course.get().getFormOfEducationID().getTypeOfEducation();
         return formOfEducation;
     }
+    /**
+     * Обрабатывает POST-запрос на добавление курса пользователю.
+     * @param idCourse идентификатор курса, который необходимо добавить
+     * @param model объект Model, используемый для передачи данных в представление
+     * @param session объект HttpSession, используемый для получения и сохранения данных
+     * @return строку с сообщением о результате попытки добавления курса
+     */
     @RequestMapping(value = "/create-users-courses", method = RequestMethod.POST)
     @ResponseBody
     public String CreateUsersCourses(@RequestParam("idCourse") Long idCourse, Model model, HttpSession session) {
@@ -148,7 +205,11 @@ public class MainPageController {
             return "Данный курс уже есть";
         }
     }
-
+    /**
+     * Обрабатывает POST-запрос на получение списка курсов, которые пользователь проходит в данный момент.
+     * @param session объект HttpSession, используемый для получения данных о пользователе
+     * @return список курсов, которые пользователь проходит в данный момент
+     */
     @RequestMapping(value = "/check-inProgress-courses", method = RequestMethod.POST)
     @ResponseBody
     public List<Course> checkCoursesInProgress(HttpSession session) {
@@ -164,7 +225,11 @@ public class MainPageController {
         }
         return inProgressCourses;
     }
-
+    /**
+     * Обрабатывает POST-запрос на получение списка завершенных курсов пользователя.
+     * @param session объект HttpSession, используемый для получения данных о пользователе
+     * @return список завершенных курсов пользователя
+     */
     @RequestMapping(value = "/check-completes-courses", method = RequestMethod.POST)
     @ResponseBody
     public List<Course> checkCompleteCourses(HttpSession session) {
@@ -180,6 +245,12 @@ public class MainPageController {
         }
         return completedCourses;
     }
+    /**
+     * Обрабатывает POST-запрос на получение результатов тестирования.
+     * @param idCourse идентификатор курса, для которого необходимо получить результаты тестирования
+     * @param session объект HttpSession, используемый для получения данных о пользователе
+     * @return массив строк с результатами тестирования
+     */
     @RequestMapping(value = "/check-test-success-main", method = RequestMethod.POST)
     @ResponseBody
     public String[] handleTestSuccess(@RequestBody Long idCourse,HttpSession session) {
@@ -195,7 +266,14 @@ public class MainPageController {
         }
         return null;
     }
-
+    /**
+     * Генерирует и отдает пользователю сертификат об окончании курса.
+     * @param idCourse идентификатор курса, для которого необходимо сгенерировать сертификат
+     * @param session объект HttpSession, используемый для получения данных о пользователе
+     * @return объект ResponseEntity со сгенерированным сертификатом в формате PDF
+     * @throws IOException
+     * @throws DocumentException
+     */
     @GetMapping("/create-certificate")
     public ResponseEntity<byte[]>  createCertificate(@RequestParam Long idCourse, HttpSession session) throws IOException, DocumentException {
         User user = userRepository.findUserByid((Long) session.getAttribute("idUser"));

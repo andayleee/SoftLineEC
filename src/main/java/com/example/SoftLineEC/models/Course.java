@@ -8,7 +8,9 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.sql.Date;
 import java.util.Collection;
-
+/**
+ * Класс-сущность для работы с курсами.
+ */
 @Entity
 public class Course {
     @Id
@@ -50,7 +52,20 @@ public class Course {
     @JsonManagedReference
     @OneToMany(mappedBy = "courseID", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private Collection<UsersCourses> tenants2;
-
+    /**
+     * Конструктор класса.
+     * @param nameOfCourse название курса
+     * @param dateOfCreation дата создания курса
+     * @param description описание курса
+     * @param resources ресурсы, необходимые для прохождения курса
+     * @param goal цель курса
+     * @param tasks задания, необходимые для выполнения курса
+     * @param categoriesOfStudents категории студентов, которые могут обучаться на курсе
+     * @param courseTypeID тип курса
+     * @param formOfEducationID форма обучения на курсе
+     * @param userID создатель курса
+     * @param themeID тема курса
+     */
     public Course(String nameOfCourse, Date dateOfCreation, String description, String resources, String goal, String tasks, String categoriesOfStudents, CourseType courseTypeID, FormOfEducation formOfEducationID, User userID, Theme themeID) {
         this.nameOfCourse = nameOfCourse;
         this.dateOfCreation = dateOfCreation;
@@ -64,7 +79,9 @@ public class Course {
         this.userID = userID;
         this.themeID = themeID;
     }
-
+    /**
+     * Пустой конструктор класса.
+     */
     public Course() {
     }
 

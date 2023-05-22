@@ -3,6 +3,7 @@
 <head>
   <title >SoftLineEC - Регистрация</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <link th:href="@{/css/loginreg.css}" rel="stylesheet" />
   <link rel="shortcut icon" href="/images/slLogo.svg">
 </head>
@@ -48,33 +49,6 @@
 </div>
 <script src="https://unpkg.com/imask"></script>
 <script src="js/main.js"></script>
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const inputElement = document.querySelector('[data-mask="password"]')
-    const maskOptions = {
-      mask: '********************'
-    }
-    IMask(inputElement, maskOptions)
-  })
-
-  const inputs = document.querySelectorAll(".user-box input");
-
-  function addClass(){
-    let parent = this.parentNode.parentNode;
-    parent.classList.add("focus");
-  }
-
-  function removeClass(){
-    let parent = this.parentNode.parentNode;
-    if(this.value == ""){
-      parent.classList.remove("focus");
-    }
-  }
-
-  inputs.forEach(input => {
-    input.addEventListener("focus", addClass);
-    input.addEventListener("blur", removeClass);
-  });
-</script>
+<script src="/js/Registration.js"></script>
 </body>
 </html>

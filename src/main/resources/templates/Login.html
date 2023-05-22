@@ -3,6 +3,7 @@
 <head>
   <title >SoftLineEC - Авторизация</title>
   <link rel="shortcut icon" href="/images/slLogo.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <link th:href="@{/css/loginreg.css}" rel="stylesheet" />
 </head>
@@ -41,25 +42,6 @@
     </div>
   </form>
 </div>
-<script>
-  const inputs = document.querySelectorAll(".user-box input");
-
-  function addClass(){
-    let parent = this.parentNode.parentNode;
-    parent.classList.add("focus");
-  }
-
-  function removeClass(){
-    let parent = this.parentNode.parentNode;
-    if(this.value == ""){
-      parent.classList.remove("focus");
-    }
-  }
-
-  inputs.forEach(input => {
-    input.addEventListener("focus", addClass);
-    input.addEventListener("blur", removeClass);
-  });
-</script>
+<script src="/js/Login.js"></script>
 </body>
 </html>

@@ -10,13 +10,21 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-
+/**
+ * Сервис для загрузки файлов.
+ */
 @Service
 public class FileUploadService {
-
+    /**
+     * Путь к загруженному файлу.
+     */
     @Value("")
     private static String filePath2;
-
+    /**
+     * Метод для сохранения загруженного файла.
+     * @param file загруженный файл
+     * @throws IOException если произошла ошибка ввода-вывода
+     */
     public static void saveFile(MultipartFile file) throws IOException {
         Path uploadPath = Paths.get("src/main/resources/static/images/usersimg");
         Path filePath = uploadPath.resolve(file.getOriginalFilename()).normalize();
@@ -26,6 +34,10 @@ public class FileUploadService {
         }
         filePath2 = filePath.toString().substring(25);
     }
+    /**
+     * Метод для получения пути к загруженному файлу.
+     * @return путь к загруженному файлу
+     */
     public static String getFilePath2(){
         return filePath2;
     }

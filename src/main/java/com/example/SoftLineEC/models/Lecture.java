@@ -8,7 +8,9 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.Collection;
-
+/**
+ * Класс-сущность для работы с лекциями.
+ */
 @Entity
 public class Lecture {
     @Id
@@ -35,7 +37,14 @@ public class Lecture {
     @Fetch(FetchMode.SUBSELECT)
     @OneToMany(mappedBy = "lectureID", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     private Collection<Photo> tenants2;
-
+    /**
+     * Конструктор класса.
+     * @param nameOfLecture название лекции
+     * @param description описание лекции
+     * @param content содержание лекции
+     * @param additionalLiterature дополнительная литература по лекции
+     * @param blockID блок, к которому относится лекция
+     */
     public Lecture(String nameOfLecture, String description, String content, String additionalLiterature, Block blockID) {
         this.nameOfLecture = nameOfLecture;
         this.description = description;
@@ -43,6 +52,9 @@ public class Lecture {
         this.additionalLiterature = additionalLiterature;
         this.blockID = blockID;
     }
+    /**
+     * Пустой конструктор класса.
+     */
     public Lecture(){}
 
     public long getIdLecture() {

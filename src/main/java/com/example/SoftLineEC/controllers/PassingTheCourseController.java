@@ -13,29 +13,62 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.*;
-
+/**
+ * Контроллер для прохождения курсов.
+ */
 @Controller
 public class PassingTheCourseController {
-
+    /**
+     * Репозиторий курсов.
+     */
     @Autowired
     private CourseRepository courseRepository;
+    /**
+     * Репозиторий блоков.
+     */
     @Autowired
     private BlockRepository blockRepository;
+    /**
+     * Репозиторий лекций.
+     */
     @Autowired
     private LectureRepository lectureRepository;
+    /**
+     * Репозиторий фото.
+     */
     @Autowired
     private PhotoRepository photoRepository;
+    /**
+     * Репозиторий пользователя.
+     */
     @Autowired
     private UserRepository userRepository;
+    /**
+     * Репозиторий курсов пользователей.
+     */
     @Autowired
     private UsersCoursesRepository usersCoursesRepository;
+    /**
+     * Репозиторий ответов на вопрос.
+     */
     @Autowired
     private AnswerOptionsRepository answerOptionsRepository;
+    /**
+     * Репозиторий вопросов.
+     */
     @Autowired
     private QuestionRepository questionRepository;
+    /**
+     * Репозиторий тестов.
+     */
     @Autowired
     private TestRepository testRepository;
-
+    /**
+     * Отображает главную страницу прохождения курса.
+     * @param session объект HttpSession, используемый для получения данных о пользователе и курсе
+     * @param model   объект Model для передачи атрибутов на страницу
+     * @return имя шаблона страницы
+     */
     @GetMapping("/passingTheCourse")
     public String mainPage(HttpSession session, Model model) {
         Long idCourse = (Long) session.getAttribute("idCourse");
@@ -48,7 +81,12 @@ public class PassingTheCourseController {
         model.addAttribute("Block", block);
         return "PassingTheCourse";
     }
-
+    /**
+     * Обрабатывает POST-запрос на получение списка фотографий для лекции.
+     * @param idLecture идентификатор лекции, для которой необходимо получить фотографии
+     * @param session   объект HttpSession, используемый для получения данных о пользователе и курсе
+     * @return список фотографий для лекции
+     */
     @RequestMapping(value = "/check-lectures-photos", method = RequestMethod.POST)
     @ResponseBody
     public List<Photo> checkLectures(@RequestParam("lectureId") Long idLecture, HttpSession session) {
@@ -56,7 +94,12 @@ public class PassingTheCourseController {
         List<Photo> photos = photoRepository.findPhotosByLectureID(lecture.get());
         return photos;
     }
-
+    /**
+     * Обрабатывает POST-запрос на получение текста лекции.
+     * @param idLecture идентификатор лекции, для которой необходимо получить текст
+     * @param session   объект HttpSession, используемый для получения данных о пользователе и курсе
+     * @return текст лекции
+     */
     @RequestMapping(value = "/check-lectures-text", method = RequestMethod.POST)
     @ResponseBody
     public String checkLecturesText(@RequestParam("lectureId") Long idLecture, HttpSession session) {
@@ -83,6 +126,11 @@ public class PassingTheCourseController {
             return null;
         }
     }
+    /**
+     * Обрабатывает POST-запрос на получение списка пройденных лекций.
+     * @param session объект HttpSession, используемый для получения данных о пользователе и курсе
+     * @return список идентификаторов пройденных лекций пользователя
+     */
     @RequestMapping(value = "/check-checkbox", method = RequestMethod.POST)
     @ResponseBody
     public List<String> checkCheckbox(HttpSession session) {
@@ -97,7 +145,12 @@ public class PassingTheCourseController {
             return null;
         }
     }
-
+    /**
+     * Обрабатывает POST-запрос на отправку ответов на вопросы теста.
+     * @param data объект Map с данными, переданными из AJAX-запроса
+     * @param session объект HttpSession, используемый для получения данных о пользователе и курсе
+     * @return результат прохождения теста в баллах
+     */
     @RequestMapping(value = "/handlePassTheTestClick", method = RequestMethod.POST)
     @ResponseBody
     public int handleProfileInfoEdit(@RequestBody Map<String, Object> data, HttpSession session) {
@@ -147,7 +200,12 @@ public class PassingTheCourseController {
         }
         return score;
     }
-
+    /**
+     * Обрабатывает POST-запрос на сохранение результатов теста.
+     * @param count количество набранных баллов в тесте
+     * @param session объект HttpSession, используемый для получения данных о пользователе и курсе
+     * @return объект ResponseEntity
+     */
     @RequestMapping(value = "/test-results-save", method = RequestMethod.POST)
     @ResponseBody
     public ResponseEntity<?> handleTestResultsSaveRequest(@RequestBody String count, HttpSession session) {
@@ -158,7 +216,11 @@ public class PassingTheCourseController {
         usersCoursesRepository.save(usersCourses);
         return ResponseEntity.noContent().build();
     }
-
+    /**
+     * Обрабатывает POST-запрос на проверку правильных ответов на тест.
+     * @param session объект HttpSession, используемый для получения данных о пользователе и курсе
+     * @return коллекция вопросов теста
+     */
     @RequestMapping(value = "/check-correct-answers", method = RequestMethod.POST)
     @ResponseBody
     public Collection<Question> handleProfileInfoEdit(HttpSession session) {
@@ -166,7 +228,11 @@ public class PassingTheCourseController {
         Test test = testRepository.findTestByIdTest(idTest);
         return test.getTenants();
     }
-
+    /**
+     * Обрабатывает POST-запрос на проверку прохождения лекции тестом.
+     * @param session объект HttpSession, используемый для получения данных о пользователе и лекции
+     * @return объект Optional с результатом поиска теста для лекции
+     */
     @RequestMapping(value = "/check-lectures-passing-test", method = RequestMethod.POST)
     @ResponseBody
     public Optional<Test> checkLecturesTest(HttpSession session) {
@@ -180,7 +246,11 @@ public class PassingTheCourseController {
             return null;
         }
     }
-
+    /**
+     * Обрабатывает POST-запрос на проверку успешного прохождения теста.
+     * @param session объект HttpSession, используемый для получения данных о пользователе и курсе
+     * @return массив строк с идентификатором теста и количеством набранных баллов или null, если результаты отсутствуют
+     */
     @RequestMapping(value = "/check-test-success", method = RequestMethod.POST)
     @ResponseBody
     public String[] handleTestSuccess(HttpSession session) {
@@ -192,15 +262,19 @@ public class PassingTheCourseController {
         }
         return null;
     }
-
+    /**
+     * Обрабатывает POST-запрос на завершение курса.
+     * @param session объект HttpSession, используемый для получения данных о пользователе и курсе
+     * @return логическое значение, обозначающее завершенность курса
+     */
     @RequestMapping(value = "/set-course-end", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<String> handleProfileAuthInfoEdit(HttpSession session) {
+    public Boolean handleProfileAuthInfoEdit(HttpSession session) {
         User user = userRepository.findUserByid((Long) session.getAttribute("idUser"));
         Course course = courseRepository.findCourseByIdCourse((Long) session.getAttribute("idCourse"));
         UsersCourses usersCourses = usersCoursesRepository.findUsersCoursesByUserIDAndCourseID(user, course);
         usersCourses.setCompleteness(true);
         usersCoursesRepository.save(usersCourses);
-        return ResponseEntity.ok("Данные успешно сохранены");
+        return (usersCourses.isCompleteness());
     }
 }

@@ -20,43 +20,72 @@ import java.io.IOException;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.*;
-
+/**
+ * Контроллер, обрабатывающий запросы для создания новых курсов.
+ */
 @Controller
 public class CreateCourseController {
-
+    /**
+     * Репозиторий курсов.
+     */
     @Autowired
     private CourseRepository courseRepository;
-
+    /**
+     * Репозиторий типов курсов.
+     */
     @Autowired
     private CourseTypeRepository courseTypeRepository;
-
+    /**
+     * Репозиторий форм обучения.
+     */
     @Autowired
     private FormOfEducationRepository formOfEducationRepository;
-
+    /**
+     * Репозиторий блоков курса.
+     */
     @Autowired
     private BlockRepository blockRepository;
-
+    /**
+     * Репозиторий лекций.
+     */
     @Autowired
     private LectureRepository lectureRepository;
-
+    /**
+     * Репозиторий фото.
+     */
     @Autowired
     private PhotoRepository photoRepository;
-
+    /**
+     * Репозиторий тестов.
+     */
     @Autowired
     private TestRepository testRepository;
-
+    /**
+     * Репозиторий вопросов.
+     */
     @Autowired
     private QuestionRepository questionRepository;
-
+    /**
+     * Репозиторий вариантов ответов.
+     */
     @Autowired
     private  AnswerOptionsRepository answerOptionsRepository;
-
+    /**
+     * Репозиторий пользователей.
+     */
     @Autowired
     private UserRepository userRepository;
-
+    /**
+     * Репозиторий тем курсов.
+     */
     @Autowired
     private ThemeRepository themeRepository;
-
+    /**
+     * Обрабатывает GET-запрос на получение страницы создания нового курса.
+     * @param Course объект курса.
+     * @param addr объект, используемый для передачи данных в представление.
+     * @return имя представления для создания нового курса.
+     */
     @GetMapping("/CreateNewCourse")
     public String CreateNewCoursePage(@ModelAttribute("Course") Course Course, Model addr) {
         Iterable<CourseType> courseType = courseTypeRepository.findAll();
@@ -67,7 +96,13 @@ public class CreateCourseController {
         addr.addAttribute("Theme", themes);
         return "CreateNewCourse";
     }
-
+    /**
+     * Обрабатывает GET-запрос на получение страницы списка созданных курсов.
+     * @param Course объект курса.
+     * @param addr объект, используемый для передачи данных в представление.
+     * @param authentication информация об аутентификации пользователя.
+     * @return имя представления для списка созданных курсов.
+     */
     @GetMapping("/CreatedCourses")
     public String CreatedCoursesPage(@ModelAttribute("Course") Course Course, Model addr, Authentication authentication) {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
@@ -77,13 +112,22 @@ public class CreateCourseController {
         addr.addAttribute("Course", course);
         return "CreatedCourses";
     }
-
+    /**
+     * Обрабатывает GET-запрос на получение страницы курса.
+     * @param courseId идентификатор курса.
+     * @param session объект, представляющий сессию пользователя.
+     * @return перенаправление на страницу деталей курса.
+     */
     @GetMapping("/course")
     public String getCoursePage(@RequestParam("id") Long courseId, HttpSession session) {
         session.setAttribute("idCourse", courseId);
         return "redirect:/CreateNewCourse/details";
     }
-
+    /**
+     * Обрабатывает GET-запрос на проверку имени курса.
+     * @param session объект, представляющий сессию пользователя.
+     * @return имя курса.
+     */
     @RequestMapping(value = "/check-course-name", method = RequestMethod.GET)
     @ResponseBody
     public String CheckCourseName(HttpSession session) {
@@ -92,7 +136,18 @@ public class CreateCourseController {
         String content = course.get().getNameOfCourse();
         return content;
     }
-
+    /**
+     * Создает новый курс и сохраняет его в базе данных.
+     * @param course объект Course, содержащий информацию о создаваемом курсе
+     * @param bindingResult результат проверки валидации объекта курса
+     * @param nameOfCourseType название типа курса, связанного с курсом
+     * @param typeOfEducation тип обучения, связанный с курсом
+     * @param nameOfTheme название темы, связанной с курсом
+     * @param session объект HttpSession, используемый для сохранения и получения атрибутов сессии
+     * @param addr объект Model, используемый для сохранения и получения атрибутов модели
+     * @param authentication объект Authentication, представляющий текущий статус аутентификации пользователя
+     * @return имя представления (view), которое будет показано после выполнения метода
+     */
     @PostMapping("/CreateNewCourse")
     public String CoursesAdd(@ModelAttribute("Course") @Valid Course course, BindingResult bindingResult,
                              @RequestParam String nameOfCourseType, @RequestParam String typeOfEducation, @RequestParam String nameOfTheme,
@@ -123,7 +178,12 @@ public class CreateCourseController {
         session.setAttribute("idCourse", idCourse);
         return "redirect:/CreateNewCourse/details";
     }
-
+    /**
+     * Отображает страницу деталей созданного курса.
+     * @param session объект HttpSession, используемый для сохранения и получения атрибутов сессии
+     * @param model объект Model, используемый для сохранения и получения атрибутов модели
+     * @return имя представления (view), которое будет показано после выполнения метода
+     */
     @GetMapping("/CreateNewCourse/details")
     public String CourseEdit(HttpSession session, Model model) {
         Long idCourse = (Long) session.getAttribute("idCourse");
@@ -132,7 +192,12 @@ public class CreateCourseController {
         }
         return "CourseDetails";
     }
-
+    /**
+     * Отображает страницу для редактирования деталей созданного курса.
+     * @param session объект HttpSession, используемый для сохранения и получения атрибутов сессии
+     * @param model объект Model, используемый для сохранения и получения атрибутов модели
+     * @return имя представления (view), которое будет показано после выполнения метода
+     */
     @GetMapping("/CreateNewCourse/details/edit")
     public String CourseEditt(HttpSession session, Model model) {
         Long idCourse = (Long) session.getAttribute("idCourse");
@@ -141,7 +206,12 @@ public class CreateCourseController {
         }
         return "CourseDetailsEdit";
     }
-
+    /**
+     * Отображает страницу описания созданного курса.
+     * @param session объект HttpSession, используемый для сохранения и получения атрибутов сессии
+     * @param model объект Model, используемый для сохранения и получения атрибутов модели
+     * @return имя представления (view), которое будет показано после выполнения метода
+     */
     @GetMapping("/CourseDescription")
     public String CourseDescriptionPage(HttpSession session, Model model) {
         Long idCourse = (Long) session.getAttribute("idCourse");
@@ -154,33 +224,60 @@ public class CreateCourseController {
         model.addAttribute("Course", res);
         return "CourseDescription";
     }
-
+    /**
+     * Отображает блок для добавления образца блока на страницу создания курса.
+     * @param num  параметр запроса, представляющий число
+     * @param model объект Model, используемый для сохранения и получения атрибутов модели
+     * @return имя представления (view), которое будет показано после выполнения метода
+     */
     @GetMapping("/blockAddSample")
     public String getBlock(@RequestParam("num") String num, Model model) {
         model.addAttribute("num", num);
         return "blockAddSample :: copy";
     }
-
+    /**
+     * Отображает блок для добавления образца лекции на страницу создания курса.
+     * @param num           параметр запроса, представляющий число
+     * @param nameOfLectur параметр запроса, представляющий название лекции
+     * @param model         объект Model, используемый для сохранения и получения атрибутов модели
+     * @return имя представления (view), которое будет показано после выполнения метода
+     */
     @GetMapping("/lectureAddSample")
     public String getLecture(@RequestParam("num") String num, @RequestParam("nameOfLectur") String nameOfLectur, Model model) {
         model.addAttribute("num", num);
         model.addAttribute("nameOfLectur", nameOfLectur);
         return "lectureAddSample :: copy1";
     }
-
+    /**
+     * Отображает блок для добавления образца вопроса на страницу создания курса.
+     * @param num  параметр запроса, представляющий число
+     * @param model объект Model, используемый для сохранения и получения атрибутов модели
+     * @return имя представления (view), которое будет показано после выполнения метода
+     */
     @GetMapping("/questionAddSample")
     public String getQuestion(@RequestParam("num") String num, Model model) {
         model.addAttribute("num", num);
         return "questionAddSample :: copy";
     }
-
+    /**
+     * Возвращает имя представления answerOptionsAddSample :: copy1 с добавленными атрибутами num и nameOfLectur
+     * @param num порядковый номер лекции
+     * @param nameOfLectur название лекции
+     * @param model объект Model, используемый для сохранения и получения атрибутов модели
+     * @return имя представления (view), которое будет показано после выполнения метода
+     */
     @GetMapping("/answerOptionsAddSample")
     public String getAnswerOptions(@RequestParam("num") String num, @RequestParam("nameOfLectur") String nameOfLectur, Model model) {
         model.addAttribute("num", num);
         model.addAttribute("nameOfLectur", nameOfLectur);
         return "answerOptionsAddSample :: copy1";
     }
-
+    /**
+     * Обрабатывает запрос на добавление нового блока, полученный в формате JSON, и сохраняет его в базе данных.
+     * @param data данные, полученные в формате JSON
+     * @param session объект HttpSession, используемый для сохранения и получения атрибутов сессии
+     * @return строку "OK", если операция выполнена успешно
+     */
     @RequestMapping(value = "/blockAddSample", method = RequestMethod.POST)
     @ResponseBody
     public String handleBlockAddSample(@RequestBody Map<String, Object> data, HttpSession session) {
@@ -213,7 +310,12 @@ public class CreateCourseController {
         }
         return "OK";
     }
-
+    /**
+     * Обрабатывает запрос на добавление нового вопроса, полученный в формате JSON, и сохраняет его в базе данных.
+     * @param data данные, полученные в формате JSON
+     * @param session объект HttpSession, используемый для сохранения и получения атрибутов сессии
+     * @return строку "OK", если операция выполнена успешно
+     */
     @RequestMapping(value = "/questionAddSample", method = RequestMethod.POST)
     @ResponseBody
     public String handleQuestionAddSample(@RequestBody Map<String, Object> data, HttpSession session) {
@@ -253,7 +355,11 @@ public class CreateCourseController {
         }
         return "OK";
     }
-
+    /**
+     * Удаляет блок по его идентификатору.
+     * @param id идентификатор теста.
+     * @return объект ResponseEntity с сообщением об успешном удалении или об ошибке
+     */
     @DeleteMapping("/delete-test/{id}")
     public ResponseEntity<String> deleteTest(@PathVariable Long id) {
         try {
@@ -264,7 +370,11 @@ public class CreateCourseController {
             return new ResponseEntity<>("Тест не удален", HttpStatus.OK);
         }
     }
-
+    /**
+     * Проверяет наличие блоков для текущего курса в базе данных.
+     * @param session объект HttpSession, используемый для сохранения и получения атрибутов сессии
+     * @return список блоков текущего курса
+     */
     @RequestMapping(value = "/check-blocks", method = RequestMethod.POST)
     @ResponseBody
     public List<Block> checkBlocks(HttpSession session)
@@ -275,7 +385,11 @@ public class CreateCourseController {
 
         return blocks;
     }
-
+    /**
+     * Проверяет наличие лекций для блока с указанным идентификатором в базе данных.
+     * @param idBlock идентификатор блока
+     * @return список лекций для указанного блока
+     */
     @RequestMapping(value = "/check-lectures/{id}", method = RequestMethod.POST)
     @ResponseBody
     public List<Lecture> checkLectures(@PathVariable("id") Long idBlock) {
@@ -284,7 +398,11 @@ public class CreateCourseController {
 
         return lectures;
     }
-
+    /**
+     * Удаляет блок по его идентификатору.
+     * @param idBlock идентификатор блока
+     * @return объект ResponseEntity с сообщением об успешном удалении или об ошибке
+     */
     @DeleteMapping("/blocks/{id}")
     public ResponseEntity<?> deleteBlockById(@PathVariable("id") Long idBlock) {
         try {
@@ -295,7 +413,12 @@ public class CreateCourseController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
-
+    /**
+     * Отображает страницу редактирования подробностей блока.
+     * @param model объект Model, используемый для сохранения и получения атрибутов модели
+     * @param session объект HttpSession, используемый для сохранения и получения атрибутов сессии
+     * @return имя представления (view), которое будет показано после выполнения метода
+     */
     @GetMapping("/CreateNewCourse/details/Block/Edit")
     public String CourseDetailsEdit(Model model, HttpSession session) {
         Long idBlock = (Long) session.getAttribute("idBlock");
@@ -308,7 +431,13 @@ public class CreateCourseController {
         model.addAttribute("Block", res);
         return "CourseDetailsBlockEdit";
     }
-
+    /**
+     * Обрабатывает запрос на изменение подробностей блока и сохраняет их в базе данных.
+     * @param id идентификатор блока
+     * @param model объект Model, используемый для сохранения и получения атрибутов модели
+     * @param session объект HttpSession, используемый для сохранения и получения атрибутов сессии
+     * @return идентификатор блока
+     */
     @RequestMapping(value = "/CreateNewCourse/details/Block/Edit", method = RequestMethod.POST)
     @ResponseBody
     public int CourseDetailsEditt(@RequestParam("id") int id, Model model, HttpSession session) {
@@ -317,7 +446,12 @@ public class CreateCourseController {
         model.addAttribute("id", id);
         return id;
     }
-
+    /**
+     * Обрабатывает запрос на изменение подробностей блока и сохраняет их в базе данных.
+     * @param data объект Map, содержащий данные, переданные из JavaScript-файла
+     * @param session объект HttpSession, используемый для сохранения и получения атрибутов сессии
+     * @return строку "OK"
+     */
     @RequestMapping(value = "/handleBlockEdit", method = RequestMethod.POST)
     @ResponseBody
     public String handleBlockEdit(@RequestBody Map<String, Object> data, HttpSession session) {
@@ -337,7 +471,11 @@ public class CreateCourseController {
         }
         return "OK";
     }
-
+    /**
+     * Удаляет лекцию по ее идентификатору.
+     * @param idLecture идентификатор лекции
+     * @return объект ResponseEntity с сообщением об успешном удалении или об ошибке
+     */
     @DeleteMapping("/lecture/{id}")
     public ResponseEntity<?> deleteLectureById(@PathVariable("id") Long idLecture) {
         try {
@@ -348,7 +486,11 @@ public class CreateCourseController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
-
+    /**
+     * Обрабатывает запрос на изменение подробностей курса и сохраняет их в базе данных.
+     * @param data объект Map, содержащий данные, переданные из JavaScript-файла
+     * @return строку "OK"
+     */
     @RequestMapping(value = "/handleCourseEdit", method = RequestMethod.POST)
     @ResponseBody
     public String handleCourseEdit(@RequestBody Map<String, Object> data) {
@@ -376,7 +518,12 @@ public class CreateCourseController {
         }
         return "OK";
     }
-
+    /**
+     * Отображает страницу редактирования подробностей лекции.
+     * @param model объект Model, используемый для сохранения и получения атрибутов модели
+     * @param session объект HttpSession, используемый для сохранения и получения атрибутов сессии
+     * @return имя представления (view), которое будет показано после выполнения метода
+     */
     @GetMapping("/CreateNewCourse/details/Lecture/Edit")
     public String CourseDetailsLectureEdit(Model model, HttpSession session) {
         Long idLecture = (Long) session.getAttribute("idLecture");
@@ -389,7 +536,13 @@ public class CreateCourseController {
         model.addAttribute("Lecture", res);
         return "CourseDetailsLectureEdit";
     }
-
+    /**
+     * Обрабатывает запрос на получение идентификатора лекции для редактирования подробностей лекции.
+     * @param id идентификатор лекции
+     * @param model объект Model, используемый для сохранения и получения атрибутов модели
+     * @param session объект HttpSession, используемый для сохранения и получения атрибутов сессии
+     * @return идентификатор лекции
+     */
     @RequestMapping(value = "/CreateNewCourse/details/Lecture/Edit", method = RequestMethod.POST)
     @ResponseBody
     public int CourseDetailsLectureEditt(@RequestParam("id") int id, Model model, HttpSession session) {
@@ -398,7 +551,12 @@ public class CreateCourseController {
         model.addAttribute("id", id);
         return id;
     }
-
+    /**
+     * Обрабатывает запрос на изменение содержания лекции и сохраняет его в базе данных.
+     * @param data объект Map, содержащий данные, переданные из JavaScript-файла
+     * @param session объект HttpSession, используемый для сохранения и получения атрибутов сессии
+     * @return строку "OK"
+     */
     @RequestMapping(value = "/handleLectureEdit", method = RequestMethod.POST)
     @ResponseBody
     public String handleLectureEdit(@RequestBody Map<String, Object> data, HttpSession session) {
@@ -419,7 +577,12 @@ public class CreateCourseController {
         }
         return "OK";
     }
-
+    /**
+     * Отображает страницу редактирования содержания лекции.
+     * @param model объект Model, используемый для сохранения и получения атрибутов модели
+     * @param session объект HttpSession, используемый для сохранения и получения атрибутов сессии
+     * @return имя представления (view), которое будет показано после выполнения метода
+     */
     @GetMapping("/CreateNewCourse/details/Lecture/Edit/Content")
     public String CourseDetailsLectureContentEdit(Model model, HttpSession session) {
         Long idLecture = (Long) session.getAttribute("idLecture");
@@ -432,7 +595,13 @@ public class CreateCourseController {
         model.addAttribute("Lecture", res);
         return "CourseDetailsLectureContentEdit";
     }
-
+    /**
+     * Обрабатывает запрос на получение идентификатора лекции для редактирования содержания лекции.
+     * @param id идентификатор лекции
+     * @param model объект Model, используемый для сохранения и получения атрибутов модели
+     * @param session объект HttpSession, используемый для сохранения и получения атрибутов сессии
+     * @return идентификатор лекции
+     */
     @RequestMapping(value = "/CreateNewCourse/details/Lecture/Edit/Content", method = RequestMethod.POST)
     @ResponseBody
     public int CourseDetailsLectureContentEditt(@RequestParam("id") int id, Model model, HttpSession session) {
@@ -441,7 +610,14 @@ public class CreateCourseController {
         model.addAttribute("id", id);
         return id;
     }
-
+    /**
+     * Обрабатывает запрос на загрузку содержимого лекции и изображений.
+     * @param content содержимое лекции
+     * @param files список файлов изображений
+     * @param session объект HttpSession, используемый для сохранения и получения атрибутов сессии
+     * @return объект ResponseEntity с сообщением об успешной загрузке файлов
+     * @throws IOException если возникает ошибка ввода-вывода
+     */
     @RequestMapping(value = "/handleLectureContentEdit", method = RequestMethod.POST)
     @ResponseBody
     public ResponseEntity<String> handleFileUpload(@RequestParam("content") String content,
@@ -464,11 +640,15 @@ public class CreateCourseController {
             photo.setLectureID(lectureRepository.findLectureByIdLecture(idLecture));
             photoRepository.save(photo);
         }
-
-
         return ResponseEntity.ok("File(s) uploaded successfully");
     }
-
+    /**
+     * Обрабатывает запрос на загрузку содержимого лекции без изображений.
+     * @param content содержимое лекции
+     * @param session объект HttpSession, используемый для сохранения и получения атрибутов сессии
+     * @return объект ResponseEntity с сообщением об успешной загрузке файла
+     * @throws IOException если возникает ошибка ввода-вывода
+     */
     @RequestMapping(value = "/handleLectureContentEditWithoutPhoto", method = RequestMethod.POST)
     @ResponseBody
     public ResponseEntity<String> handleFileUploadWithoutPhoto(@RequestParam("content") String content, HttpSession session) throws IOException {
@@ -485,7 +665,11 @@ public class CreateCourseController {
         lectureRepository.save(lecture);
         return ResponseEntity.ok("File(s) uploaded successfully");
     }
-
+    /**
+     * Обрабатывает запрос на проверку изображений для лекции.
+     * @param session объект HttpSession, используемый для сохранения и получения атрибутов сессии
+     * @return список объектов Photo, которые представляют изображения, связанные с лекцией
+     */
     @RequestMapping(value = "/check-lectures-details", method = RequestMethod.POST)
     @ResponseBody
     public List<Photo> checkLectures(HttpSession session) {
@@ -494,7 +678,11 @@ public class CreateCourseController {
         List<Photo> photos = photoRepository.findPhotosByLectureID(lecture.get());
         return photos;
     }
-
+    /**
+     * Обрабатывает запрос на проверку содержимого лекции.
+     * @param session объект HttpSession, используемый для сохранения и получения атрибутов сессии
+     * @return содержимое лекции
+     */
     @RequestMapping(value = "/check-lectures-details-text", method = RequestMethod.POST)
     @ResponseBody
     public String checkLecturesText(HttpSession session) {
@@ -503,6 +691,11 @@ public class CreateCourseController {
         String content = lecture.get().getContent();
         return content;
     }
+    /**
+     * Обрабатывает запрос на проверку наличия тестов для лекции.
+     * @param session объект HttpSession, используемый для сохранения и получения атрибутов сессии
+     * @return объект Optional, содержащий объект Test, который представляет тест, связанный с лекцией
+     */
     @RequestMapping(value = "/check-lectures-test", method = RequestMethod.POST)
     @ResponseBody
     public Optional<Test> checkLecturesTest(HttpSession session) {
@@ -516,7 +709,11 @@ public class CreateCourseController {
             return null;
         }
     }
-
+    /**
+     * Удаляет фотографию по заданному идентификатору.
+     * @param idPhoto идентификатор фотографии
+     * @return объект ResponseEntity, который сообщает об успешном удалении фотографии, либо об ошибке сервера
+     */
     @DeleteMapping("/photo/{id}")
     public ResponseEntity<?> deletePhotoById(@PathVariable("id") Long idPhoto) {
         try {
@@ -527,5 +724,4 @@ public class CreateCourseController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
-
 }

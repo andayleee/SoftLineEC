@@ -18,15 +18,31 @@ import javax.validation.Valid;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Optional;
+/**
+ * Контроллер для управления лекциями.
+ */
 @Controller
 public class LectureController {
+    /**
+     * Репозиторий блоков.
+     */
     @Autowired
     private BlockRepository blockRepository;
+    /**
+     * Репозиторий лекций.
+     */
     @Autowired
     private LectureRepository lectureRepository;
+    /**
+     * Репозиторий фото.
+     */
     @Autowired
     private PhotoRepository photoRepository;
-
+    /**
+     * Обрабатывает GET-запрос на получение страницы со всеми лекциями.
+     * @param model объект Model, используемый для передачи данных в представление
+     * @return имя представления, отображающего страницу со всеми лекциями
+     */
     @GetMapping("/Lecture")
     public String Lecture(Model model)
     {
@@ -34,7 +50,12 @@ public class LectureController {
         model.addAttribute("Lecture", lecture);
         return "LectureMain";
     }
-
+    /**
+     * Обрабатывает GET-запрос на получение страницы для добавления новой лекции.
+     * @param Lecture объект Lecture, используемый для сохранения данных о новой лекции
+     * @param addr объект Model, используемый для передачи данных в представление
+     * @return имя представления, отображающего страницу для добавления новой лекции
+     */
     @GetMapping("/LectureAdd")
     public String LectureAdd(@ModelAttribute("Lecture") Lecture Lecture, Model addr)
     {
@@ -42,6 +63,16 @@ public class LectureController {
         addr.addAttribute("nameOfBlock",nameOfBlock);
         return "LectureAdd";
     }
+    /**
+     * Обрабатывает POST-запрос на добавление новой лекции.
+     * @param Lecture объект Lecture, содержащий данные о новой лекции
+     * @param bindingResult объект BindingResult, содержащий ошибки валидации
+     * @param file MultipartFile, содержащий фотографию для лекции
+     * @param photo объект Photo, используемый для сохранения данных о фотографии
+     * @param nameOfBlock название блока, в который добавляется новая лекция
+     * @param addr объект Model, используемый для передачи данных в представление
+     * @return имя представления со списком всех лекций в случае успешного добавления, иначе - страница для добавления новой лекции
+     */
     @PostMapping("/LectureAdd")
     public String LectureAddAdd(@ModelAttribute("Lecture") @Valid Lecture Lecture, BindingResult bindingResult,
                                 @RequestParam("file") MultipartFile file, Photo photo,
@@ -60,6 +91,12 @@ public class LectureController {
         photoRepository.save(photo);
         return "redirect:/Lecture";
     }
+    /**
+     * Обрабатывает GET-запрос на получение страницы для редактирования лекции.
+     * @param idLecture идентификатор лекции, которую необходимо отредактировать
+     * @param model объект Model, используемый для передачи данных в представление
+     * @return имя представления, отображающего страницу для редактирования лекции
+     */
     @GetMapping("/Lecture/{idLecture}/edit")
     public String LectureEdit(@PathVariable(value = "idLecture") long idLecture, Model model)
     {
@@ -74,7 +111,16 @@ public class LectureController {
         model.addAttribute("Block",block);
         return "LectureEdit";
     }
-
+    /**
+     * Обрабатывает POST-запрос на редактирование лекции.
+     * @param idLecture идентификатор лекции, которую необходимо отредактировать
+     * @param lecture объект Lecture, содержащий данные о лекции после редактирования
+     * @param bindingResult объект BindingResult, содержащий ошибки валидации
+     * @param file MultipartFile, содержащий фотографию для лекции
+     * @param photo объект Photo, используемый для сохранения данных о фотографии
+     * @param nameOfBlock название блока, к которому принадлежит лекция
+     * @return имя представления со списком всех лекций в случае успешного редактирования, иначе - страница для редактирования лекции
+     */
     @PostMapping("/Lecture/{idLecture}/edit")
     public String LectureUpdate(@PathVariable("idLecture")long idLecture,
                                 @Valid Lecture lecture, BindingResult bindingResult,
@@ -86,7 +132,12 @@ public class LectureController {
         lectureRepository.save(lecture);
         return "redirect:/Lecture";
     }
-
+    /**
+     * Обрабатывает GET-запрос на удаление лекции.
+     * @param idLecture идентификатор лекции, которую необходимо удалить
+     * @param model объект Model, используемый для передачи данных в представление
+     * @return имя представления со списком всех лекций после удаления лекции
+     */
     @GetMapping("/Lecture/{idLecture}/remove")
     public String LectureRemove(@PathVariable("idLecture") long idLecture, Model model)
     {

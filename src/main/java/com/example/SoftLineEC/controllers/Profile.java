@@ -22,21 +22,41 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
-
+/**
+ * Контроллер для работы с профилем пользователя.
+ */
 @Controller
 public class Profile {
+    /**
+     * Репозиторий пользователей.
+     */
     @Autowired
     private UserRepository userRepository;
+    /**
+     * Репозиторий адресов.
+     */
     @Autowired
     private AddressRepository addressRepository;
+    /**
+     * Интерфейс для кодирования паролей пользователей.
+     */
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    /**
+     * Отображает главную страницу.
+     * @return имя представления для главной страницы.
+     */
     @GetMapping("/ProfileInfo")
     public String mainPage() {
         return "ProfileMainPage";
     }
-
+    /**
+     * Обрабатывает GET-запрос на получение информации о пользователе.
+     * @param authentication объект Authentication, используемый для получения имени текущего пользователя
+     * @param session объект HttpSession, используемый для хранения идентификатора текущего пользователя
+     * @return объект User, соответствующий текущему пользователю
+     */
     @RequestMapping(value = "/check-user-info", method = RequestMethod.GET)
     @ResponseBody
     public User checkUser(Authentication authentication, HttpSession session) {
@@ -47,7 +67,13 @@ public class Profile {
         session.setAttribute("idUser", idUser);
         return user;
     }
-
+    /**
+     * Обрабатывает POST-запрос на изменение фотографии пользователя.
+     * @param file объект MultipartFile, содержащий загружаемый файл
+     * @param session объект HttpSession, используемый для получения идентификатора текущего пользователя
+     * @return объект ResponseEntity, содержащий текстовое сообщение об успешной загрузке файла
+     * @throws IOException если возникает ошибка ввода-вывода
+     */
     @RequestMapping(value = "/handleUserPhotoEdit", method = RequestMethod.POST)
     @ResponseBody
     public ResponseEntity<String> handleFileUpload(@RequestParam("file") MultipartFile file, HttpSession session) throws IOException {
@@ -71,7 +97,12 @@ public class Profile {
 
         return ResponseEntity.ok("File(s) uploaded successfully");
     }
-
+    /**
+     * Обрабатывает GET-запрос на получение страницы редактирования профиля пользователя.
+     * @param session объект HttpSession, используемый для получения идентификатора текущего пользователя
+     * @param model объект Model, используемый для передачи данных на страницу
+     * @return имя представления для страницы редактирования профиля
+     */
     @GetMapping("/ProfileInfo/Update")
     public String updView(HttpSession session, Model model) {
         Long idUser = (Long) session.getAttribute("idUser");
@@ -80,7 +111,12 @@ public class Profile {
         model.addAttribute("address", address);
         return "ProfileEdit";
     }
-
+    /**
+     * Обрабатывает POST-запрос на сохранение изменений профиля пользователя.
+     * @param data объект Map, содержащий данные о пользователе и его адресе
+     * @param session объект HttpSession, используемый для получения идентификатора текущего пользователя
+     * @return строковое значение "OK", если сохранение прошло успешно
+     */
     @RequestMapping(value = "/handleProfileInfoEdit", method = RequestMethod.POST)
     @ResponseBody
     public String handleProfileInfoEdit(@RequestBody Map<String, Object> data, HttpSession session) {
@@ -151,7 +187,13 @@ public class Profile {
         }
         return "OK";
     }
-
+    /**
+     * Обрабатывает POST-запрос на изменение авторизационных данных пользователя (логина и пароля).
+     * @param data объект Map, содержащий новый логин и пароль пользователя
+     * @param bindingResult объект BindingResult, содержащий результаты валидации данных
+     * @param session объект HttpSession, используемый для получения идентификатора текущего пользователя
+     * @return объект ResponseEntity с текстовым сообщением об успешном изменении данных или об ошибках валидации
+     */
     @RequestMapping(value = "/handleProfileAuthInfoEdit", method = RequestMethod.POST)
     @ResponseBody
     public ResponseEntity<String> handleProfileAuthInfoEdit(@RequestBody @Valid Map<String, List<@ValidPassword String>> data, BindingResult bindingResult, HttpSession session) {
@@ -178,7 +220,11 @@ public class Profile {
         userRepository.save(user_from_db);
         return ResponseEntity.ok("Данные успешно сохранены");
     }
-
+    /**
+     * Обрабатывает DELETE-запрос на удаление профиля пользователя.
+     * @param session объект HttpSession, используемый для получения идентификатора текущего пользователя
+     * @return объект ResponseEntity с текстовым сообщением об успешном или неуспешном удалении профиля
+     */
     @DeleteMapping("/handleUserDelete")
     public ResponseEntity<String> deleteUser(HttpSession session) {
         try {

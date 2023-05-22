@@ -8,7 +8,9 @@ import javax.validation.constraints.Size;
 import java.sql.Date;
 import java.util.Collection;
 import java.util.Set;
-
+/**
+ * Класс-сущность для работы с пользователями.
+ */
 @Entity
 public class User {
     @Id
@@ -45,10 +47,26 @@ public class User {
     @CollectionTable(name="user_role", joinColumns = @JoinColumn(name = "user_id"))
     @Enumerated(EnumType.STRING)
     private Set<Role> roles;
-
+    /**
+     * Пустой конструктор класса.
+     */
     public User() {
     }
-
+    /**
+     * Конструктор класса User для создания новых пользователей.
+     * @param userSur фамилия пользователя
+     * @param userNamee имя пользователя
+     * @param userPatr отчество пользователя
+     * @param username адрес электронной почты пользователя
+     * @param password пароль пользователя
+     * @param repeatPassword повторный ввод пароля пользователя
+     * @param active флаг активности пользователя
+     * @param roles роли, присвоенные пользователю
+     * @param photoLink ссылка на фотографию пользователя
+     * @param phoneNumber номер телефона пользователя
+     * @param edInstitution учебное заведение пользователя
+     * @param dateOfBirth дата рождения пользователя
+     */
     public User(String userSur, String userNamee, String userPatr, String username, String password, String repeatPassword, boolean active, Set<Role> roles, String photoLink, String phoneNumber, String edInstitution, Date dateOfBirth) {
         this.userSur = userSur;
         this.userNamee = userNamee;

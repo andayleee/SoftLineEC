@@ -12,59 +12,47 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.Optional;
-
+/**
+ * Контроллер для работы с пользователями в режиме администратора.
+ */
 @Controller
 @RequestMapping("/admin")
 @PreAuthorize("hasAnyAuthority('ADMIN')")
 public class UserController {
+    /**
+     * Репозиторий пользователей.
+     */
     @Autowired
     private com.example.SoftLineEC.repositories.UserRepository userRepository;
-
-
+    /**
+     * Обрабатывает GET-запрос на получение списка всех пользователей.
+     * @param model объект Model, используемый для передачи данных на страницу
+     * @return имя представления для страницы со списком пользователей
+     */
     @GetMapping("/a")
     public String userView(Model model)
     {
         model.addAttribute("user_list", userRepository.findAll());
         return "UserMain";
     }
-
+    /**
+     * Обрабатывает GET-запрос на получение информации о конкретном пользователе.
+     * @param id идентификатор пользователя, информацию о котором нужно получить
+     * @param model объект Model, используемый для передачи данных на страницу
+     * @return имя представления для страницы с информацией о пользователе
+     */
     @GetMapping("/{id}")
     public String detailView(@PathVariable Long id, Model model)
     {
         model.addAttribute("user_object",userRepository.findById(id).orElseThrow());
         return "UserDetail";
     }
-
-//    @GetMapping("/addUser")
-//    public String userAdd (Model model)
-//    {
-//        model.addAttribute("roles", role.values());
-//        return "userAdd";
-//    }
-//
-//    @PostMapping("/addUser")
-//    public String add_user(@RequestParam String username,
-//                           @RequestParam String userSur,
-//                           @RequestParam String userNamee,
-//                           @RequestParam String userPatr,
-//                           @RequestParam(name="roles[]", required = false) String[] roles,
-//                           Model model)
-//    {
-//        user.getRoles().clear();
-//        if(roles != null)
-//        {
-//            for(String Role: roles)
-//            {
-//                user.getRoles().add(role.valueOf(Role));
-//            }
-//        }
-//
-//        //user.setPassword(passwordEncoder.encode(user.getPassword()));
-//
-//        userRepository.save(user);
-//        return "redirect:/admin/a";
-//    }
-
+    /**
+     * Обрабатывает GET-запрос на открытие формы редактирования информации о пользователе.
+     * @param id идентификатор пользователя, информацию о котором нужно отредактировать
+     * @param model объект Model, используемый для передачи данных на страницу
+     * @return имя представления для страницы редактирования информации о пользователе
+     */
     @GetMapping("/{id}/update")
     public String updView(@PathVariable(value = "id") Long id, Model model)
     {
@@ -72,7 +60,15 @@ public class UserController {
         model.addAttribute("roles", Role.values());
         return "UserEdit";
     }
-
+    /**
+     * Обрабатывает POST-запрос на сохранение измененной информации о пользователе.
+     * @param user объект User, содержащий измененные данные о пользователе
+     * @param bindingResult объект BindingResult, содержащий результаты валидации данных
+     * @param modelRoles объект Model, используемый для передачи данных на страницу
+     * @param roles массив строк, содержащий названия ролей, которые должны быть присвоены пользователю
+     * @param id идентификатор пользователя, информацию о котором нужно отредактировать
+     * @return перенаправление на страницу с информацией о пользователе после сохранения изменений
+     */
     @PostMapping("/{id}/update")
     public String userPostUpdate(@ModelAttribute("user") @Valid User user,
                                  BindingResult bindingResult,

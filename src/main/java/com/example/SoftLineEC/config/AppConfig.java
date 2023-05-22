@@ -6,10 +6,15 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import java.util.List;
-
+/**
+ * Конфигурационный класс для приложения.
+ */
 @Configuration
 public class AppConfig extends WebMvcConfigurerAdapter {
-
+    /**
+     * Настраивает список конвертеров сообщений для отправки и получения запросов и ответов.
+     * @param converters список конвертеров сообщений.
+     */
     @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
         MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();

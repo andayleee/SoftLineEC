@@ -1,0 +1,65 @@
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 15vw;
+    height: 100%;
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    z-index: 10;
+}
+
+.sidebar a {
+    display: block;
+    color: #fff;
+    text-decoration: none;
+    margin-bottom: 10px;
+}
+
+.dropdown {
+    position: relative;
+    z-index: 10;
+}
+
+.dropdown-content {
+    z-index: 10;
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 100%;
+    background-color: #444;
+    min-width: 200px;
+    z-index: 1001;
+}
+
+.dropdown-content a {
+    z-index: 10;
+    color: #fff;
+    padding: 10px;
+    display: block;
+}
+
+.dropdown:hover .dropdown-content {
+    z-index: 10;
+    display: block;
+}
+
+.dropbtn {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+}
+
+.fa-caret-down {
+    float: right;
+    margin-top: 3px;
+}
+
+.dropbtn:hover {
+    background-color: #444;
+}

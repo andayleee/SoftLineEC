@@ -16,18 +16,35 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+/**
+ * Класс восстановления доступа.
+ */
 @Controller
 public class AccessRecovery {
+    /**
+     * Контроллер для выполнения операций с базой данных, связанных с сущностью User.
+     */
     @Autowired
     private UserRepository userRepository;
+    /**
+     * Интерфейс для кодирования паролей пользователей.
+     */
     @Autowired
     private PasswordEncoder passwordEncoder;
-
+    /**
+     * Отображает страницу с формой восстановления доступа.
+     * @return имя представления для страницы восстановления доступа.
+     */
     @GetMapping("/accessRecovery")
     public String AccessRecovery() {
         return "AccessRecovery";
     }
-
+    /**
+     * Проверяет наличие пользователя в базе данных по указанному email-адресу и сохраняет его идентификатор в сессии.
+     * @param email строка, содержащая email-адрес пользователя.
+     * @param session текущий сеанс Http.
+     * @return экземпляр ResponseEntity с сообщением о наличии/отсутствии пользователя.
+     */
     @RequestMapping(value = "/user-data-recovery", method = RequestMethod.POST)
     @ResponseBody
     public ResponseEntity<String> UserDataRecovery(@RequestBody String email, HttpSession session) {
@@ -41,6 +58,13 @@ public class AccessRecovery {
         }
     }
 
+    /**
+     * Проверяет соответствие указанного номера телефона номеру телефона пользователя, связанного с указанным email-адресом.
+     * Если соответствие подтверждено, генерирует случайный код, отправляет его пользователю и сохраняет его в сессии.
+     * @param data данные, содержащие имя пользователя и номер телефона.
+     * @param session текущий сеанс Http.
+     * @return экземпляр ResponseEntity с сообщением об успешности выполнения операции и, при необходимости, с описанием ошибки.
+     */
     @RequestMapping(value = "/user-data-recovery-code-send", method = RequestMethod.POST)
     @ResponseBody
     public ResponseEntity<String> UserDataRecoveryCode(@RequestBody Map<String, List<String>> data, HttpSession session) {
@@ -81,7 +105,12 @@ public class AccessRecovery {
             return ResponseEntity.ok("Неверный номер телефона");
         }
     }
-
+    /**
+     * Проверяет переданный пользователем код подтверждения и сравнивает его с ранее сохраненным в сессии значением.
+     * @param confirmationCode строка, содержащая код подтверждения.
+     * @param session текущий сеанс Http.
+     * @return экземпляр ResponseEntity с сообщением об успешности выполнения операции и, при необходимости, с описанием ошибки.
+     */
     @RequestMapping(value = "/user-data-confirmation-message", method = RequestMethod.POST)
     @ResponseBody
     public ResponseEntity<String> ConfirmationMessage(@RequestBody String confirmationCode, HttpSession session) {
@@ -94,7 +123,12 @@ public class AccessRecovery {
             return ResponseEntity.ok("Неверный код подтверждения");
         }
     }
-
+    /**
+     * Изменяет пароль пользователя на новый.
+     * @param newPassword строка, содержащая новый пароль пользователя.
+     * @param session текущий сеанс Http.
+     * @return экземпляр ResponseEntity с сообщением об успешности выполнения операции и, при необходимости, с описанием ошибки.
+     */
     @RequestMapping(value = "/user-data-password-send", method = RequestMethod.POST)
     @ResponseBody
     public ResponseEntity<String> NewPassword(@RequestBody String newPassword, HttpSession session) {

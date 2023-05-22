@@ -8,10 +8,15 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import java.util.List;
-
+/**
+ * Конфигурационный класс для MVC фреймворка.
+ */
 @Configuration
 public class MvcConfig implements WebMvcConfigurer {
-
+    /**
+     * Регистрирует новый контроллер представления для страницы входа.
+     * @param registry объект, используемый для регистрации новых контроллеров представления.
+     */
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/login").setViewName("Login");
     }

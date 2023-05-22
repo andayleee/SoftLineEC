@@ -3,7 +3,9 @@ package com.example.SoftLineEC.models;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
-
+/**
+ * Класс-сущность для связи пользователей и курсов.
+ */
 @Entity
 public class UsersCourses {
     @Id
@@ -25,7 +27,15 @@ public class UsersCourses {
     private String passedLectures;
 
     private String testResults;
-
+    /**
+     * Конструктор класса.
+     * @param userID пользователь, зарегистрированный на курс
+     * @param courseID курс
+     * @param completeness флаг завершения курса
+     * @param certificateNumber номер сертификата
+     * @param passedLectures пройденные лекции
+     * @param testResults результаты тестирования по курсу
+     */
     public UsersCourses(User userID, Course courseID, boolean completeness, String certificateNumber, String passedLectures, String testResults) {
         this.userID = userID;
         this.courseID = courseID;
@@ -34,7 +44,9 @@ public class UsersCourses {
         this.passedLectures = passedLectures;
         this.testResults = testResults;
     }
-
+    /**
+     * Пустой конструктор класса.
+     */
     public UsersCourses(){}
 
     public long getIdUsersCourses() {
