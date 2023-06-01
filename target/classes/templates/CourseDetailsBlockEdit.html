@@ -38,50 +38,9 @@
     </div>
 </form>
 <script type="text/javascript" th:src="@{/js/textAreaResize.js}" src="/js/textAreaResize.js"></script>
-<script src="https://unpkg.com/imask" type="text/javascript"></script> <!-- Подключаем плагин через CDN -->
+<script src="https://unpkg.com/imask" type="text/javascript"></script>
 <script type="text/javascript" th:src="@{/js/jquery.maskedinput.js}" src="/js/jquery.maskedinput.js"></script>
 <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
-<script>
-    document.getElementById("save-block").addEventListener("click", function () {
-        var nameOfBlockValues = [];
-        var descriptionValues = [];
-        var durationValues = [];
-        $('.block').each(function () {
-            var value = $(this).find('input').val();
-            nameOfBlockValues.push(value);
-            var value1 = $(this).find('textarea').val();
-            descriptionValues.push(value1);
-            var value2 = $(this).find('.number').val();
-            durationValues.push(value2);
-        });
-        console.log(nameOfBlockValues);
-        console.log(descriptionValues);
-        console.log(durationValues);
-        var data = {
-            nameOfBlock: nameOfBlockValues,
-            description: descriptionValues,
-            duration: durationValues
-        };
-        console.log(JSON.stringify(data));
-        if (nameOfBlockValues.includes(null) || nameOfBlockValues.includes("") || descriptionValues.includes(null) || descriptionValues.includes("") || durationValues.includes(null) || durationValues.includes("")) {
-            alert("Введите все данные");
-        } else {
-            $.ajax({
-                url: '/handleBlockEdit',
-                type: 'POST',
-                data: JSON.stringify(data),
-                contentType: "application/json;charset=UTF-8",
-                success: function (data) {
-                    console.log("sucsess");
-                    window.location.href = "/CreateNewCourse/details";
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    console.error(textStatus, errorThrown);
-                    alert("Данные невалидны!");
-                }
-            });
-        }
-    });
-</script>
+<script src="/js/CourseDetailsBlockEdit.js"></script>
 </body>
 </html>

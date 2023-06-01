@@ -47,7 +47,7 @@ public class RegistrationController {
      * @return имя представления для страницы регистрации или перенаправление на страницу входа в систему
      */
     @PostMapping("/registration")
-    private String Reg(@ModelAttribute("User") @Valid User user, BindingResult bindingResult, Model model)
+    public String Reg(@ModelAttribute("User") @Valid User user, BindingResult bindingResult, Model model)
     {
         if (bindingResult.hasErrors()) {
             return "Registration";

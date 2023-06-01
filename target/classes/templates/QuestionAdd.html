@@ -38,15 +38,15 @@
       <button type="submit" class="custom-btn btn-16">Добавить вопрос</button>
     </form>
 
-  <script src="https://unpkg.com/imask"></script> <!-- Подключаем плагин через CDN -->
+  <script src="https://unpkg.com/imask"></script>
   <script src="js/main.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      const inputElement = document.querySelector('[data-mask="phone"]') // ищем наш единственный input
-      const maskOptions = { // создаем объект параметров
-        mask: '00' // задаем единственный параметр mask
+      const inputElement = document.querySelector('[data-mask="phone"]')
+      const maskOptions = {
+        mask: '00'
       }
-      IMask(inputElement, maskOptions) // запускаем плагин с переданными параметрами
+      IMask(inputElement, maskOptions)
     })
   </script>
 </form>
